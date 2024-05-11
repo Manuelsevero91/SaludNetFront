@@ -1,0 +1,17 @@
+/* Reset de estilos y definición de la fuente predeterminada */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Calibri;
+  
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  /* Aplica estilos solo cuando el ancho de la pantalla es igual o menor a 768px */
+  * {
+    /* font-size: 5vw; */
+    margin-top: 0px;
+  }
+}
