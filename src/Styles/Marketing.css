@@ -58,19 +58,19 @@
   
 }
 .marketing-section:hover {
-  background-size: 120%; 
+  background-size: 120%; /* Aumenta el tamaño de la imagen de fondo en un 5% al pasar el cursor*/
   /* transform: scale(1); */
 }
 
 .title-wrapper {
   position: relative;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100%; 
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100%; /* Ajusta la altura del contenedor */
   /* z-index:1; */
-  width: 100%; 
-  margin: auto; 
+  width: 100%; /* Ajusta el ancho al 80% del contenedor */
+  margin: auto; /* Aplica un margen alrededor del wrapper */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -92,7 +92,7 @@
 }
 
 .title-wrapper:hover::before {
-  background-color: rgb(185, 66, 66); 
+  background-color: rgb(185, 66, 66); /* Cambia el color y la opacidad al pasar el cursor */
 }
 
 .title-wrapper::after {
@@ -107,13 +107,14 @@
     99,
     103,
     0.8
-  ); 
-  opacity: 0;
-  transition: opacity 0.7s ease; 
+  ); /* Color verde con poca transparencia */
+  opacity: 0; /* Inicialmente transparente */
+  transition: opacity 0.7s ease; /* Transición suave */
+}
 
 .title-wrapper:hover::after {
   opacity: 20;
-  color: aliceblue; 
+  color: aliceblue; /* Mostrar el color al pasar el cursor sobre el título */
 }
 @media (max-width: 768px) {
 
@@ -123,8 +124,8 @@
   }
     .marketing-section {
       width: 100%;    
-      height:150px; 
+      height:150px; /* Establece una altura fija para los marketing-section */
       margin-bottom: 0px;
     }
   }
-}
+   

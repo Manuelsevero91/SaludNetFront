@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FormContact= () => {
+const Formulario = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [consulta, setConsulta] = useState("");
@@ -121,4 +121,4 @@ const FormContact= () => {
   );
 };
 
-export default FormContact;
+export default Formulario;
