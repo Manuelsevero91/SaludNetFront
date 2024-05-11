@@ -1,0 +1,72 @@
+nav {
+  background-color:rgba(
+    44,
+    99,
+    103,
+    0.8
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 8%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+  margin-top: 2px;
+  margin-left: 20px;
+}
+
+ul.nav-links {
+  list-style: none;
+  display: flex;
+  align-items:center;
+  margin-left: 50px;
+}
+li {
+  padding: 0 10px;
+}
+li:hover {
+  transform: scale(1.1);
+}
+a {
+  font-size: 1.4em;
+  text-decoration: none;
+  color: white;
+}
+
+/* #buttonProf {
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
+  background-color: rgb(44, 99, 103);
+} */
+
+/* #NombreUser {
+  color: white;
+  margin-left: 0px;
+  font-size: 1.4em;
+  margin-left: 130px;
+} */
+@media (max-width: 768px) {
+  ul.nav-links {    
+    margin-left: 2px;  
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+ 
+    .container {
+      min-height:50vh;
+      width: 100%; 
+    }}

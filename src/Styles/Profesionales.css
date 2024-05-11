@@ -1,0 +1,61 @@
+.profesionales {
+  background-color: rgba(90, 89, 95, 0.959); /* Color de fondo claro */
+  margin-bottom: 0;
+}
+
+/* Estilos para la barra superior */
+.barra-superior {
+  position: relative;
+  background-image: url('https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=');
+  background-size: cover;
+  opacity: 1;
+  padding: 20px;
+  margin-top: 4.2vw; /* Ajusta el margen superior */
+  height: 6vw; /* Ajusta la altura de la barra superior */
+  margin-bottom: 0;
+}
+
+/* Estilos para el título */
+.titulo-seccion {
+  font-size: 2vw; /* Tamaño de fuente en unidades de viewport width */
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(101, 17, 211, 0.979);
+  margin-left: 5vw;
+  margin-bottom: 1vw; /* Ajusta el margen inferior del título */
+  
+}
+
+/* Estilos para las tarjetas de profesionales */
+.contenedor-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0; /* Ajusta el margen del contenedor de tarjetas */
+  padding: 0; /* Ajusta el padding del contenedor de tarjetas */
+
+}
+
+.tarjeta {
+  width: 40vw; /* Ancho relativo para las tarjetas en viewport width */
+  max-width: 300px; /* Establece un ancho máximo para las tarjetas */
+  height: auto; /* Altura automática para que las tarjetas se ajusten al contenido */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 4vw; /* Ajusta el padding en unidades de viewport width */
+  margin: 2vw; /* Ajusta el margen en unidades de viewport width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Media Query para dispositivos móviles
+@media (max-width: 768px) {
+  .titulo-seccion {
+    font-size: 4vw; /* Reducir el tamaño del título en dispositivos más pequeños */
+  
+
