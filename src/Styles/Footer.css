@@ -1,0 +1,27 @@
+.footer {
+  background-color:  rgba(
+    44,
+    99,
+    103,
+    0.8
+  );
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   
+  margin-top: 92vh;
+}
+
+.social-icons {
+  display: flex;
+}
+
+.social-icon {
+  margin-right: 20px;
+  color: white;
+  font-size: 30px;
+}
+
+.footer-text {
+  color: white;
+  font-weight:500;
+}

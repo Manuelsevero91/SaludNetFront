@@ -1,0 +1,59 @@
+.profesionales {
+  background-color: rgba(90, 89, 95, 0.959); 
+  margin-bottom: 0;
+}
+
+
+.barra-superior {
+  position: relative;
+  background-image: url('https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=');
+  background-size: cover;
+  opacity: 1;
+  padding: 20px;
+  margin-top: 4.2vw; 
+  margin-bottom: 0;
+}
+
+
+.titulo-seccion {
+  font-size: 2vw; 
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(101, 17, 211, 0.979);
+  margin-left: 5vw;
+  margin-bottom: 1vw; 
+  
+}
+
+
+.contenedor-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0; 
+  padding: 0; 
+}
+
+.tarjeta {
+  width: 40vw; 
+  max-width: 300px; 
+  height: auto; 
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 4vw;
+  margin: 2vw; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+}
+
+
+
+/* Media Query para dispositivos móviles
+@media (max-width: 768px) {
+  .titulo-seccion {
+    font-size: 4vw; /* Reducir el tamaño del título en dispositivos más pequeños */
+  
+
