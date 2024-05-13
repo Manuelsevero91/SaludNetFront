@@ -1,5 +1,5 @@
 /* Reset de estilos y definición de la fuente predeterminada */
-* {
+body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;

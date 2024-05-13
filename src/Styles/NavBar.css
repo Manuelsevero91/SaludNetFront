@@ -17,15 +17,15 @@ nav {
   z-index: 999;
 }
 
-img {
-  width: 70px;
-  height: 70px;
-  margin-top: 2px;
+img { 
+  height: 3.8vw;
+  margin-top: 0%;
   margin-left: 20px;
 }
 
 ul.nav-links {
   list-style: none;
+  margin: 0%;
   display: flex;
   align-items:center;
   margin-left: 50px;
@@ -60,13 +60,12 @@ a {
     margin-left: 2px;  
   }
   img {
-    width: 50px;
-    height: 50px;
-    margin-top: 8px;
+  
+    height:10.5vw;
+    margin-top: 0;
     margin-left: 10px;
-  }
- 
-    .container {
-      min-height:50vh;
+  } 
+    nav {
+     height:6vh;
       width: 100%; 
     }}

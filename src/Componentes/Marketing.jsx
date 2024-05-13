@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Profesionales from "../Pages/Profesionales";
 import { Link } from "react-router-dom";
 
+
+
+
 const Marketing = () => {
   const [mostrarProfesionales, setMostrarProfesionales] = useState(false);
 
@@ -34,6 +37,7 @@ const Marketing = () => {
   };
 
   return (
+    
     <Link to="/profesionales" style={{ textDecoration: "none" }}>
       <div className="marketing-container">
         <div className="marketing-row">
@@ -63,8 +67,11 @@ const Marketing = () => {
 
         {mostrarProfesionales && <Profesionales />}
       </div>
+   
     </Link>
+    
   );
+
 };
 
 export default Marketing;

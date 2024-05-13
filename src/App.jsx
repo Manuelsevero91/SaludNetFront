@@ -9,6 +9,7 @@ import "./Styles/Footer.css";
 import "./Styles/Profesionales.css";
 import "./Styles/Admin.css";
 import "./Styles/SpanContinue.css";
+import "./Styles/FormProfesionals.css";
 import NavBar from "./Componentes/NavBar";
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
@@ -16,8 +17,9 @@ import Login from "./Pages/Login";
 import Contacto from "./Pages/Contacto";
 import Admin from "./Pages/Admin";
 import NotFound from "./Pages/NotFound";
-
 import { UserProvider } from "./Componentes/UserContext";
+import Footer from "./Componentes/Footer";
+import FormProfesionals from "./Componentes/FormProfesionals";
 
 function App() {
   return (
@@ -31,9 +33,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/FormProfesionals" element={<FormProfesionals />} />
         </Routes>
-    
       </UserProvider>
+      <Footer />
     </>
   );
 };

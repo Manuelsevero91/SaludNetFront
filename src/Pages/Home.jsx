@@ -1,8 +1,9 @@
 import Marketing from "../Componentes/Marketing";
-import Footer from "../Componentes/Footer";
+
 import { useAuth } from "../Componentes/UserContext";
 import "../Styles/SpanContinue.css";
 import SpanContinue from "../Componentes/SpanContinue";
+
 
 
 function Home() {
@@ -24,8 +25,9 @@ function Home() {
         <Marketing />
       
       </div>
-      <Footer />
-    </>
+     
+      </>  
+   
   );
 }
 export default Home;

@@ -6,16 +6,14 @@
   width: 100%;
   /* overflow-y: auto;  */
   overflow-x: hidden;
-  margin-top: 0px;
-
-  position: absolute;
-  /* z-index: 1; */
+  margin-top: 0%;
+  position: absolute; 
 }
 .marketing-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 0px; 
+  margin-bottom: 3.5%; 
 }
 
 .marketing-column {
@@ -30,7 +28,7 @@
 .marketing-section {
   width: 100%;
   min-width: 950px;
-  height:46vh; /* Establece una altura fija para los marketing-section */
+  height:42.35vh; /* Establece una altura fija para los marketing-section */
   margin-bottom:0px;
   background-size: cover;
   background-position: center;

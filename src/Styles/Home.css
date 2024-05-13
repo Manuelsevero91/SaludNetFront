@@ -52,8 +52,10 @@ h1 {
 }
 
 h1:first-child {
+  display: flex;
   position: absolute;
   align-items: center;
+  justify-content: center;
   font-size: 70px;
   color: rgb(245, 249, 249);
   text-shadow: 5px 5px 5px rgb(3, 3, 3);
