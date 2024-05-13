@@ -1,14 +1,22 @@
-.footer {
-    background-color:  rgba(
+.footer { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    background-color: rgba(
       44,
       99,
       103,
       0.8
-    );
-    display: flex;
-    justify-content: space-between;
-    align-items: center;   
-    margin-top: 92vh;
+    ); /* Color de fondo del Footer */
+  color: white; /* Color del texto del Footer */
+  padding: 20px; /* Espaciado interno del Footer */
+  text-align: center; /* Alineación del texto al centro */
+  position: fixed; /* Para fijar el Footer en la parte inferior de la ventana del navegador */
+  left: 0;
+  bottom: 0;
+  width: 100%; /* Ancho completo del Footer */
+height: 1%;
+    
   }
   
   .social-icons {
