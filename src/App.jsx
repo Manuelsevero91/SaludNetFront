@@ -31,7 +31,9 @@ function App() {
           <Route path="/Profesionales" element={<Profesionales />} />
           <Route exact path="/contacto" element={<Contacto />} />
           <Route path="/login" element={<Login />} />
+         
           <Route path="/Admin" element={<Admin />} />
+        
           <Route path="*" element={<NotFound />} />
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
         </Routes>
