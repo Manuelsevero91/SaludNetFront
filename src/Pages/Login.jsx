@@ -62,7 +62,7 @@ function Login({ isLoggedIn }) {
         timer: 3000,
       });
       handleLogin(enteredUsername);
-      navigate('/');
+      navigate('/admin');
     } else {
       setError(true);
       Swal.fire({

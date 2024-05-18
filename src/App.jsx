@@ -20,6 +20,10 @@ import NotFound from "./Pages/NotFound";
 import { UserProvider } from "./Componentes/UserContext";
 import Footer from "./Componentes/Footer";
 import FormProfesionals from "./Componentes/FormProfesionals";
+import ProtectedRoute from "./Auth/ProtectedRoute"
+import Turnos from "./Pages/Turnos";
+import SobreNosotros from "./Pages/SobreNosotros";
+import Novedades from "./Pages/Novedades";
 
 function App() {
   return (
@@ -31,9 +35,12 @@ function App() {
           <Route path="/Profesionales" element={<Profesionales />} />
           <Route exact path="/contacto" element={<Contacto />} />
           <Route path="/login" element={<Login />} />
-         
+          <Route element={<ProtectedRoute />}>
           <Route path="/Admin" element={<Admin />} />
-        
+          </Route>
+          <Route path="/Novedades" element={<Novedades />} />
+          <Route path="/Turnos" element={<Turnos />} />
+          <Route path="/Sobre Nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
         </Routes>
