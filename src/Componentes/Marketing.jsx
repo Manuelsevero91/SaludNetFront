@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Profesionales from "../Pages/Profesionales";
 import { Link } from "react-router-dom";
 
+
 const Marketing = () => {
   const [mostrarProfesionales, setMostrarProfesionales] = useState(false);
 
@@ -73,6 +74,7 @@ const Marketing = () => {
       </div>
       <div id="final-marketing"></div> {/* Asegúrate de que este ID esté presente */}
       {mostrarProfesionales && <Profesionales />}
+    
     </div>
   );
 };

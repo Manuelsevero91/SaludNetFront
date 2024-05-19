@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import "./Styles/App.css";
-import "./Styles/NavBar.css";
+// import "./Styles/NavBar.css";
 import "./Styles/Home.css";
 import "./Styles/Form.css";
 import "./Styles/Login.css";
 import "./Styles/Marketing.css";
-import "./Styles/Footer.css";
+
 import "./Styles/Profesionales.css";
 import "./Styles/Admin.css";
 import "./Styles/SpanContinue.css";
 import "./Styles/FormProfesionals.css";
+
 import NavBar from "./Componentes/NavBar";
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
@@ -18,18 +19,19 @@ import Contacto from "./Pages/Contacto";
 import Admin from "./Pages/Admin";
 import NotFound from "./Pages/NotFound";
 import { UserProvider } from "./Componentes/UserContext";
-import Footer from "./Componentes/Footer";
+
 import FormProfesionals from "./Componentes/FormProfesionals";
 import ProtectedRoute from "./Auth/ProtectedRoute"
 import Turnos from "./Pages/Turnos";
 import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
+import CreateSchedule from "./Componentes/CreateSchedule";
 
 function App() {
   return (
     <>
       <UserProvider>
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Profesionales" element={<Profesionales />} />
@@ -43,9 +45,10 @@ function App() {
           <Route path="/Sobre Nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
+          <Route exact path="/CreateSchedule" element={<CreateSchedule />} />
         </Routes>
       </UserProvider>
-      <Footer />
+    
     </>
   );
 };

@@ -60,7 +60,7 @@ const Admin = () => {
   imageSrc="https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0="
   title="ADMINISTRAR PROFESIONALES"
   options={[
-    { label: 'Agregar Profesional', link: '/agregar-profesional' },
+    { label: 'Agregar Profesional', link: '/FormProfesionals' },
     { label: 'Modificar Profesional', link: '/modificar-profesional' },
     { label: 'Borrar Profesional', link: '/borrar-profesional' }
   ]}
@@ -93,7 +93,7 @@ const Admin = () => {
             options={[
               { label: 'Todos los turnos de hoy', link: '/todos los turnos de hoy' },
               { label: 'Turnos del mes por médico', link: '/turnos del mes por medico' },
-              { label: 'Configurar Reporte', link: '/configurar reporte' }
+              { label: 'Solicitar turno como paciente', link: '/turnos' }
             ]} 
           />
         </div>

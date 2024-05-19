@@ -7,13 +7,15 @@
   /* overflow-y: auto;  */
   overflow-x: hidden;
   margin-top: 0%;
-  position: absolute; 
+  position: absolute;
+
 }
 .marketing-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 3.5%; 
+  margin-bottom: 0; 
+
 }
 
 .marketing-column {
@@ -23,13 +25,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+
 }
 
 .marketing-section {
   width: 100%;
   min-width: 950px;
-  height:42.35vh; /* Establece una altura fija para los marketing-section */
-  margin-bottom:0px;
+  height:50vh; /* Establece una altura fija para los marketing-section */
+margin-bottom: 0;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -50,70 +53,17 @@
   transition: background-color 0.9s ease;
 }
 
-   .marketing-section.active.title {
+   /* .marketing-section.active.title {
   font-size: 40px;
   font-weight: bold;
   
-}
+} */
 .marketing-section:hover {
   background-size: 120%; /* Aumenta el tamaño de la imagen de fondo en un 5% al pasar el cursor*/
   /* transform: scale(1); */
 }
 
-.title-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100%; /* Ajusta la altura del contenedor */
-  /* z-index:1; */
-  width: 100%; /* Ajusta el ancho al 80% del contenedor */
-  margin: auto; /* Aplica un margen alrededor del wrapper */
-  top: 50%;
-  transform: translateY(-50%);
-}
 
-.title {
-  color: rgb(46, 37, 37);
-}
-
-.title-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* width:0%;
-      height: 0%; */
-  /* background-color: transparent; */
-  /* transition: background-color 0.3s ease; */
-  z-index: -1;
-}
-
-.title-wrapper:hover::before {
-  background-color: rgb(185, 66, 66); /* Cambia el color y la opacidad al pasar el cursor */
-}
-
-.title-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(
-    44,
-    99,
-    103,
-    0.8
-  ); /* Color verde con poca transparencia */
-  opacity: 0; /* Inicialmente transparente */
-  transition: opacity 0.7s ease; /* Transición suave */
-}
-
-.title-wrapper:hover::after {
-  opacity: 20;
-  color: aliceblue; /* Mostrar el color al pasar el cursor sobre el título */
-}
 @media (max-width: 768px) {
 
   h1 {   
