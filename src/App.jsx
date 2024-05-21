@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import "./Styles/App.css";
 import "./Styles/NavBar.css";
 import "./Styles/Home.css";
@@ -26,6 +26,7 @@ import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
 
 function App() {
+ 
   return (
     <>
       <UserProvider>
@@ -37,12 +38,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute />}>
           <Route path="/Admin" element={<Admin />} />
+          <Route path="/FormProfesionals" element={<FormProfesionals />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
           <Route path="/Sobre Nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/FormProfesionals" element={<FormProfesionals />} />
+          
         </Routes>
       </UserProvider>
       <Footer />
