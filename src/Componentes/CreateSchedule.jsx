@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import '../Styles/CreateSchedule.css';
 
 const CreateSchedule = ({ doctorId, day }) => {
     const [turnos, setTurnos] = useState([]);
+    const [startDate, setStartDate] = useState(new Date());
+    const [currentDoctorId, setCurrentDoctorId] = useState(doctorId || '');
     const intervalInMinutes = 30;
 
     const createScheduleForMonth = async () => {
@@ -20,7 +23,7 @@ const CreateSchedule = ({ doctorId, day }) => {
 
                     turnos.push({
                         day: fecha.toISOString().split('T')[0],
-                        idDoctor: doctorId,
+                        idDoctor: currentDoctorId,
                         start_Time: startTime.toTimeString().split(' ')[0],
                         end_Time: endTime.toTimeString().split(' ')[0],
                         available: true,
@@ -47,10 +50,19 @@ const CreateSchedule = ({ doctorId, day }) => {
 
     useEffect(() => {
         createScheduleForMonth();
-    }, [doctorId, day]);
+    }, [currentDoctorId, day]);
 
-    const handleCreateSchedule = () => {
+    const handleCreateSchedule = (event) => {
+        event.preventDefault();
         createScheduleForMonth();
+    };
+
+    const handleDoctorIdChange = (event) => {
+        setCurrentDoctorId(event.target.value);
+    };
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
     };
 
     const tileContent = ({ date, view }) => {
@@ -65,13 +77,13 @@ const CreateSchedule = ({ doctorId, day }) => {
     return (
         <div className="create-schedule-container">
             <h2 className="create-schedule-title">Crear Agenda de Turnos</h2>
-            <form className="create-schedule-form">
+            <form className="create-schedule-form" onSubmit={handleCreateSchedule}>
                 <label htmlFor="doctorId">ID del Doctor:</label>
                 <input
                     type="text"
                     id="doctorId"
                     name="doctorId"
-                    value={doctorId}
+                    value={currentDoctorId}
                     onChange={handleDoctorIdChange}
                 />
                 <label htmlFor="startDate">Fecha de Inicio:</label>
@@ -82,7 +94,7 @@ const CreateSchedule = ({ doctorId, day }) => {
                     onChange={handleStartDateChange}
                     minDate={new Date()}
                 />
-                <button className="create-schedule-button"  type="submit" onClick={handleCreateSchedule}>Crear Agenda</button>
+                <button className="create-schedule-button" type="submit">Crear Agenda</button>
             </form>
             <div className="calendar-container">
                 <Calendar

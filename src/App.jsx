@@ -10,7 +10,7 @@ import "./Styles/Profesionales.css";
 import "./Styles/Admin.css";
 import "./Styles/SpanContinue.css";
 import "./Styles/FormProfesionals.css";
-
+import "./Styles/CreateSchedule.css";
 import NavBar from "./Componentes/NavBar";
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";

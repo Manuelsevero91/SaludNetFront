@@ -24,12 +24,11 @@ select {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  background-color: #fff;
-  /* Agregamos un estilo adicional para que el cursor cambie al pasar sobre el campo */
+  background-color: #fff;  
   cursor: pointer;
 }
 
-/* Estilos para las opciones del campo de especialidad */
+
 select option {
   padding: 5px;
 }
