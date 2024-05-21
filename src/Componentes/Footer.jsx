@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import saludnetqr from "../assets/saludnetqr.png";
 
 const Footer = () => {
   return (
@@ -14,8 +15,12 @@ const Footer = () => {
         <a href="https://www.instagram.com/" className="social-icon">
           <FontAwesomeIcon icon={faInstagram} />
         </a>
+     
       </div>
-      <p className="footer-text">© 2023 Salud Net. Todos los derechos reservados.</p>
+      
+      <img src={saludnetqr} alt="QR Salud Net" className="qr" />
+
+      <p className="footer-text">© 2024 Salud Net. Todos los derechos reservados.</p>
     </footer>
   );
 };

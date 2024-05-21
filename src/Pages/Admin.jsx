@@ -93,7 +93,7 @@ const Admin = () => {
             options={[
               { label: 'Todos los turnos de hoy', link: '/todos los turnos de hoy' },
               { label: 'Turnos del mes por médico', link: '/turnos del mes por medico' },
-              { label: 'Configurar Reporte', link: '/configurar reporte' }
+              { label: 'Solicitar turno como paciente', link: '/turnos' }
             ]} 
           />
         </div>
