@@ -1,0 +1,57 @@
+  [
+    {
+      "nombre": "Dr. Juan Pérez",
+      "especialidad": "Cardiología",
+      "foto": "https://www.shutterstock.com/image-photo/healthcare-medical-staff-concept-portrait-600nw-2281024823.jpg"
+      
+    },
+    {
+      "nombre": "Dra. María García",
+      "especialidad": "Pediatría",
+      "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5hQ7vZsrywqPstt0lvAUupVJ2JwkFxcCCB0LPishDQ&s"
+      
+    },
+    {
+      "nombre": "Dr. Carlos Rodríguez",
+      "especialidad": "Dermatología",
+      "foto": "https://media.istockphoto.com/id/1390000431/es/foto/inyecci%C3%B3n-de-un-m%C3%A9dico-maduro-con-una-tableta-digital-en-un-hospital-moderno.jpg?s=612x612&w=0&k=20&c=KFtETXPxOVTPNAWQwRdtD38MsH6xNXJzCSLi2DzMosM="
+      
+    },
+    {
+      "nombre": "Dra. Laura Martínez",
+      "especialidad": "Ginecología",
+      "foto": "https://img.freepik.com/foto-gratis/hermosa-joven-doctora-mirando-camara-oficina_1301-7807.jpg"
+      
+    },
+    {
+      "nombre": "Dr. José González",
+      "especialidad": "Neurología",
+      "foto": "https://canalshowsport.com.ar/wp-content/uploads/2022/03/medicoss.jpg"
+     
+    },
+    {
+      "nombre": "Dra. Ana López",
+      "especialidad": "Oftalmología",
+      "foto": "https://www.expomedhub.com/img/blog/avances-medicos-8-avances-medicos-conexiones-portada.png"
+      
+    },
+    {
+      "nombre": "Dr. Miguel Ruiz",
+      "especialidad": "Ortopedia",
+      "foto": "https://www.marketingmedico.mx/wp-content/uploads/2019/06/Marketing-Medico-Diseno-de-Paginas-Web-para-Medicos-y-Clinicas-Slider-v001-compressor.png"
+      
+    },
+    {
+      "nombre": "Dra. Patricia Sánchez",
+      "especialidad": "Psiquiatría",
+      "foto": "https://static.guiainfantil.com/media/10364/c/5-medicos-influencers-mas-importantes-de-venezuela-que-arrasan-en-instagram-lg.jpg"
+      
+    },
+    {
+      "nombre": "Dr. Fernando Díaz",
+      "especialidad": "Urología",
+      "foto": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/5KCVGAGSP5HFJA7KMALNP7ITS4.jpg"
+    }
+  ]
+
+  
