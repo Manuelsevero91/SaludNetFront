@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Asegúrate de importar Link si es necesario
 import Footer from '../Componentes/Footer';
 import "../Styles/Footer.css";
+import NavBar from '../Componentes/NavBar';
+import "../Styles/NavBar.css";
 
 
 const Admin = () => {
   
   const AdminSection = ({ imageSrc, title, options }) => {
-    // const [isActive, setIsActive] = useState(false);
+  
 
-    // const handleToggle = () => {
-    //   setIsActive(!isActive);
-    // };
+   
     const [isHovered, setIsHovered] = useState(false);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
   
@@ -52,7 +52,9 @@ const Admin = () => {
   };
 
   return (
+   
     <div className="admin-container">
+ <NavBar />
       <div className="admin-row">
         <div className="admin-column">
           

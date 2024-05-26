@@ -1,23 +1,19 @@
 import React from "react";
-import { useRef } from "react"; // Asegúrate de importar useRef desde React
+import { useRef } from "react"; 
 
-// Tu código de componente Home aquí
-
-function SpanContinue() {
-  const marketingRef = useRef(null);
-
+function SpanContinue({ marketingRef }) {
   const scrollToMarketing = () => {
-    document
-      .getElementById("final-marketing")
-      .scrollIntoView({ behavior: "smooth" });
+    if (marketingRef.current) {
+      marketingRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <div className="span-continue-container"> {/* Contenedor adicional */}
+    <div className="span-continue-container"> 
       <div className="span-continue">
-        <button className="button-span-continue" onClick={scrollToMarketing}>Continuar</button>
+        <button button className="button-span-continue span-continue-button" onClick={scrollToMarketing}>Continuar</button>
       </div>
-      <div ref={marketingRef}></div>
+   
     </div>
   );
 };

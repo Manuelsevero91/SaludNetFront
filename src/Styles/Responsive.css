@@ -1,0 +1,111 @@
+@media (max-width: 1200px) {
+  .tittleHome {
+    font-size: 5vw;
+  }
+  .pHome {
+    font-size: 3vw;
+  }
+  .logo {
+    width: 10vw;
+    max-width: 150px;
+  }
+
+  a {
+    font-size: 75vw;
+  }
+  .social-icon {
+    font-size: 3vw;
+  }
+  .footer-text {
+    font-size: 1vw;
+    width: 5vw;
+    margin-left: 20vw;
+  }
+  .qr {
+    width: 25vw;
+    height: 20vh;
+  }
+  .button-span-continue {
+    font-size: 1.5vw;
+  }
+  .link-container ul {
+    gap: 1.5vw;
+  }
+  .link-container li {
+    font-size: 1.2vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .tittleHome {
+    font-size: 7vw;
+  }
+
+  .pHome {
+    font-size: 4vw;
+  }
+
+  .logo {
+    width: 7vw;
+  }
+  a {
+    font-size: 50vw;
+  }
+
+  .social-icon {
+    font-size: 2vw;
+  }
+
+  .footer-text {
+    font-size: 2vw;
+    width: 5vw;
+    margin-left: 20vw;
+  }
+
+  .qr {
+    width: 5rem;
+    height: 8rem;
+  }
+  
+  .button-span-continue.span-continue-button {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .tittleHome {
+    font-size: 8vw;
+  }
+
+  .pHome {
+    font-size: 7vw;
+  }
+
+  .logo {
+    width: 10vw;
+  }
+  a {
+    font-size: 10px;
+  }
+
+  .social-icon {
+    font-size: 20vw;
+  }
+
+  .footer-text {
+    font-size: 5vw;
+    width: 5vw;
+    margin-left: 20vw;
+  }
+
+  .qr {
+    width: 5vw;
+    height: 3vw;
+  }
+  
+
+
+  .button-span-continue.span-continue-button {
+    font-size:25vw;
+  }
+}

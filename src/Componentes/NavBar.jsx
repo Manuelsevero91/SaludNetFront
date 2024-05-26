@@ -14,8 +14,9 @@ function NavBar({ showButtons }) {
       <div className="nav-container">
         <nav>
           <ul className="nav-links">
-            <li><Link to="/"><img id="logoSN" src={logoSN} alt="Logo" /></Link></li>
-            <li><Link to="/contacto">Contacto</Link></li>
+            <li><Link to="/"><img id="logoSN" src={logoSN} alt="Logo" /></Link></li
+
+            <li><Link to="/contacto">Contacto</L
             {isLoggedIn ? (
               <>
                 <Link to="/" onClick={handleLogoutClick}>
