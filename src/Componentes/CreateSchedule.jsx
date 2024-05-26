@@ -69,7 +69,7 @@ const CreateSchedule = ({ doctorId, day }) => {
         if (view === 'month') {
             const turno = turnos.find(t => t.day === date.toISOString().split('T')[0]);
             if (turno) {
-                return <div>{turno.start_Time}</div>; // Por ejemplo, mostrar la hora de inicio del turno
+                return <div>{turno.start_Time}</div>;
             }
         }
     };
