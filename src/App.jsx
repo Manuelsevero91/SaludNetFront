@@ -26,7 +26,7 @@ import Turnos from "./Pages/Turnos";
 import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
-
+import ListProfesionals from "./Componentes/ListProfesionals";
 function App() {
  
   return (
@@ -47,6 +47,7 @@ function App() {
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
+          <Route path="/ListProfesionals" element={<ListProfesionals />} />
           <Route exact path="/CreateSchedule" element={<CreateSchedule />} />
 
           
