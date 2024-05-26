@@ -5,7 +5,7 @@ import "./Styles/Home.css";
 import "./Styles/Form.css";
 import "./Styles/Login.css";
 import "./Styles/Marketing.css";
-
+import "./Styles/Responsive.css";
 import "./Styles/Profesionales.css";
 import "./Styles/Admin.css";
 import "./Styles/SpanContinue.css";
