@@ -63,8 +63,8 @@ const Admin = () => {
   title="ADMINISTRAR PROFESIONALES"
   options={[
     { label: 'Agregar Profesional', link: '/FormProfesionals' },
-    { label: 'Modificar Profesional', link: '/modificar-profesional' },
-    { label: 'Borrar Profesional', link: '/borrar-profesional' }
+    { label: 'Modificar/Eliminar Profesional', link: '/modificar/eliminar-profesional' },
+    // { label: 'Borrar Profesional', link: '/borrar-profesional' }
   ]}
 />
 
