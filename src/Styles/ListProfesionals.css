@@ -8,15 +8,14 @@
   .barra-superior {
     position: relative;
     background-image: url('https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=');
-    background-size:auto;
-   
+    background-size:auto;   
     padding: 10px;
     height: 3vw;
     margin-top: 3.8vw;
     margin-bottom: 4vh;
   }
   .list {
-    background-color: rgba(90, 89, 95, 0.959); 
+    background-color: rgba(46, 42, 51, 0.959); 
    
   }
   .titulo-seccion {
@@ -35,9 +34,7 @@
   a:hover {
     transform: scale(1.1);
   }
-
-
-  
+ 
   
   .list h1 {
     text-align: center;
@@ -75,10 +72,17 @@
     text-align: left;
     border-bottom: 1px solid #ccc;
     color: white;
+    font-size: 1vw;
   }
   
   table th {
-    background-color: rgba(101, 17, 211, 0.979);
+    background-color: rgba(
+      44,
+      99,
+      103,
+      0.8
+    );
+    font-size: 1.5vw;
   }
   
   table tr:nth-child(even) {
@@ -97,6 +101,7 @@
   button.edit-button,
   button.delete-button {
     padding: 10px;
+    font-size: 0.9vw;
     border: none;
     border-radius: 3px;
     cursor: pointer;
@@ -104,36 +109,36 @@
   }
   
   button.edit-button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #5ba848;
+    color: white;
   }
   
   button.edit-button:hover {
-    background-color: #0056b3;
+    background-color: #68d81d;
   }
   
   button.delete-button {
-    background-color: #ff4d4d;
-    color: #fff;
+    background-color: #d8763d;
+    color: white;
   }
   
   button.delete-button:hover {
-    background-color: #cc0000;
+    background-color: #ee4e4e;
   }
   
-  .modal {
-    max-width: 500px;
+React-modal {
+    width: 20vw;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #df23cf;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #c23e3e;
     position: relative;
-    top: 20%;
+    top: 20vw;
   }
   
-  .overlay {
-    background-color: rgba(0, 0, 0, 0.5);
+   .overlay {
+    background-color: rgba(126, 12, 12, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -142,10 +147,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } 
   
   form {
-    max-width: 400px;
+    max-width: 50vw;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;

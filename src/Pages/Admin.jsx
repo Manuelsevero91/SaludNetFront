@@ -54,7 +54,7 @@ const Admin = () => {
   return (
    
     <div className="admin-container">
- <NavBar />
+ <NavBar showLinks={true}/>
       <div className="admin-row">
         <div className="admin-column">
           
@@ -63,7 +63,7 @@ const Admin = () => {
   title="ADMINISTRAR PROFESIONALES"
   options={[
     { label: 'Agregar Profesional', link: '/FormProfesionals' },
-    { label: 'Modificar/Eliminar Profesional', link: '/modificar/eliminar-profesional' },
+    { label: 'Modificar/Eliminar Profesional', link: '/ListProfesionals' },
     // { label: 'Borrar Profesional', link: '/borrar-profesional' }
   ]}
 />

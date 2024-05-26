@@ -27,7 +27,7 @@ function Profesionales() {
 
   return (
     <div className="profesionales">
-      <NavBar user={user} />
+      <NavBar />
       <div className="barra-superior">
         <div className="titulo-seccion">Profesionales</div>
       </div>

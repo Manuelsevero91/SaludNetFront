@@ -35,7 +35,7 @@ const CreateSchedule = ({ doctorId, day }) => {
         }
 
         try {
-            const response = await fetch('http://localhost:3300/schedules', {
+            const response = await fetch('http://localhost:3000/schedules', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

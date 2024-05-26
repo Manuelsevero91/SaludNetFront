@@ -1,40 +1,9 @@
-// import Marketing from "../Componentes/Marketing";
-// import Footer from "../Componentes/Footer";
-// import { useAuth } from "../Componentes/UserContext";
-// import "../Styles/SpanContinue.css";
-// import SpanContinue from "../Componentes/SpanContinue";
-
-
-// function Home() {
-//   const { isLoggedIn } = useAuth;
-  
-
-//   return (
-//     <>
-//       <div className="inicio">
-//         <section className="container">
-//           {!isLoggedIn && <h1>BIENVENIDOS A SALUD NET</h1>}
-//           <p className="pHome">
-//             En nuestra página podrá consultar sobre los profesionales que
-//             atienden en Salud Net como también reservar un turno
-//           </p>      
-//             <SpanContinue />            
-               
-//         </section>
-//         <Marketing />
-      
-//       </div>
-//       <Footer />
-//     </>
-//   );
-// }
-// export default Home;
-
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import logoSN from '../assets/logosaludnet.png';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Componentes/UserContext';
+import NavBar from '../Componentes/NavBar';
 import NotFoundImage from '../assets/not-found.jpg';
 
 function Login({ isLoggedIn }) {
@@ -79,6 +48,7 @@ function Login({ isLoggedIn }) {
 
   return (
     <>
+     <NavBar showLinks={false} />
       <div className='login'>
         <form onSubmit={handleSubmit}>
           <h3 id="inicioSesion"><strong>Iniciar Sesión</strong></h3>
