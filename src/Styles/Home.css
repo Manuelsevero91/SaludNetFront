@@ -1,48 +1,96 @@
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  width: 100%;
+  height: 100%;
 }
 
-.container {
-  margin-top: 5%;
+
+.general-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.link-container {
   position: relative;
   display: flex;
-  place-items: center;
-  align-items: center;
-  height: 100vh; 
+  justify-content: flex-end; /* Alinear los enlaces a la derecha */
+  padding:10px;
+  width: 100%;  
+  top: 2vh;
+  right: 6vw;
   width: 100%;
+  margin: 0
+}
+
+.link-container ul {
+  display: flex;
+  gap: 1.5vw;
+  list-style: none;
+  margin-top: 2vw;
+  padding: 0;
+  margin:0;
+}
+
+
+.inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  width: 100%;
+  height:max-content;
+  min-height: 50vh;
   background-image: url("https://media.istockphoto.com/id/1343098418/es/foto/examen-m%C3%A9dico-y-negocio-de-seguros-de-salud-a-trav%C3%A9s-de-la-tecnolog%C3%ADa-de-interfaz-virtual.jpg?s=612x612&w=0&k=20&c=D4gW3RcySVx-8ZkZUCfXOvgmV6Umso1r7A6hjQ2tSVQ=");
   background-size: cover;
   background-position: center;
-  overflow: hidden; /* Evitar el desbordamiento */
+  overflow: hidden; 
   margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  position:absolute;
+top: -3vh;
+  left: 20px;
+  width: 10vw; 
+  max-width: 150px; 
+  height: auto;
 }
 
 .tittleHome {
-  position: absolute;
-  top: 25vh; /* Centrar verticalmente */
-  left: 14vw; /* Centrar horizontalmente */
-  transform: translate(-50%, -50%); /* Corregir el centro */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: fit-content;
   font-size: 6vw; /* Usar unidades relativas */
   color: rgb(245, 249, 249);
-  text-shadow: 5px 5px 5px rgb(3, 3, 3);
+  margin-top: 5vh;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
   animation: h1blue 3s 1 forwards; /* Ejecutar la animación solo una vez */
 }
+
 .pHome {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 2vw; /* Usar unidades relativas */
+  font-size: 1.8vw; 
   font-weight: bolder;
-  margin-top: 40vh;
   color: white;
+  margin-top: .5vh; 
+  width: 80vw;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
 }
+
+
 
 @keyframes h1blue {
   0% {
@@ -59,53 +107,4 @@ body {
   }
 }
 
-.logo {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 10vw; /* Usar unidades relativas para responsividad */
-  max-width: 150px; /* Limitar el tamaño máximo */
-  height: auto;
-}
 
-@media (max-width: 1200px) {
-  h1 {
-    font-size: 5vw;
-  }
-  .pHome {
-    font-size: 2.5vw;
-  }
-  .logo {
-    width: 12vw;
-    max-width: 120px;
-  }
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 6vw;
-    margin-left: 25%;
-  }
-  .pHome {
-    font-size: 3vw;
-  }
-  .logo {
-    width: 15vw;
-    max-width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 8vw;
-    margin-left: 20%;
-  }
-  .pHome {
-    font-size: 4vw;
-    margin-top: 50vh;
-  }
-  .logo {
-    width: 20vw;
-    max-width: 80px;
-  }
-}

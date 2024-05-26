@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import Marketing from "../Componentes/Marketing";
 import logoSN from "../assets/logosaludnet.png";
 import { useAuth } from "../Componentes/UserContext";
@@ -5,30 +6,41 @@ import "../Styles/SpanContinue.css";
 import SpanContinue from "../Componentes/SpanContinue";
 import Footer from "../Componentes/Footer";
 import "../Styles/Footer.css";
+import { Link } from "react-router-dom";
+import "../Styles/Responsive.css";
+
 function Home() {
   const { isLoggedIn } = useAuth;
-  
-
+  const marketingRef = useRef(null);
   return (
-    <>
+    <div className="general-container">
       <div className="inicio">
+        <div className="link-container">
+          <ul>
+            <li>
+              <Link to="/contacto">Contacto</Link></li>
+            <li>
+              <Link to="/login">Admin</Link></li>
+          </ul>
+        </div>
+
         <section className="container">
-        <img src={logoSN} alt="Logo de Salud Net" className="logo" />
-          {!isLoggedIn && <h1 className="tittleHome">BIENVENIDOS A SALUD NET</h1>}
+          <img src={logoSN} alt="Logo de Salud Net" className="logo" />
+          {!isLoggedIn && (
+            <h1 className="tittleHome">BIENVENIDOS A SALUD NET</h1>
+          )}
           <p className="pHome">
             En nuestra página podrá consultar sobre los profesionales que
             atienden en Salud Net como también reservar un turno
-          </p>      
-            <SpanContinue />            
-               
+          </p>
+          <SpanContinue marketingRef={marketingRef}/>
         </section>
-        <Marketing />
-
       </div>
-     
-     
-   <Footer />
-   </>
+      <div ref={marketingRef}>
+      <Marketing />
+      </div>
+      <Footer />
+    </div>
   );
 }
 export default Home;

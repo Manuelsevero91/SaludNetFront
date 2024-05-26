@@ -11,7 +11,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 0px; /* Espacio entre filas*/
+  margin-bottom: 0px; 
 }
 
 .admin-column {
@@ -19,16 +19,14 @@
   flex-shrink: 1; /* Las columnas pueden contraerse si hay menos espacio disponible*/
   flex-basis: 0; /* Establece el tamaño inicial de la columna a cero */
   display: flex;
-  flex-direction: column;
- 
+  flex-direction: column; 
   width: 100%;
 }
 
 .admin-section { 
   width: 100%;
   min-width: 950px;
-  height: 410px;/* Establece una altura fija para los marketing-section */
-
+  height: 410px;
   background-size: cover;
   background-position: center;
   position: relative;

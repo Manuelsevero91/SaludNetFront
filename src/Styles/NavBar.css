@@ -37,9 +37,11 @@ li:hover {
   transform: scale(1.1);
 }
 a {
-  font-size: 1.4em;
+  font-size: 2vw;
   text-decoration: none;
   color: white;
+  text-shadow: 5px 5px 5px rgb(5, 5, 5);
+  font-weight: bold;
 }
 
 /* #buttonProf {
@@ -55,7 +57,7 @@ a {
   font-size: 1.4em;
   margin-left: 130px;
 } */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   ul.nav-links {    
     margin-left: 2px;  
   }
@@ -68,4 +70,4 @@ a {
     nav {
      height:6vh;
       width: 100%; 
-    }}
+    }} */

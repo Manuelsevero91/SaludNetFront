@@ -62,7 +62,7 @@ function NavBar({ showButtons }) {
           <ul className="nav-links">
             <li><Link to="/"><img id="logoSN" src={logoSN} alt="Logo" /></Link></li>
             {/* {!showButtons && ( */}
-              <li><Link to="/contacto">Contacto</Link></li>
+             
             {/* )} */}
             {isLoggedIn ? (
               <>
