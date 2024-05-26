@@ -13,7 +13,7 @@ function FormProfesionals() {
   useEffect(() => {
     const fetchSpecialities = async () => {
       try {
-        const response = await fetch("http://localhost:3300/speciality");
+        const response = await fetch("http://localhost:3000/speciality");
 
         if (!response.ok) {
           throw new Error(
@@ -48,7 +48,7 @@ function FormProfesionals() {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3300/doctors", {
+      const response = await fetch("http://localhost:3000/doctors", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

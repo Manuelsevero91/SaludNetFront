@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Styles/Marketing.css"; // Asegúrate de crear y ajustar este archivo CSS
+import "../Styles/Marketing.css";
 
 const Marketing = () => {
   const MarketingSection = ({ imageSrc, title, link }) => {
