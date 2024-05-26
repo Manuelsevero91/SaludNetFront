@@ -44,9 +44,8 @@ function App() {
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
-          <Route path="/Sobre Nosotros" element={<SobreNosotros />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
-
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
           <Route exact path="/CreateSchedule" element={<CreateSchedule />} />
 
