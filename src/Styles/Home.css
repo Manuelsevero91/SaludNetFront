@@ -74,15 +74,15 @@ top: -3vh;
 
 .tittleHome {
   height: fit-content;
-  font-size: 6vw; /* Usar unidades relativas */
+  font-size: 5vw;
   color: rgb(245, 249, 249);
   margin-top: 5vh;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
-  animation: h1blue 3s 1 forwards; /* Ejecutar la animación solo una vez */
+  animation: h1blue 3s 1 forwards; 
 }
 
 .pHome {
-  font-size: 1.8vw; 
+  font-size: 1.6vw; 
   font-weight: bolder;
   color: white;
   margin-top: .5vh; 

@@ -119,7 +119,7 @@
   width:80%;
   height: 50%;
   background-color: rgba( 44,99,103,0.9);
-  font-size: 1.2vw;
+
   border-radius: 65px;
   padding: 2vw;
   box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
@@ -132,11 +132,10 @@
 .options a {  
   color: #fef7f7;
   margin-left: 2vw;
-
   border-radius: 20%;
   padding: 5.5%;
   margin: 0.5vw;
-
+  font-size:1.5vw;
 }
 
 .options a:hover {

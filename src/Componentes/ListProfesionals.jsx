@@ -124,7 +124,7 @@ const ListProfesionals = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const filteredDoctors = doctors.filter((doctor) => {
+    const filteredDoctors = doctors.filter((doctor) => {
     const fullNameMatch = doctor.fullName.toLowerCase().includes(searchName.toLowerCase());
     const specialityMatch = doctor.speciality.name.toLowerCase().includes(searchSpeciality.toLowerCase());
     return fullNameMatch && specialityMatch;

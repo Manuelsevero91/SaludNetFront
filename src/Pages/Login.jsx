@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import logoSN from '../assets/logosaludnet.png';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Componentes/UserContext';
+import NavBar from '../Componentes/NavBar';
 import NotFoundImage from '../assets/not-found.jpg';
 
 function Login({ isLoggedIn }) {
@@ -47,6 +48,7 @@ function Login({ isLoggedIn }) {
 
   return (
     <>
+     <NavBar showLinks={false} />
       <div className='login'>
         <form onSubmit={handleSubmit}>
           <h3 id="inicioSesion"><strong>Iniciar Sesión</strong></h3>
