@@ -136,7 +136,7 @@ const ListProfesionals = () => {
 
   return (
     <div className="list">
-      <NavBar />
+     <NavBar showLinks={true}/>
       <div className="barra-superior">
         <h1 className="titulo-seccion">Listado de Profesionales</h1>
       </div>
