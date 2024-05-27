@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Asegúrate de importar Link si es necesario
+import { Link } from 'react-router-dom';
 import Footer from '../Componentes/Footer';
 import "../Styles/Footer.css";
 import NavBar from '../Componentes/NavBar';
@@ -64,7 +64,11 @@ const Admin = () => {
   options={[
     { label: 'Agregar Profesional', link: '/FormProfesionals' },
     { label: 'Modificar/Eliminar Profesional', link: '/ListProfesionals' },
+
     // { label: 'Borrar Profesional', link: '/borrar-profesional' }
+
+    
+
   ]}
 />
 
