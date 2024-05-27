@@ -76,7 +76,7 @@ const Admin = () => {
             imageSrc="https://www.shutterstock.com/image-illustration/top-view-medical-stethoscope-icon-600nw-2075382679.jpg"
             title="ADMINISTRAR AGENDA"
             options={[
-              { label: 'Configurar turnos disponibles', link: '/configurar turnos disponibles'},
+              { label: 'Configurar turnos disponibles', link: '/CreateSchedule'},
               { label: 'Actualizar turnos disponibles', link: '/sactualizar turnos disponibles'},
               { label: 'Eliminar turnos disponibles', link: '/eliminar turnos disponibles' }
             ]}
