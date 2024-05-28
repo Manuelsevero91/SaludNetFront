@@ -79,7 +79,7 @@ const CreateSchedule = ({ doctorId }) => {
 
   return (
     <>
-    
+    <div className="createSchedule-container">
       <NavBar showLinks={true}/>
       <div className="barra-superior-schedule">
         <h1 className="titulo-seccion">Administrar agenda: Crear</h1>
@@ -157,6 +157,7 @@ const CreateSchedule = ({ doctorId }) => {
         />
       </div>
       
+    </div>
     </div>
     </>
   );

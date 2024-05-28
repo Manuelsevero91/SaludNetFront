@@ -86,6 +86,8 @@ const Formulario = () => {
   }
 
   return (
+    <>
+
     <div className="form-overlay">
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -118,6 +120,7 @@ const Formulario = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

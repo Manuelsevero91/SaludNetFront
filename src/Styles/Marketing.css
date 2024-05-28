@@ -16,10 +16,9 @@
 }
 
 .marketing-column {
-  flex-grow: 1; /* Las columnas pueden crecer para ocupar el espacio disponible */
-  flex-shrink: 1; /* Las columnas pueden contraerse si hay menos espacio disponible */
-  flex-basis: 0; /* Establece el tamaño inicial de la columna a cero */
-  display: flex;
+  flex-grow: 1; 
+  flex-shrink: 1; 
+  flex-basis: 0;  
   flex-direction: column;
   width: 100%;
 }
@@ -32,7 +31,7 @@
   background-position: center;
   position: relative;
   cursor: pointer;
-  transition: background-size 0.9s ease;
+  /* transition: background-size 0.9s ease; */
 }
 
 .marketing-section h2 {
@@ -41,12 +40,21 @@
   margin-top: 0;
   font-size: 3vw;
   font-weight: bold;
-  position: relative; /* Asegura que el título esté por encima del hover */
-  z-index: 2; /* Asegura que el título esté por encima del hover */
+  position: relative; 
+  z-index: 2; 
+}
+.marketing-section.active {
+  transition: background-color 0.9s ease;
+  
+}
+
+.marketing-section.active.title {
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .marketing-section:hover {
-  background-size: 120%; /* Aumenta el tamaño de la imagen de fondo al pasar el cursor */
+  background-size: 120%; 
 }
 
 .title-wrapper {
@@ -69,9 +77,7 @@
   z-index: -1;
 }
 
-.title-wrapper:hover::before {
-  background-color: rgba(185, 66, 66, 0.5); /* Cambia el color y la opacidad al pasar el cursor */
-}
+
 
 .title-wrapper::after {
   content: "";
@@ -85,6 +91,4 @@
   transition: opacity 0.7s ease; /* Transición suave */
 }
 
-.title-wrapper:hover::after {
-  opacity: 1; /* Mostrar el color al pasar el cursor sobre el título */
-}
+

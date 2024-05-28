@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavBar from '../Componentes/NavBar';
 
 function FormProfesionals() {
   const [form, setForm] = useState({
@@ -83,12 +84,18 @@ function FormProfesionals() {
   };
 
   return (
+    <>
+    <NavBar showLinks={true}/>
+      <div className="barra-superior-prof">
+        <h1 className="titulo-seccion">Registrar Profesionales</h1>
+      </div>
+      <div className="formProfesionals-container">
     <form onSubmit={handleSubmit}>
       {error && <div style={{ color: "red" }}>{error}</div>}
       {success && <div style={{ color: "green" }}>{success}</div>}
       <div>
         <label>Nombre y Apellido:</label>
-        <input
+        <input className="inputProf"
           type="text"
           name="fullName"
           value={form.fullName}
@@ -97,7 +104,7 @@ function FormProfesionals() {
       </div>
       <div>
         <label>Correo Electrónico:</label>
-        <input
+        <input className="inputProf"
           type="email"
           name="mail"
           value={form.mail}
@@ -106,7 +113,7 @@ function FormProfesionals() {
       </div>
       <div>
         <label>Número de Teléfono:</label>
-        <input
+        <input  className="inputProf"
           type="tel"
           name="phone"
           value={form.phone}
@@ -130,7 +137,7 @@ function FormProfesionals() {
       </div>
       <div>
         <label>Licencia:</label>
-        <input
+        <input  className="inputProf"
           type="text"
           name="license"
           value={form.license}
@@ -139,6 +146,8 @@ function FormProfesionals() {
       </div>
       <button type="submit">Enviar</button>
     </form>
+    </div>
+    </>
   );
 }
 
