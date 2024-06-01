@@ -50,9 +50,9 @@ function Login({ isLoggedIn }) {
     <>
      <NavBar showLinks={false} />
       <div className='login'>
-        <form onSubmit={handleSubmit}>
+        <form className= 'inicio-cesion'onSubmit={handleSubmit}>
           <h3 id="inicioSesion"><strong>Iniciar Sesión</strong></h3>
-          <label htmlFor="nombre"><strong>Usuario</strong></label>
+          <label  htmlFor="nombre"><strong>Usuario</strong></label>
           <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre" style={{ display: 'block' }} />
           <label htmlFor="password"><strong>Contraseña</strong></label>
           <input type="password" name="password" id="password" placeholder="Introduzca su contraseña" style={{ display: 'block' }} />

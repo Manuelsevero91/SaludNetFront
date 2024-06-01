@@ -2,43 +2,48 @@ div.login {
   margin: 0;
   display: flex;
   flex-direction: column;
-  place-items: center;
   justify-content: center;
-  min-width: 320px;
+  min-width: 10vw;
   min-height: 100vh;
   background-image: url("../assets/Consultorio.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
 }
- input {
-  width: 100%;
-  height: 40px;
+.inicio-cesion{
+  background-color: rgba(44, 99, 103, 1);
+  width: 30vw;
+  height: 25vw;
+}
+
+ input#nombre {
+  width: 29vw;
+  height: 3.8vh;
+}
+input#password{
+  width: 29.7vw;
+  height: 5vh;
 }
 label {  
-
-  color: rgb(33, 36, 36);
-  font-size: 22px;
-
+  font-size: 1.5vw;
+  width: 25vw;
   }
 
 #inicioSesion {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: rgb(44, 99, 103);
-  margin-top: 20px;
+  font-size: 2vw;
+  color: rgb(224, 242, 243);
 }
 
-#enviarLogin {
+button#enviarLogin {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 1.5vw;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #277ad8;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: white;
+  
+  
 }
 #enviarLogin:hover {
   border-color: #646cff;
@@ -48,23 +53,18 @@ label {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
-}
+} */  
 
-#enviarLogin {
-  background-color: rgb(44, 99, 103);
-  color: white;
-  font-weight: bold;
-}
 #error {
   margin-bottom: 50px;
 }
-#password {
-  margin-bottom: 50px;
+#password {  
+  margin-bottom: 5vw;
 }
 #nombre {
   margin-top: 5px;

@@ -27,17 +27,18 @@ function Profesionales() {
 
   return (
     <div className="profesionales">
-      <NavBar />
+       <NavBar showLinks={false}/>
       <div className="barra-superior">
         <div className="titulo-seccion">Profesionales</div>
-      </div>
-      <input
+      </div >
+      <div className="barra-busqueda">
+      <input  className="buscar-esp"
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder="Buscar por especialidad"
-        className="barra-busqueda"
+        placeholder="Buscar por especialidad"       
       />
+      </div>
       <div className="contenedor-tarjetas">
         {renderTarjetas()}
       </div>

@@ -4,8 +4,9 @@
   justify-content:space-evenly;
   align-items: center;
   background-color: white;
-  padding: 20px;
-  width: 100%;
+  padding: 10px;
+  width:100vw;
+  height: 30vh;
   position: relative;
   bottom: 0;
   max-width: 1652px;
@@ -15,7 +16,7 @@
 .social-icon {
   display: flex;
   justify-content: center;
-  margin-left:10vw;
+  margin-left:4vw;
   color: black;
   font-size: 2vw;
 }

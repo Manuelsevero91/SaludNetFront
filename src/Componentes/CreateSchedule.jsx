@@ -19,7 +19,7 @@ const CreateSchedule = ({ doctorId }) => {
     const schedules = [];
     selectedDates.forEach(day => {
       const fecha = new Date(day);
-      if (fecha.getDay() !== 0 && fecha.getDay() !== 4) { // Excluyendo domingos y jueves
+      if (fecha.getDay() !== 0 && fecha.getDay() !== 4) { 
         schedules.push({
           day: fecha.toISOString().split('T')[0],
           idDoctor: currentDoctorId,
@@ -79,7 +79,7 @@ const CreateSchedule = ({ doctorId }) => {
 
   return (
     <>
-    
+    <div className="createSchedule-container">
       <NavBar showLinks={true}/>
       <div className="barra-superior-schedule">
         <h1 className="titulo-seccion">Administrar agenda: Crear</h1>
@@ -157,6 +157,7 @@ const CreateSchedule = ({ doctorId }) => {
         />
       </div>
       
+    </div>
     </div>
     </>
   );

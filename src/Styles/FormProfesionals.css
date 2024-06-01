@@ -1,27 +1,62 @@
 
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 100px;
-  position: relative; 
+.barra-superior-prof {
+  display: flex;
+  background-color: rgba(46,42,51,0.959); 
+  padding:5px;
+  height:5vw;
+  margin-top: 3.8vw;
+  text-align:left;
+
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+}
+h1#titulo-section{
+  margin-top: 150vh;
 }
 
-input[type="text"],
+.formProfesionals-container{
+  background-image: url("https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 80.3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+form {
+  width: 30vw; 
+  height: 60vh;
+  border: 1px solid #f7f4f4;
+  border-radius: 5px;
+  margin-top:50vw;
+  position: relative; 
+  background: transparent;  
+  backdrop-filter: blur(20px);
+
+}
+/* input[type="text"],
 input[type="email"],
 input[type="tel"] {
-  width: 100%;
-  padding: 10px;
+ 
+  padding:30vw;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 3px;
+} */
+label{
+  color: white;
+  font-size: 1.5rem;
+}
+.inputProf{
+  max-width:25rem;
+margin-bottom: 1.5rem;
+ background-color: white;
 }
 select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+
   border: 1px solid #ccc;
   border-radius: 3px;
   background-color: #fff;  
@@ -29,30 +64,26 @@ select {
 }
 
 
-select option {
-  padding: 5px;
-}
-
 button[type="submit"] {
-  width: 100%;
+  width: 25rem;
   padding: 10px;
-  background-color: #007bff;
-  color: #fff;
+   color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius:8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: #cc0000;
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #1a1b1c;
 }
 
-/* Estilos para los mensajes de error y éxito */
+
 .error-message,
 .success-message {
   position: absolute;
-  width: calc(100% - 40px); /* Ancho del formulario menos el padding */
+  width: calc(100% - 40px); 
   padding: 10px;
   border-radius: 5px;
   left: 0;
@@ -60,12 +91,12 @@ button[type="submit"]:hover {
 }
 
 .error-message {
-  background-color: #80da1a; /* Color de fondo para errores */
-  color: #cc0000; /* Color de texto para errores */
+  background-color: #80da1a; 
+  color: #cc0000; 
 
 }
 
 .success-message {
-  background-color: #ccffcc; /* Color de fondo para éxito */
-  color: #009900; /* Color de texto para éxito */
+  background-color: #ccffcc; 
+  color: #009900; 
 }

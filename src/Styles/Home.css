@@ -15,7 +15,7 @@ html, body {
 .link-container {
   position: relative;
   display: flex;
-  justify-content: flex-end; /* Alinear los enlaces a la derecha */
+  justify-content: flex-end; 
   padding:10px;
   width: 100%;  
   top: 2vh;

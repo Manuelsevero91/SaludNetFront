@@ -1,4 +1,3 @@
-/* Reset de estilos y definición de la fuente predeterminada */
 html, body {
   margin: 0;
   padding: 0;
@@ -9,7 +8,7 @@ html, body {
 }
 /* Media query para pantallas más pequeñas 
 @media (max-width: 768px) {
-  Aplica estilos solo cuando el ancho de la pantalla es igual o menor a 768px 
+
   * {
     /* font-size: 5vw; 
     margin-top: 0px;

@@ -1,29 +1,46 @@
+.barra-superior-contacto {
+  position: relative;
+  display: flex;
+  background-color: rgba(46,42,51,0.959); 
+  padding: 12px;
+  height:3vw;
+  margin-top: 3.8vw;
+} 
+.titulo-seccion-contacto{
+  color: white;
+}   
 .form-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  margin: 0;
+  width: 100vw;
+  height:83vh; 
   background-image: url("../assets/Consultorio.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
 }
+
 #consulta {
-  width: 100%;
+  width: 28.5vw;
   height: 150px;
  
+}
+input#nombre{
+  width: 28.5vw;
+  
+} input#email{
+  width: 28.5vw;
 }
 
 .form-container {
   position: relative;
-  margin-top: 150px;
+margin-left: -18vw;
   font-weight: bold;
-  width: 500px;
+  width: 25vw;
   height: 500px;
 }
 
