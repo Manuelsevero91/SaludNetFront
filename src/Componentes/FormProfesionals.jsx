@@ -121,6 +121,15 @@ function FormProfesionals() {
         />
       </div>
       <div>
+        <label>Licencia:</label>
+        <input  className="inputProf"
+          type="text"
+          name="license"
+          value={form.license}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
         <label>Especialidad:</label>
         <select
           name="speciality"
@@ -135,15 +144,7 @@ function FormProfesionals() {
           ))}
         </select>
       </div>
-      <div>
-        <label>Licencia:</label>
-        <input  className="inputProf"
-          type="text"
-          name="license"
-          value={form.license}
-          onChange={handleChange}
-        />
-      </div>
+      
       <button type="submit">Enviar</button>
     </form>
     </div>

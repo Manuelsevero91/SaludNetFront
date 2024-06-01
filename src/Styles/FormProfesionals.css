@@ -29,11 +29,13 @@ h1#titulo-section{
 form {
   width: 30vw; 
   height: 60vh;
-  border: 1px solid #ccc;
+  border: 1px solid #f7f4f4;
   border-radius: 5px;
   margin-top:50vw;
   position: relative; 
-  background-color:rgba(44, 99, 103, 0.8) ;
+  background: transparent;  
+  backdrop-filter: blur(20px);
+
 }
 /* input[type="text"],
 input[type="email"],
@@ -46,16 +48,15 @@ input[type="tel"] {
 } */
 label{
   color: white;
-  font-size: 1.2vw;
+  font-size: 1.5rem;
 }
 .inputProf{
-  max-width:25vw;
-margin:1vw;
+  max-width:25rem;
+margin-bottom: 1.5rem;
  background-color: white;
 }
 select {
-  width: 25vw;
-  margin-bottom: 15px;
+
   border: 1px solid #ccc;
   border-radius: 3px;
   background-color: #fff;  
@@ -64,24 +65,25 @@ select {
 
 
 button[type="submit"] {
-  width: 100%;
+  width: 25rem;
   padding: 10px;
    color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius:8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: #cc0000;
 }
 
 button[type="submit"]:hover {
   background-color: #1a1b1c;
 }
 
-/* Estilos para los mensajes de error y éxito */
+
 .error-message,
 .success-message {
   position: absolute;
-  width: calc(100% - 40px); /* Ancho del formulario menos el padding */
+  width: calc(100% - 40px); 
   padding: 10px;
   border-radius: 5px;
   left: 0;
@@ -89,12 +91,12 @@ button[type="submit"]:hover {
 }
 
 .error-message {
-  background-color: #80da1a; /* Color de fondo para errores */
-  color: #cc0000; /* Color de texto para errores */
+  background-color: #80da1a; 
+  color: #cc0000; 
 
 }
 
 .success-message {
-  background-color: #ccffcc; /* Color de fondo para éxito */
-  color: #009900; /* Color de texto para éxito */
+  background-color: #ccffcc; 
+  color: #009900; 
 }

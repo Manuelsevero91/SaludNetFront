@@ -60,11 +60,11 @@
 .title-wrapper {
   position: relative;
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100%; /* Ajusta la altura del contenedor */
-  width: 100%; /* Ajusta el ancho al 100% del contenedor */
-  margin: auto; /* Aplica un margen alrededor del wrapper */
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
+  width: 100%; 
+  margin: auto; 
   top: 50%;
   transform: translateY(-50%);
 }
@@ -86,9 +86,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con transparencia */
-  opacity: 0; /* Inicialmente transparente */
-  transition: opacity 0.7s ease; /* Transición suave */
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0;
+  transition: opacity 0.7s ease; 
 }
 
 
