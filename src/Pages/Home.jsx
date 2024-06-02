@@ -19,8 +19,8 @@ function Home() {
           <ul>
             <li>
               <Link to="/contacto">Contacto</Link></li>
-            <li>
-              <Link to="/login">Admin</Link></li>
+            {/* <li> */}
+              {/* <Link to="/login">Admin</Link></li> */}
           </ul>
         </div>
 
