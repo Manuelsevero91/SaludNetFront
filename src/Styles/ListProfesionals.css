@@ -5,18 +5,18 @@
     right: 0;
     z-index: 999;
   }
-  .barra-superior {
+  /* .barra-superior {
     position: relative;     
     padding: 10px;
     height: 3vw;
     margin-top: 3.8vw;
     margin-bottom: 4vh;
-  }
+  } */
   .list {
     background-color: rgba(46, 42, 51, 0.959); 
    
   }
-  .titulo-seccion {
+  /* .titulo-seccion {
    justify-content: left;
     font-size: 2vw;
     font-weight: bold;
@@ -26,7 +26,7 @@
    margin-top: 0;
   margin-right: 30vw;
   
-  }
+  } */
  a {
     padding: 0 px;
   }
@@ -96,34 +96,7 @@
     text-decoration: line-through;
     color: gray;
   }
-  
-  button.edit-button,
-  button.delete-button {
-    padding: 10px;
-    font-size: 0.9vw;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.edit-button {
-    background-color: #5ba848;
-    color: white;
-  }
-  
-  button.edit-button:hover {
-    background-color: #68d81d;
-  }
-  
-  button.delete-button {
-    background-color: #d8763d;
-    color: white;
-  }
-  
-  button.delete-button:hover {
-    background-color: #ee4e4e;
-  }
+   
   
 React-modal {
     width: 20vw;
@@ -155,67 +128,29 @@ React-modal {
     border: 1px solid #ccc;
     border-radius: 5px;
   }
+   
   
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-  
-  button[type="submit"],
-  button[type="button"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  button[type="button"] {
-    background-color: #6c757d;
-    color: #fff;
-    margin-top: 10px;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #5a6268;
-  }
-
-  .error-message,
-  .success-message {
+  /* .error-message {
     position: absolute;
-    width: calc(100% - 40px); 
+    align-self:self-end;
+    width: 75%; 
     padding: 10px;
-    border-radius: 5px;
-    left: 0;
-    background-color: #515851;
+    border-radius: 5px;    
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
   }
-  
-  .error-message {
+  .error-message{
     background-color: #ffcccc; 
     color: #cc0000; 
   }
   
-  .success-message {
+  .success-message {    
     background-color: #ccffcc; 
     color: #009900; 
   }
   
-  
+   */
 
  

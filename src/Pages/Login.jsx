@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Componentes/UserContext';
 import NavBar from '../Componentes/NavBar';
 import NotFoundImage from '../assets/not-found.jpg';
+import "../Styles/SharedStyles/Btn.css";
 
 function Login({ isLoggedIn }) {
   const { handleLogin } = useAuth();
@@ -49,20 +50,31 @@ function Login({ isLoggedIn }) {
   return (
     <>
      <NavBar showLinks={false} />
-      <div className='login'>
-        <form className= 'inicio-cesion'onSubmit={handleSubmit}>
-          <h3 id="inicioSesion"><strong>Iniciar Sesión</strong></h3>
-          <label  htmlFor="nombre"><strong>Usuario</strong></label>
-          <input type="text" name="nombre" id="nombre" placeholder="Introduzca su nombre" style={{ display: 'block' }} />
-          <label htmlFor="password"><strong>Contraseña</strong></label>
-          <input type="password" name="password" id="password" placeholder="Introduzca su contraseña" style={{ display: 'block' }} />
-          {error && <p style={{ color: 'red' }}>El usuario o la contraseña ingresados son incorrectos.</p>}
-          <button id="enviarLogin" type="submit">Enviar</button>
+     <div className="barra-superior">
+        <h2 className="titulo-section">Inicio de Cesión</h2>
+      </div>
+      <div className='formContainerInicio'>
+        <form className= 'createFormInicio' onSubmit={handleSubmit}>
+        <div className="input-container">         
+          <label >Usuario</label>
+          <input className='inputInicio'
+           type="text"
+           name="nombre" 
+           placeholder="Introduzca su nombre" />           
+          </div>
+          <div className="input-container">   
+          <label > Contraseña</label>
+          <input className='inputInicio'
+          type="password" 
+          name="password" 
+          placeholder="Introduzca su contraseña" />  
+          </div>       
+          <button className="btn" type="submit">Enviar</button>
         </form>
         {isLoggedIn && <p>Usuario autenticado</p>}
       </div>
     </>
-  );
-}
+     );
+    }
 
 export default Login;

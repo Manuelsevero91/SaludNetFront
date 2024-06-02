@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBar from '../Componentes/NavBar';
+import NavBar from "../Componentes/NavBar";
 
 function FormProfesionals() {
   const [form, setForm] = useState({
@@ -22,7 +22,7 @@ function FormProfesionals() {
           );
         }
 
-        const responseData = await response.json();        
+        const responseData = await response.json();
 
         setSpecialities(responseData.data);
       } catch (error) {
@@ -78,76 +78,79 @@ function FormProfesionals() {
     }
   };
   const handleReset = () => {
-  
     setError("");
     setSuccess("");
   };
 
   return (
     <>
-    <NavBar showLinks={true}/>
-      <div className="barra-superior-prof">
-        <h1 className="titulo-seccion">Registrar Profesionales</h1>
+      <NavBar showLinks={true} />
+      <div className="barra-superior">
+        <h2 className="titulo-section">Administrar Profesionales: registrar</h2>
       </div>
-      <div className="formProfesionals-container">
-    <form onSubmit={handleSubmit}>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {success && <div style={{ color: "green" }}>{success}</div>}
-      <div>
-        <label>Nombre y Apellido:</label>
-        <input className="inputProf"
-          type="text"
-          name="fullName"
-          value={form.fullName}
-          onChange={handleChange}
-        />
+      <div className="formContainer">      
+
+        <form className="createForm-Profesionals" onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label>Nombre y Apellido:</label>
+            <input
+              type="text"
+              name="fullName"
+              value={form.fullName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label>Correo Electrónico:</label>
+            <input              
+              type="email"
+              name="mail"
+              value={form.mail}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container" >
+            <label>Número de Teléfono:</label>
+            <input              
+              type="tel"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container" >
+            <label>Licencia:</label>
+            <input              
+              type="text"
+              name="license"
+              value={form.license}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-container">
+            <label>Especialidad:</label>
+            <select
+              name="speciality"
+              value={form.speciality}
+              onChange={handleChange}
+            >
+              <option value="">Seleccione una especialidad</option>
+              {specialities.map((speciality) => (
+                <option key={speciality.id} value={speciality.id}>
+                  {speciality.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button className="btn" type="submit">
+            Enviar
+          </button>
+          {error && <div className="error-message" >{error}</div>}
+        {success && <div className="succes-message">{success}</div>}
+
+        </form>
       </div>
-      <div>
-        <label>Correo Electrónico:</label>
-        <input className="inputProf"
-          type="email"
-          name="mail"
-          value={form.mail}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Número de Teléfono:</label>
-        <input  className="inputProf"
-          type="tel"
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Licencia:</label>
-        <input  className="inputProf"
-          type="text"
-          name="license"
-          value={form.license}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Especialidad:</label>
-        <select
-          name="speciality"
-          value={form.speciality}
-          onChange={handleChange}
-        >
-          <option value="">Seleccione una especialidad</option>
-          {specialities.map((speciality) => (
-            <option key={speciality.id} value={speciality.id}>
-              {speciality.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      
-      <button type="submit">Enviar</button>
-    </form>
-    </div>
     </>
   );
 }

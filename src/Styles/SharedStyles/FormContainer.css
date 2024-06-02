@@ -1,0 +1,44 @@
+.formContainer {
+  background-image: url("https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+.createForm {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 45rem;
+  width: 30rem;
+  border-radius: 10px;
+}
+label {
+  font-size: 1.3rem;
+  text-shadow: 5px 5px 5px rgb(5, 5, 5);
+  width: 20%;
+  color: white;
+  padding-bottom: 2rem;
+}
+.input-container { 
+  padding: 0.4rem;
+}
+input,
+select {
+  width: 95%;
+  padding: .75rem;
+  border-radius: 8px;
+}
+input[type="checkbox"] {
+  width: 5rem;
+  height: 2rem;
+}

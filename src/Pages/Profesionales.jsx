@@ -29,7 +29,7 @@ function Profesionales() {
     <div className="profesionales">
        <NavBar showLinks={false}/>
       <div className="barra-superior">
-        <div className="titulo-seccion">Profesionales</div>
+        <div className="titulo-section">Profesionales</div>
       </div >
       <div className="barra-busqueda">
       <input  className="buscar-esp"

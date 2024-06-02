@@ -1,82 +1,38 @@
-div.login {
-  margin: 0;
+.formContainerInicio {
+  background-image: url("https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=");
+  background-size:cover;
+
+ /* background-position: center center; */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 10vw;
-  min-height: 100vh;
-  background-image: url("../assets/Consultorio.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
 }
-.inicio-cesion{
-  background-color: rgba(44, 99, 103, 1);
-  width: 30vw;
-  height: 25vw;
-}
-
- input#nombre {
-  width: 29vw;
-  height: 3.8vh;
-}
-input#password{
-  width: 29.7vw;
-  height: 5vh;
-}
-label {  
-  font-size: 1.5vw;
-  width: 25vw;
+.createFormInicio{  
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 18rem;
+    width: 20rem;
+    border-radius: 10px;
+    padding: 3rem;
+    gap:2rem;
+    margin-top: 5rem;
+    margin-bottom:5.5rem;
   }
-
-#inicioSesion {
-  font-size: 2vw;
-  color: rgb(224, 242, 243);
+.inputInicio{
+  margin-top: 2rem;
 }
-
-button#enviarLogin {
-  border-radius: 8px;
-  font-size: 1.5vw;
-  font-family: inherit;
-  background-color: #277ad8;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  color: white;
-  
-  
-}
-#enviarLogin:hover {
-  border-color: #646cff;
-}
-#enviarLogin:focus,
-#enviarLogin:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-} */  
-
-#error {
-  margin-bottom: 50px;
-}
-#password {  
-  margin-bottom: 5vw;
-}
-#nombre {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 .error-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-input:focus {
-  background:linear-gradient(to right, white, lightblue 50%, #646CFF);
-  border: 2px solid red;
 }
