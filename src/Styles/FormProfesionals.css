@@ -1,102 +1,17 @@
-
-.barra-superior-prof {
-  display: flex;
-  background-color: rgba(46,42,51,0.959); 
-  padding:5px;
-  height:5vw;
-  margin-top: 3.8vw;
-  text-align:left;
-
-  text-shadow: 5px 5px 5px rgb(5, 5, 8);
-}
-h1#titulo-section{
-  margin-top: 150vh;
-}
-
-.formProfesionals-container{
-  background-image: url("https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0=");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: 80.3vh;
+.createForm-Profesionals{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: center;
-  margin-bottom: 0;
-}
-form {
-  width: 30vw; 
-  height: 60vh;
-  border: 1px solid #f7f4f4;
-  border-radius: 5px;
-  margin-top:50vw;
-  position: relative; 
-  background: transparent;  
-  backdrop-filter: blur(20px);
-
-}
-/* input[type="text"],
-input[type="email"],
-input[type="tel"] {
- 
-  padding:30vw;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-} */
-label{
-  color: white;
-  font-size: 1.5rem;
-}
-.inputProf{
-  max-width:25rem;
-margin-bottom: 1.5rem;
- background-color: white;
-}
-select {
-
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background-color: #fff;  
-  cursor: pointer;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 35.3rem;
+  width: 30rem;
+  border-radius: 10px;
+ margin:5.42rem;
 }
 
 
-button[type="submit"] {
-  width: 25rem;
-  padding: 10px;
-   color: #fff;
-  border: none;
-  border-radius:8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: #cc0000;
-}
-
-button[type="submit"]:hover {
-  background-color: #1a1b1c;
-}
 
 
-.error-message,
-.success-message {
-  position: absolute;
-  width: calc(100% - 40px); 
-  padding: 10px;
-  border-radius: 5px;
-  left: 0;
-  background-color: #515851;
-}
-
-.error-message {
-  background-color: #80da1a; 
-  color: #cc0000; 
-
-}
-
-.success-message {
-  background-color: #ccffcc; 
-  color: #009900; 
-}

@@ -1,0 +1,21 @@
+
+  .succes-message,
+  .error-message {
+    text-align: center;
+    font-size: 2rem;
+    border: #ccffcc 2px;
+    position: absolute;    
+    width: 30rem;
+    height: 3rem;
+    border-radius: 8px;
+    margin-top: 30rem;
+    
+  }
+  .success-message {
+    background-color: #e73dc2;
+    color: white;
+  }
+  .error-message {
+    background-color: #80da1a;
+    color: white;
+  }

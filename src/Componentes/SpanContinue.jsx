@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef } from "react"; 
+import { useRef } from "react";
 
 function SpanContinue({ marketingRef }) {
   const scrollToMarketing = () => {
@@ -9,12 +9,9 @@ function SpanContinue({ marketingRef }) {
   };
 
   return (
-    <div className="span-continue-container"> 
-      <div className="span-continue">
-        <button button className="button-span-continue span-continue-button" onClick={scrollToMarketing}>Continuar</button>
-      </div>
-   
-    </div>
+    <button className="btn" onClick={scrollToMarketing}>
+      Continuar
+    </button>
   );
-};
+}
 export default SpanContinue;

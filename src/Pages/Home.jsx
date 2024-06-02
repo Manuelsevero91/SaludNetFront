@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import Marketing from "../Componentes/Marketing";
 import logoSN from "../assets/logosaludnet.png";
 import { useAuth } from "../Componentes/UserContext";
-import "../Styles/SpanContinue.css";
 import SpanContinue from "../Componentes/SpanContinue";
 import Footer from "../Componentes/Footer";
 import "../Styles/Footer.css";

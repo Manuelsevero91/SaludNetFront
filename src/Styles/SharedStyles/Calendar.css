@@ -1,0 +1,40 @@
+.calendar-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.react-calendar {    
+    background-color:turquoise!important ; 
+    border-radius:10px;
+    padding: 15px;
+    height: 19rem;
+    padding: 1rem;
+    margin: 1rem;
+  } 
+
+  .custom-calendar .react-calendar__tile--active,
+  .custom-calendar .react-calendar__tile--rangeStart,
+  .custom-calendar .react-calendar__tile--rangeEnd {
+    background-color: #5ba848; 
+    color: white;
+  }
+     .selected-date {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 25%;
+  }
+  
+  /* Estilos para los días normales */
+  .custom-calendar .react-calendar__tile {
+    padding: 10px !important; /* Asegúrate de usar !important si es necesario */
+    text-align: center !important; /* Asegúrate de usar !important si es necesario */
+    border-radius: 4px !important; /* Asegúrate de usar !important si es necesario */
+    transition: background-color 0.3s ease !important; /* Asegúrate de usar !important si es necesario */
+  }
+  
+  .custom-calendar .react-calendar__tile:hover {
+    background-color: #f0f0f0 !important; /* Asegúrate de usar !important si es necesario */
+  }
+  

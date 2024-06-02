@@ -1,106 +1,11 @@
-.admin-container {
+.fourSections-containerAdmin {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;  
   height: 50%;
   width: 100%;  
-  margin-top: 073px;
+  margin-top: 4rem;
   margin-bottom: 0px;
-}
-.admin-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 0px; 
-}
-
-.admin-column {
-  flex-grow: 1; 
-  flex-shrink: 1; 
-  flex-basis: 0; 
-  flex-direction: column; 
-  width: 100%;
-}
-
-.admin-section { 
-  width: 100%;
-  min-width: 950px;
-  height: 410px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.admin-section h2 {  
-  color: #fff;
-  text-shadow: 5px 5px 5px rgb(3, 3, 3);
-  margin-top: 0;
-  font-size: 3vw;
-  font-weight: bold;
-  position: relative; 
-  z-index: 2; 
-}
-
-.admin-section.active {
-  transition: background-color 0.9s ease;
-  
-}
-
-.admin-section.active.title {
-  font-size: 40px;
-  font-weight: bold;
-}
-.admin-section:hover {
-  background-size: 120%; 
-  /* transform: scale(1); */
-}
-
-.title-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100%; 
-  /* z-index:1; */
-  width: 100%;
-  margin: auto; 
-  top: 50%;
-  transform: translateY(-50%);
-}
-/* 
-.title {
-  color: rgb(46, 37, 37);
-} */
-
-.title-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* width:0%;
-        height: 0%; */
-  /* background-color: transparent; */
-  /* transition: background-color 0.3s ease; */
-  z-index: -1;
-}
-
-
-.title-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0; 
-  transition: opacity 0.7s ease; 
-}
-
-.title-wrapper:hover::after {
-  opacity: 20;
-  color: aliceblue; 
 }
 .options {
   position: absolute;
@@ -111,7 +16,6 @@
   width:80%;
   height: 50%;
   background-color: rgba( 44,99,103,0.9);
-
   border-radius: 65px;
   padding: 2vw;
   box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
