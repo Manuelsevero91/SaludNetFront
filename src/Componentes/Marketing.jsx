@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Styles/Marketing.css";
+
 
 const Marketing = () => {
   const MarketingSection = ({ imageSrc, title, link }) => {
     return (
-      <Link to={link} style={{ textDecoration: "none" }}>
+      <Link to={link} >
         <div
-          className="marketing-section"
+          className="four-section"
           style={{ backgroundImage: `url(${imageSrc})` }}
         >
           <div className="title-wrapper">
@@ -19,9 +19,9 @@ const Marketing = () => {
   };
 
   return (
-    <div className="marketing-container">
-      <div className="marketing-row">
-        <div className="marketing-column">
+    <div className="fourSections-container">
+      <div className="fourSections-row">
+        <div className="fourSections-column">
           <MarketingSection
             imageSrc="https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0="
             title="PROFESIONALES"

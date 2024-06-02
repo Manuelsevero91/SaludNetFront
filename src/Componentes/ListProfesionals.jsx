@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import "../Styles/ListProfesionals.css";
 import NavBar from '../Componentes/NavBar';
-import "../Styles/NavBar.css";
+
 
 const ListProfesionals = () => {
   const [doctors, setDoctors] = useState([]);
@@ -135,11 +135,12 @@ const ListProfesionals = () => {
 
 
   return (
-    <div className="list">
-     <NavBar showLinks={true}/>
+<>
+ <NavBar showLinks={true} />
       <div className="barra-superior">
-        <h1 className="titulo-seccion">Listado de Profesionales</h1>
+        <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
       </div>
+    <div className="list">     
      
       <div className="search-bar">
         <label htmlFor="searchName">Nombre:</label>
@@ -259,13 +260,14 @@ const ListProfesionals = () => {
             value={editData.license}
             onChange={handleChange}
           />
-          <button type="submit">Guardar</button>
-          <button type="button" onClick={closeModal}>
+          <button className= "Btn" type="submit">Guardar</button>
+          <button className= "Btn" type="button" onClick={closeModal}>
             Cancelar
           </button>
         </form>
       </Modal>
     </div>
+    </>
   );
 };
 
