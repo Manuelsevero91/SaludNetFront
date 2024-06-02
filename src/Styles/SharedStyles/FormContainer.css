@@ -7,8 +7,8 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: .3rem;
+  padding-bottom: .3rem;
 }
 .createForm {
   display: flex;
@@ -18,27 +18,11 @@
   background-color: transparent;
   backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.2);
-  height: 45rem;
+  height: 46.12rem;
   width: 30rem;
   border-radius: 10px;
 }
-label {
-  font-size: 1.3rem;
-  text-shadow: 5px 5px 5px rgb(5, 5, 5);
-  width: 20%;
-  color: white;
-  padding-bottom: 2rem;
-}
+
 .input-container { 
   padding: 0.4rem;
-}
-input,
-select {
-  width: 95%;
-  padding: .75rem;
-  border-radius: 8px;
-}
-input[type="checkbox"] {
-  width: 5rem;
-  height: 2rem;
 }

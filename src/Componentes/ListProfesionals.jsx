@@ -135,13 +135,12 @@ const ListProfesionals = () => {
 
 
   return (
-    <div className="list">
-      <div>
-     <NavBar showLinks={true}/>
-     </div>
+<>
+ <NavBar showLinks={true} />
       <div className="barra-superior">
-        <h2 className="titulo-section">Listado de Profesionales</h2>
+        <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
       </div>
+    <div className="list">     
      
       <div className="search-bar">
         <label htmlFor="searchName">Nombre:</label>
@@ -268,6 +267,7 @@ const ListProfesionals = () => {
         </form>
       </Modal>
     </div>
+    </>
   );
 };
 

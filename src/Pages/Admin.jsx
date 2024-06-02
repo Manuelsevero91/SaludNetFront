@@ -24,7 +24,7 @@ const Admin = () => {
 
     return (
       <div
-        className={`admin-section ${isHovered ? "active" : ""}`}
+        className={`four-section ${isHovered ? "active" : ""}`}
         style={{ backgroundImage: `url(${imageSrc})` }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -49,10 +49,13 @@ const Admin = () => {
   };
 
   return (
-    <div className="admin-container">
-      <NavBar showLinks={true} />
-      <div className="admin-row">
-        <div className="admin-column">
+    <>
+    <NavBar showLinks={true} />
+   
+   <div className="fourSections-containerAdmin">
+    
+      <div className="fourSections-row">
+        <div className="fourSections-column">
           <AdminSection
             imageSrc="https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0="
             title="ADMINISTRAR PROFESIONALES"
@@ -121,6 +124,8 @@ const Admin = () => {
 
       <Footer />
     </div>
+    </>
+    
   );
 };
 
