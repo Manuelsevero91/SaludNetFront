@@ -16,6 +16,7 @@ import "./Styles/SharedStyles/ErrorSuccesMessage.css";
 import "./Styles/SharedStyles/FourSections.css";
 import "./Styles/FormProfesionals.css";
 import "./Styles/Contacto.css";
+import "./Styles/Turnos.css"
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -30,6 +31,8 @@ import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
+
+
 function App() {
  
   return (
@@ -52,8 +55,7 @@ function App() {
           <Route path="/FormProfesionals" element={<FormProfesionals />} />
           <Route path="/ListProfesionals" element={<ListProfesionals />} />
           <Route exact path="/CreateSchedule" element={<CreateSchedule />} />
-
-          
+        
 
         </Routes>
       </UserProvider>

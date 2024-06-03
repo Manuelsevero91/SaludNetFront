@@ -26,15 +26,14 @@
     border-radius: 25%;
   }
   
-  /* Estilos para los días normales */
-  .custom-calendar .react-calendar__tile {
-    padding: 10px !important; /* Asegúrate de usar !important si es necesario */
-    text-align: center !important; /* Asegúrate de usar !important si es necesario */
-    border-radius: 4px !important; /* Asegúrate de usar !important si es necesario */
-    transition: background-color 0.3s ease !important; /* Asegúrate de usar !important si es necesario */
-  }
   
+  .custom-calendar .react-calendar__tile {
+    padding: 10px !important; 
+    text-align: center !important; 
+    border-radius: 4px !important; 
+    transition: background-color 0.3s ease !important; 
+  }
   .custom-calendar .react-calendar__tile:hover {
-    background-color: #f0f0f0 !important; /* Asegúrate de usar !important si es necesario */
+    background-color: #f0f0f0 !important; 
   }
   
