@@ -52,9 +52,7 @@ const Admin = () => {
     <>
     <NavBar showLinks={true} />
    
-
    <div className="fourSections-containerAdmin">
-
     
       <div className="fourSections-row">
         <div className="fourSections-column">
@@ -62,10 +60,10 @@ const Admin = () => {
             imageSrc="https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0="
             title="ADMINISTRAR PROFESIONALES"
             options={[
-              { label: "Agregar Profesional", link: "/FormProfesionals" },
+              { label: "Agregar Profesional", link: "/FormProfesionales" },
               {
                 label: "Modificar/Eliminar Profesional",
-                link: "/ListProfesionals",
+                link: "/ListProfesionales",
               },
               // { label: 'Borrar Profesional', link: '/borrar-profesional' }
             ]}
@@ -75,7 +73,18 @@ const Admin = () => {
             imageSrc="https://www.shutterstock.com/image-illustration/top-view-medical-stethoscope-icon-600nw-2075382679.jpg"
             title="ADMINISTRAR AGENDA"
             options={[
-
+              {
+                label: "Configurar turnos disponibles",
+                link: "/Agenda",
+              },
+              {
+                label: "Actualizar/Eliminar turnos disponibles",
+                link: "/EditarTurnos",
+              },
+              // {
+              //   label: "Eliminar turnos disponibles",
+              //   link: "/eliminar turnos disponibles",
+              // },
             ]}
           />
         </div>
