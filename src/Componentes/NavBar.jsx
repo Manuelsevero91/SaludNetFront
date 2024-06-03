@@ -24,9 +24,12 @@
 //             <>
 //               {isLoggedIn ? (
 //                 <>
-//                  <li id="NombreUser">
+
+//                  {/* <li id="NombreUser">
 //                     {"Hola"} {username || "Nombre de usuario"}
-//                   </li>
+//                   </li> */}
+
+
 //                   <li>
 //                      <Link to="/" onClick={handleLogoutClick}>
 //                       Cerrar sesión
