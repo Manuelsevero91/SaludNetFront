@@ -24,9 +24,12 @@
 //             <>
 //               {isLoggedIn ? (
 //                 <>
+
 //                  {/* <li id="NombreUser">
 //                     {"Hola"} {username || "Nombre de usuario"}
 //                   </li> */}
+
+
 //                   <li>
 //                      <Link to="/" onClick={handleLogoutClick}>
 //                       Cerrar sesión
@@ -105,3 +108,4 @@ const NavBar = ({ showLinks = true }) => {
 };
 
 export default NavBar;
+
