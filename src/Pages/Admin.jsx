@@ -88,7 +88,7 @@ const Admin = () => {
             ]}
           />
         </div>
-        <div className="admin-column">
+        <div className="fourSections-column">
           <AdminSection
             imageSrc="https://bancosdeimagenes.com/wp-content/uploads/2019/03/Getty-Medical-Category-768x443-1.jpg"
             title="CONFIRMAR TURNOS"        
