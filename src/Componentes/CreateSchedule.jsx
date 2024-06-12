@@ -12,33 +12,49 @@ const CreateSchedule = ({ doctorId }) => {
   const [available, setAvailable] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
 
+  // const createSchedulesForDays = async () => {
+  //   const schedules = [];
+  //   selectedDates.forEach((day) => {
+  //     const fecha = new Date(day);
+  //     if (fecha.getDay() !== 0 && fecha.getDay() !== 4) {
+  //       schedules.push({
+  //         day: fecha.toISOString().split("T")[0],
+  //         idDoctor: currentDoctorId,
+  //         start_Time: startTime,
+  //         end_Time: endTime,
+  //         available: available,
+  //         interval: interval,
+  //       });
+  //     }
+  //   });
   const createSchedulesForDays = async () => {
-    const schedules = [];
-    selectedDates.forEach((day) => {
-      const fecha = new Date(day);
-      if (fecha.getDay() !== 0 && fecha.getDay() !== 4) {
-        schedules.push({
-          day: fecha.toISOString().split("T")[0],
-          idDoctor: currentDoctorId,
-          start_Time: startTime,
-          end_Time: endTime,
-          available: available,
-          interval: interval,
-        });
-      }
-    });
-
+    const schedules = {
+      days: selectedDates.map((day) => new Date(day).toISOString().split("T")[0]),
+      idDoctor: currentDoctorId,
+      start_Time: startTime,
+      end_Time: endTime,
+      available: available,
+      interval: interval,
+    };
     try {
-      const response = await fetch("http://localhost:3000/schedules/bulk", {
+      const response = await fetch("http://localhost:3000/schedules", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(schedules),
       });
-      // console.log("Turnos creados", response);
-      setSuccessMessage("¡Agenda creada exitosamente!");
-      setSelectedDates([]);
+      if (response.ok) {
+        setSuccessMessage("¡Agenda creada exitosamente!");
+        setSelectedDates([]);
+        setCurrentDoctorId("");
+        setStartTime("");
+        setEndTime("");
+        setInterval("30");
+        setAvailable(true);
+      } else {
+        console.error("Error creando turnos", response.statusText);
+      }
     } catch (error) {
       console.error("Error creando turnos", error);
     }
@@ -53,8 +69,14 @@ const CreateSchedule = ({ doctorId }) => {
     setCurrentDoctorId(event.target.value);
   };
 
-  const handleDatesChange = (dates) => {
-    setSelectedDates(dates);
+  const handleDatesChange = (date) => {
+    const dateString = date.toISOString().split("T")[0];
+    // Agregar o quitar la fecha seleccionada
+    if (selectedDates.find((d) => d.toISOString().split("T")[0] === dateString)) {
+      setSelectedDates(selectedDates.filter((d) => d.toISOString().split("T")[0] !== dateString));
+    } else {
+      setSelectedDates([...selectedDates, date]);
+    }
   };
 
   const handleStartTimeChange = (event) => {
@@ -72,6 +94,9 @@ const CreateSchedule = ({ doctorId }) => {
   const handleAvailableChange = (event) => {
     setAvailable(event.target.checked);
   };
+  const isDateSelected = (date) => {
+    return selectedDates.find((d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]);
+  };
 
   return (
     <>
@@ -81,10 +106,9 @@ const CreateSchedule = ({ doctorId }) => {
           <h2 className="titulo-section">Administrar agenda: Crear</h2>
         </div>
       
-      <div className="formContainer">
-        
-
-        <form className="createForm" onSubmit={handleCreateSchedule}>
+        <div className="formContainer">  
+        <form className="createForm-Schedule" onSubmit={handleCreateSchedule}>
+         <div className="inputContainerSchedule">
           <div className="input-container">
             <label>ID del Doctor:</label>
             <input
@@ -135,30 +159,24 @@ const CreateSchedule = ({ doctorId }) => {
               onChange={handleAvailableChange}
             />
           </div>
-<div className="calendar-container">
-          <Calendar
-         
-            tileContent={({ date, view }) => {
-              if (view === "month") {
-                const turno = selectedDates.find(
-                  (d) => new Date(d).toDateString() === date.toDateString()
-                );
-                if (turno) {
-                  return <div >S</div>;
-                }
-              }
-            }}
-            selectRange={true}
-            value={selectedDates}
-            onChange={handleDatesChange}
-            minDate={new Date()}
-          />
           </div>
+
+<div className="calendar-container">
+<Calendar
+              tileClassName={({ date }) => (isDateSelected(date) ? 'selected' : '')}
+              onClickDay={handleDatesChange}
+              value={selectedDates}
+              minDate={new Date()}
+            />
+          </div>
+          {successMessage && <div className="success-message">{successMessage}</div>}
+        </form>
+        <div className="btnCreateSchedule">
           <button className="btn" type="submit">
             Crear Agenda
           </button>
-          {successMessage && <div className="success-message">{successMessage}</div>}
-        </form>
+          </div>
+          
       </div>
     
     </>
@@ -166,3 +184,4 @@ const CreateSchedule = ({ doctorId }) => {
 };
 
 export default CreateSchedule;
+

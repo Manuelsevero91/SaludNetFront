@@ -16,7 +16,7 @@ h2 {
   position: relative; 
   z-index: 2;   
 }
-label {
+label,th {
   font-size: 1.3rem;
   text-shadow: 5px 5px 5px rgb(5, 5, 5);
   width: 20%;

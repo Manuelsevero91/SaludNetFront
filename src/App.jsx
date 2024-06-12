@@ -6,6 +6,7 @@ import "./Styles/Login.css";
 import "./Styles/Responsive.css";
 import "./Styles/Profesionales.css";
 import "./Styles/Admin.css";
+import "./Styles/CreateSchedule.css";
 import "./Styles/SharedStyles/Btn.css";
 import "./Styles/SharedStyles/BarraSuperior.css";
 import "./Styles/SharedStyles/Calendar.css";
@@ -30,7 +31,7 @@ import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
-
+import Coverage from "./Componentes/Coverage";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <Route path="/ListProfesionales" element={<ListProfesionals />} />
             <Route path="/Agenda" element={<CreateSchedule />} />
             <Route path="/EditarTurnos" element={<EditShifts />} />
+            <Route path="/Coverage" element={<Coverage />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
