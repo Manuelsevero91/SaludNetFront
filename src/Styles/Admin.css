@@ -4,7 +4,6 @@
   justify-content: center;  
   height: 50%;
   width: 100%;  
-  margin-top: 4rem;
   margin-bottom: 0px;
 }
 .options {
@@ -15,7 +14,9 @@
   top: calc(5% + 2.3vw);
   width:80%;
   height: 50%;
-  background-color: rgba( 44,99,103,0.9);
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 65px;
   padding: 2vw;
   box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
@@ -36,4 +37,37 @@
 
 .options a:hover {
  font-weight: bold;
+ }
+
+
+ @media only screen and (max-width: 600px) {
+  .fourSections-containerAdmin{
+    display: flex;
+    flex-direction: row;
+ 
+  }
+  .title-wrapper {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 5rem; 
+    width: 50%; 
+     
+  }
+   .title-wrapper::after {
+    content: "";
+    position: absolute; 
+    width:5rem ;
+    height:5rem ;
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 0; 
+    transition: opacity 0.7s ease; 
+  }
+  h2{
+    font-size: 1.5rem;
+  }
+  .options{
+    justify-content:center;
+
+  }
  }

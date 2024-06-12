@@ -212,8 +212,9 @@ const ListProfesionals = () => {
           </tbody>
         </table>
       )}
-      <Modal isOpen={showModal} onRequestClose={closeModal}>
-        <form onSubmit={handleSave}>
+       {/* <div className="formContainer">   */}
+      <Modal  isOpen={showModal} onRequestClose={closeModal}>
+        <form className= " createForm-Profesionals" onSubmit={handleSave}>
           <label htmlFor="fullName">Nombre Completo:</label>
           <input
             type="text"
@@ -266,7 +267,8 @@ const ListProfesionals = () => {
           </button>
         </form>
       </Modal>
-    </div>
+      </div>
+    {/* </div> */}
     </>
   );
 };

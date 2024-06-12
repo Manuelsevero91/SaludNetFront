@@ -1,0 +1,26 @@
+.createForm-Schedule{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 30rem;
+    width: 50rem;
+    border-radius: 10px;
+ 
+}
+.btnCreateSchedule{
+
+width: 50rem;
+text-align: center;
+background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(64,224,208);
+  border-radius: 10px;
+  padding-top: .5rem;
+}
+.selected {
+  background-color: #90ee90 !important;
+}

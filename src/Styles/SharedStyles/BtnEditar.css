@@ -1,22 +1,26 @@
+.edit-button,
+.delete-button {
+  color: white;
+  padding: 0.5rem;
+  font-size: medium;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 8rem;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  border: hidden;
+}
 .edit-button {
-    background-color: #5ba848;
-    color: white;
-    padding:.5rem;
-    font-size: medium;
-  }
-  
-  .edit-button:hover {
-    background-color: #68d81d;
-  }
-  
- .delete-button {
-    background-color: #d8763d;
-    color: white;
-    padding: .5rem;
-    font-size: medium;
-  }
-  
-  .delete-button:hover {
-    background-color: #ee4e4e;
-  }
-  
+  background-color: #5ba848;
+}
+
+.edit-button:hover {
+  background-color: #68d81d;
+}
+
+.delete-button {
+  background-color: #d8763d;
+}
+
+.delete-button:hover {
+  background-color: #ee4e4e;
+}
