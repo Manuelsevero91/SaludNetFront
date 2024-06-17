@@ -32,6 +32,7 @@ import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
 import Coverage from "./Componentes/Coverage";
+import ShiftSelection from "./Componentes/ShiftSelection";
 
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
           <Route path="/Turnos" element={<Turnos />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
-
+          <Route path="/ShiftSelection" element={<ShiftSelection />} />
 
         </Routes>
       </UserProvider>

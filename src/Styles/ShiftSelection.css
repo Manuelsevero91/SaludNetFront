@@ -1,0 +1,61 @@
+/* .ReactModal__Overlay {
+
+   margin:0;
+    background-color: rgba(199, 48, 48, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+  }
+  
+  .ReactModal__Content {
+    position: relative;
+margin-top: 10rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    outline: none;
+  }
+  
+  .ReactModal__Content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+  }
+  
+  .ReactModal__Content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ReactModal__Content li {
+    padding: 10px;
+    border-bottom: 1px solid #6e2828;
+  }
+  
+  .ReactModal__Content li:last-child {
+    border-bottom: none;
+  }
+  
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .Btn:hover {
+    background-color: #0056b3;
+  }
+  
+  
+   */
