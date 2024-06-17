@@ -212,13 +212,15 @@ const ListProfesionals = () => {
           </tbody>
         </table>
       )}
-       {/* <div className="formContainer">   */}
-      <Modal  isOpen={showModal} onRequestClose={closeModal}>
+      <div className="barra-superior">
+        <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
+      </div>
+      <Modal  isOpen={showModal} onRequestClose={closeModal} className=" formContainer" >
         <form className= " createForm-Profesionals" onSubmit={handleSave}>
-          <label htmlFor="fullName">Nombre Completo:</label>
+          <label htmlFor="fullName">Nombre y Apellido</label>
           <input
             type="text"
-            id="fullName"
+          
             name="fullName"
             value={editData.fullName}
             onChange={handleChange}
@@ -226,7 +228,7 @@ const ListProfesionals = () => {
           <label htmlFor="mail">Correo:</label>
           <input
             type="email"
-            id="mail"
+        
             name="mail"
             value={editData.mail}
             onChange={handleChange}
@@ -234,14 +236,14 @@ const ListProfesionals = () => {
           <label htmlFor="phone">Teléfono:</label>
           <input
             type="tel"
-            id="phone"
+          
             name="phone"
             value={editData.phone}
             onChange={handleChange}
           />
           <label htmlFor="speciality">Especialidad:</label>
           <select
-            id="speciality"
+         
             name="speciality"
             value={editData.speciality.id}
             onChange={handleChange}
@@ -256,15 +258,16 @@ const ListProfesionals = () => {
           <label htmlFor="license">Licencia:</label>
           <input
             type="text"
-            id="license"
+         
             name="license"
             value={editData.license}
             onChange={handleChange}
-          />
-          <button className= "Btn" type="submit">Guardar</button>
-          <button className= "Btn" type="button" onClick={closeModal}>
+          /><div className="btn-container">
+          <button className= "edit-button" type="submit">Guardar</button>
+          <button className= "delete-button" type="button" onClick={closeModal}>
             Cancelar
           </button>
+          </div>
         </form>
       </Modal>
       </div>
