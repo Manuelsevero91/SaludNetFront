@@ -10,6 +10,7 @@ const CreateSchedule = () => {
   const [endTime, setEndTime] = useState('');
   const [interval, setInterval] = useState(30);
   const [available, setAvailable] = useState(true);
+
   const [selectedDates, setSelectedDates] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -66,6 +67,12 @@ const CreateSchedule = () => {
     }
   };
 
+
+  const isDateSelected = (date) => {
+    return selectedDates.find((d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]);
+  };
+
+
   return (
     <>
       <NavBar showLinks={true} />
@@ -74,6 +81,7 @@ const CreateSchedule = () => {
       </div>
       <div className="formContainer">
         <form className="createForm-Schedule" onSubmit={handleCreateSchedule}>
+
           <div className="inputContainerSchedule">
             <div className="input-container">
               <label>
@@ -113,6 +121,7 @@ const CreateSchedule = () => {
     </>
   );
 };
+
 
 
 export default CreateSchedule;
