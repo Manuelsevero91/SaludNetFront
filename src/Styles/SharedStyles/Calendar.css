@@ -17,18 +17,8 @@
     background-color: none; 
  color: none;
   }
-  .custom-calendar .react-calendar__tile--rangeStart,
-  .custom-calendar .react-calendar__tile--rangeEnd {
-    background-color: #5ba848; 
-    color: white;
-  }
-     /* .selected-date {
-    background-color: red;
-    color: white;
-    padding: 5px;
-    border-radius: 25%;
-  } */
   
+   
   
   .custom-calendar .react-calendar__tile {
     padding: 10px !important; 

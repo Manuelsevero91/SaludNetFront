@@ -2,12 +2,12 @@
   .succes-message{
     text-align: center;
     font-size: 2rem;
-    border: #ccffcc 2px;
+  
     position: absolute;    
-    width: 100%;
+    width: 80%;
     height: 3rem;
     border-radius: 8px;
-    margin-top: 5cap;
+ 
     color: white;
     background-color: #3fec96;
     
@@ -16,14 +16,14 @@
   
   .error-message {
     text-align: center;
-    font-size: 2rem;
-    border: #ccffcc 2px;
+    font-size: 10rem;
+
     position: absolute;    
-    width: 100%;
+    width: 80%;
     height: 3rem;
-    border-radius: 8px;
-    margin-top: 5cap;
+ 
+   
     color: white;
-    background-color: #ee4410;
+    background-color: #f537ac;
 
   }
