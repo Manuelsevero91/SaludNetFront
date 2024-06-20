@@ -1,0 +1,38 @@
+.slider-container {
+  display:inline-block;
+  width: 90rem;
+  height: 45rem;
+  margin-left:13rem;
+}
+
+.slider-container img {
+     width: 60%; 
+    height: auto; /* Para mantener la proporción */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    margin-top: 1rem;
+    margin-left: 20rem;/* Ajusta el tamaño de la imagen según el contenedor */
+}
+
+.slider-container p {
+  text-align: justify; /* Ajusta el texto justificado */
+  margin-left: 20rem;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  width: 55rem;/* Espacio superior para separación del texto */
+}
+
+  
+  
+  
+  .slider-item img {
+    width: 60%; 
+    height: auto; /* Para mantener la proporción */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    margin-top: 5rem;
+    
+  }.slick-dots li button:before {
+    font-size: 1rem;
+    color: #000;
+  }

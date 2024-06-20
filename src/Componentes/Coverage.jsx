@@ -131,8 +131,8 @@ function ListCoverage() {
         </div>
         <div className="list">  
     <div>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {success && <div style={{ color: "green" }}>{success}</div>}
+    {error && <div className="error-message" >{error}</div>}
+    {success && <div className="succes-message">{success}</div>}
      
       <div className="create">
         <div className="search-bar">

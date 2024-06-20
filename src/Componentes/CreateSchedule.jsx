@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import NavBar from "../Componentes/NavBar";
 
 const CreateSchedule = ({ doctorId }) => {
   const [selectedDates, setSelectedDates] = useState([]);
-  const [currentDoctorId, setCurrentDoctorId] = useState(doctorId || "");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [interval, setInterval] = useState("30");
+  const [currentDoctorId, setCurrentDoctorId] = useState(doctorId || '');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [interval, setInterval] = useState('30');
   const [available, setAvailable] = useState(true);
+
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
 
@@ -25,16 +26,18 @@ const CreateSchedule = ({ doctorId }) => {
 
     console.log("Datos enviados:", schedules);
 
+
     try {
-      const response = await fetch("http://localhost:3000/schedules", {
-        method: "POST",
+      const response = await fetch('http://localhost:3000/schedules', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(schedules),
+        body: JSON.stringify(schedule),
       });
 
       if (response.ok) {
+
         setSuccessMessage("¡Agenda creada exitosamente!");
         setError("");
         setSelectedDates([]);
@@ -67,6 +70,7 @@ const CreateSchedule = ({ doctorId }) => {
     setCurrentDoctorId(event.target.value);
   };
 
+
   const handleDatesChange = (date) => {
     const dateString = date.toISOString().split("T")[0];
     if (selectedDates.find((d) => d.toISOString().split("T")[0] === dateString)) {
@@ -74,6 +78,7 @@ const CreateSchedule = ({ doctorId }) => {
     } else {
       setSelectedDates([...selectedDates, date]);
     }
+
   };
 
   const handleStartTimeChange = (event) => {
@@ -92,9 +97,11 @@ const CreateSchedule = ({ doctorId }) => {
     setAvailable(event.target.checked);
   };
 
+
   const isDateSelected = (date) => {
     return selectedDates.find((d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]);
   };
+
 
   return (
     <>
@@ -104,6 +111,7 @@ const CreateSchedule = ({ doctorId }) => {
       </div>
       <div className="formContainer">
         <form className="createForm-Schedule" onSubmit={handleCreateSchedule}>
+
           <div className="inputContainerSchedule">
             <div className="input-container">
               <label>ID del Doctor:</label>
@@ -172,9 +180,5 @@ const CreateSchedule = ({ doctorId }) => {
             </button>
           </div>
         </form>
-      </div>
-    </>
-  );
-};
 
 export default CreateSchedule;

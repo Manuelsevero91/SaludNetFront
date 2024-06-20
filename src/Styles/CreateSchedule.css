@@ -1,6 +1,6 @@
 .createForm-Schedule{
     display: flex;
-    flex-direction: row;
+    flex-direction: flex;
     align-items: center;
     justify-content: center;
     background-color: transparent;
@@ -12,7 +12,10 @@
  
 }
 .btnCreateSchedule{
-
+  font-size: 2rem; 
+  cursor: pointer;
+  color: white; 
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
 width: 50rem;
 text-align: center;
 background-color: transparent;
@@ -23,4 +26,10 @@ background-color: transparent;
 }
 .selected {
   background-color: #90ee90 !important;
+}
+.inputContainerSchedule{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
 }

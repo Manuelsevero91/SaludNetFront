@@ -1,68 +1,35 @@
-.profesionales {
-  background-color: rgba(46,42,51,0.959);
-  margin-bottom: 0;
-  position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    height: 80vw;
-}
-
-/* 
-.barra-superior {
-  position: relative;  
-  height: 4vw;
-  opacity: 1;
-  height: 6vw;
-  margin-bottom: 0;
- 
-}
-
-.titulo-seccion {
-  position: relative;
-  font-size: 5vw; 
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(46,42,51,0.959);
-padding: 2vw;
-width: 100vw;
-  height: 3vw;
-} */
 
 
-
-.buscar-esp{
-background-color: white;
-height: 3vh;
-width: vw;
-}
-.contenedor-tarjetas {
+.cards-container {
   display: flex;
-  flex-direction: row;
    flex-wrap: wrap;
-  height: 32vw;
+  height: 42.2rem;
   margin: 0; 
-  padding: 2vw; 
-  background-color: rgba(90, 89, 95, 0.859); 
+  padding: 1rem; 
+  background-color: rgba(46, 42, 51, 0.959)
+;  justify-content: space-around; 
 }
-
-.tarjeta {
-  width:10vw; 
-  height: 10vw;
- font-size: 1vw;
- image-rendering: optimizeQuality;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1.5vw; 
-  margin: 1vw; 
+.card {
   display: flex;
-  flex-direction: column;
+  flex-direction:row;
   justify-content: space-between;
-  transition: transform 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  width: 25rem;
+  height:18rem;
+  margin-top: 2rem;
 }
 
-
-
-
+.card-content {
+padding: .5rem;
+margin-top: 1rem; 
+}
+.card-image{
+  height: 12rem;
+  width: 13rem;
+  border-radius: 10px;
+}
+.appointments-link{
+  font-size: 1.5rem;
+}
