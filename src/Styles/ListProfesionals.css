@@ -7,19 +7,7 @@
     ); 
  padding: 3rem;
 
-     } 
-  
-  .search-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    align-items:last baseline;
-   width: 80rem;
-    gap: 20px;
-    padding: 1.5rem;
-    margin-left: 5rem;
-    
-  } 
+     }   
   
   table {
     width: 100%;

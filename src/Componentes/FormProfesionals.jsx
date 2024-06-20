@@ -87,7 +87,11 @@ function FormProfesionals() {
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: registrar</h2>
-      </div>
+      
+      {error && <div className="error-message" >{error}</div>}
+        {success && <div className="succes-message">{success}</div>}
+      
+        </div>
       <div className="formContainer">      
 
         <form className="createForm-Profesionals" onSubmit={handleSubmit}>
@@ -146,8 +150,7 @@ function FormProfesionals() {
           <button className="btn" type="submit">
             Enviar
           </button>
-          {error && <div className="error-message" >{error}</div>}
-        {success && <div className="succes-message">{success}</div>}
+          
 
         </form>
       </div>
