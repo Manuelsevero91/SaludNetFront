@@ -1,6 +1,6 @@
 .createForm-Schedule{
     display: flex;
-    flex-direction: flex;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
     background-color: transparent;

@@ -360,95 +360,217 @@
 //   );
 // };
 // export default CreateSchedule;
+// import React, { useState } from 'react';
+// import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
+// import NavBar from "../Componentes/NavBar";
+
+// const CreateSchedule = ({ doctorId }) => {
+//   const [selectedDates, setSelectedDates] = useState([]);
+//   const [currentDoctorId, setCurrentDoctorId] = useState(doctorId || '');
+//   const [startTime, setStartTime] = useState('');
+//   const [endTime, setEndTime] = useState('');
+//   const [interval, setInterval] = useState('30');
+//   const [available, setAvailable] = useState(true);
+//   const [successMessage, setSuccessMessage] = useState('');
+//   const [errorMessage, setErrorMessage] = useState('');
+
+//   const createScheduleForDay = async (schedule) => {
+//     try {
+//       const response = await fetch('http://localhost:3000/schedules', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(schedule),
+//       });
+//       if (response.ok) {
+//         console.log('Turno creado', response);
+//       } else {
+//         throw new Error('Error en la respuesta del servidor');
+//       }
+//     } catch (error) {
+//       console.error('Error creando turno', error);
+//       throw error; // Propagar el error para manejarlo más arriba si es necesario
+//     }
+//   };
+
+//   const createSchedulesForDays = async () => {
+//     try {
+//       const schedules = selectedDates.map(day => ({
+//         days: [day.toISOString().split('T')[0]], // Convertir a formato ISO 8601
+//         idDoctor: currentDoctorId,
+//         start_Time: startTime,
+//         end_Time: endTime,
+//         available: available,
+//         interval: interval
+//       }));
+
+//       console.log('Schedules a crear:', schedules);
+
+//       await Promise.all(schedules.map(schedule => createScheduleForDay(schedule)));
+//       setSuccessMessage('¡Agenda creada exitosamente!');
+//       setSelectedDates([]);
+//       setStartTime('');
+//       setEndTime('');
+//       setInterval('30');
+//       setAvailable(true);
+//     } catch (error) {
+//       console.error('Error creando turnos', error);
+//       setErrorMessage('Hubo un error creando la agenda. Por favor, inténtelo de nuevo.');
+//     }
+//   };
+
+//   const handleCreateSchedule = (event) => {
+//     event.preventDefault();
+//     createSchedulesForDays();
+//   };
+
+//   const handleDoctorIdChange = (event) => {
+//     setCurrentDoctorId(event.target.value);
+//   };
+
+//   const handleDatesChange = (dates) => {
+//     console.log('Fechas seleccionadas:', dates);
+//     setSelectedDates(dates); // dates debe ser un array de objetos Date
+//   };
+
+//   const handleStartTimeChange = (event) => {
+//     setStartTime(event.target.value);
+//   };
+
+//   const handleEndTimeChange = (event) => {
+//     setEndTime(event.target.value);
+//   };
+
+//   const handleIntervalChange = (event) => {
+//     setInterval(event.target.value);
+//   };
+
+//   const handleAvailableChange = (event) => {
+//     setAvailable(event.target.checked);
+//   };
+
+//   return (
+//     <>
+//       <NavBar showLinks={true} />
+//       <div className="barra-superior">
+//         <h2 className="titulo-section">Administrar agenda: Crear</h2>
+//       </div>
+//       <div className="formContainer">
+//         <form className="createForm-Schedule" onSubmit={handleCreateSchedule}>
+//         <div className="inputContainerSchedule">
+//           <div className="input-container">
+//             <label>
+//               Doctor ID:
+//               <input type="text" value={currentDoctorId} onChange={handleDoctorIdChange} />
+//             </label>
+           
+//             <label>
+//               Hora de Inicio:
+//               <input type="time" value={startTime} onChange={handleStartTimeChange} />
+//             </label>
+//             <label>
+//               Hora de Fin:
+//               <input type="time" value={endTime} onChange={handleEndTimeChange} />
+//             </label>
+//             <label>
+//               Intervalo:
+//               <input type="number" value={interval} onChange={handleIntervalChange} />
+//             </label>
+//             <label>
+//               Disponible:
+//               <input type="checkbox" checked={available} onChange={handleAvailableChange} />
+//             </label>
+//             </div>
+//             <label>
+//               Fechas:
+//               <Calendar 
+//                 onChange={handleDatesChange}
+//                 value={selectedDates}
+//                 selectRange={true}
+//                 tileDisabled={({ date }) => date.getDay() === 0 || date.getDay() === 6}
+//               />
+//             </label>
+//             </div>
+//             </form>
+//             <button className='btnCreateSchedule'  type="submit">Crear Agenda</button>
+//             {error && <div className="error-message" >{error}</div>}
+//         {success && <div className="succes-message">{success}</div>}
+       
+//       </div>
+//     </>
+//   );
+// };
+
+// export default CreateSchedule;
+
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import NavBar from "../Componentes/NavBar";
+import NavBar from './NavBar';
 
-const CreateSchedule = ({ doctorId }) => {
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [currentDoctorId, setCurrentDoctorId] = useState(doctorId || '');
+
+const CreateSchedule = () => {
+  const [currentDoctorId, setCurrentDoctorId] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [interval, setInterval] = useState('30');
+  const [interval, setInterval] = useState(30);
   const [available, setAvailable] = useState(true);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const createScheduleForDay = async (schedule) => {
-    try {
-      const response = await fetch('http://localhost:3000/schedules', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(schedule),
-      });
-      if (response.ok) {
-        console.log('Turno creado', response);
-      } else {
-        throw new Error('Error en la respuesta del servidor');
-      }
-    } catch (error) {
-      console.error('Error creando turno', error);
-      throw error; // Propagar el error para manejarlo más arriba si es necesario
-    }
+  const handleDoctorIdChange = (e) => setCurrentDoctorId(e.target.value);
+  const handleStartTimeChange = (e) => setStartTime(e.target.value);
+  const handleEndTimeChange = (e) => setEndTime(e.target.value);
+  const handleIntervalChange = (e) => setInterval(e.target.value);
+  const handleAvailableChange = (e) => setAvailable(e.target.checked);
+
+  const handleDatesChange = (date) => {
+    const newDate = date.toDateString();
+    setSelectedDates((prevDates) =>
+      prevDates.includes(newDate) ? prevDates.filter((d) => d !== newDate) : [...prevDates, newDate]
+    );
   };
 
-  const createSchedulesForDays = async () => {
-    try {
-      const schedules = selectedDates.map(day => ({
-        days: [day.toISOString().split('T')[0]], // Convertir a formato ISO 8601
+  const handleCreateSchedule = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+
+    const requests = selectedDates.map(date => {
+      const scheduleData = {
+        day: new Date(date).toISOString().split('T')[0],
         idDoctor: currentDoctorId,
         start_Time: startTime,
         end_Time: endTime,
-        available: available,
-        interval: interval
-      }));
+        available,
+        interval: interval.toString()
+      };
 
-      console.log('Schedules a crear:', schedules);
+      console.log('Sending scheduleData:', scheduleData); // Log the data being sent
 
-      await Promise.all(schedules.map(schedule => createScheduleForDay(schedule)));
-      setSuccessMessage('¡Agenda creada exitosamente!');
-      setSelectedDates([]);
-      setStartTime('');
-      setEndTime('');
-      setInterval('30');
-      setAvailable(true);
-    } catch (error) {
-      console.error('Error creando turnos', error);
-      setErrorMessage('Hubo un error creando la agenda. Por favor, inténtelo de nuevo.');
+      return fetch('http://localhost:3000/schedules', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(scheduleData)
+      });
+    });
+
+    try {
+      const responses = await Promise.all(requests);
+      const successfulResponses = responses.filter(res => res.status === 201);
+      if (successfulResponses.length > 0) {
+        setSuccess(`Se han creado ${successfulResponses.length} horarios exitosamente`);
+      } else {
+        setError('No se pudo crear ningún horario');
+      }
+    } catch (err) {
+      setError('Hubo un error al crear los horarios');
     }
-  };
-
-  const handleCreateSchedule = (event) => {
-    event.preventDefault();
-    createSchedulesForDays();
-  };
-
-  const handleDoctorIdChange = (event) => {
-    setCurrentDoctorId(event.target.value);
-  };
-
-  const handleDatesChange = (dates) => {
-    console.log('Fechas seleccionadas:', dates);
-    setSelectedDates(dates); // dates debe ser un array de objetos Date
-  };
-
-  const handleStartTimeChange = (event) => {
-    setStartTime(event.target.value);
-  };
-
-  const handleEndTimeChange = (event) => {
-    setEndTime(event.target.value);
-  };
-
-  const handleIntervalChange = (event) => {
-    setInterval(event.target.value);
-  };
-
-  const handleAvailableChange = (event) => {
-    setAvailable(event.target.checked);
   };
 
   return (
@@ -459,45 +581,41 @@ const CreateSchedule = ({ doctorId }) => {
       </div>
       <div className="formContainer">
         <form className="createForm-Schedule" onSubmit={handleCreateSchedule}>
-        <div className="inputContainerSchedule">
-          <div className="input-container">
-            <label>
-              Doctor ID:
-              <input type="text" value={currentDoctorId} onChange={handleDoctorIdChange} />
-            </label>
-           
-            <label>
-              Hora de Inicio:
-              <input type="time" value={startTime} onChange={handleStartTimeChange} />
-            </label>
-            <label>
-              Hora de Fin:
-              <input type="time" value={endTime} onChange={handleEndTimeChange} />
-            </label>
-            <label>
-              Intervalo:
-              <input type="number" value={interval} onChange={handleIntervalChange} />
-            </label>
-            <label>
-              Disponible:
-              <input type="checkbox" checked={available} onChange={handleAvailableChange} />
-            </label>
+          <div className="inputContainerSchedule">
+            <div className="input-container">
+              <label>
+                Doctor ID:
+                <input type="text" value={currentDoctorId} onChange={handleDoctorIdChange} />
+              </label>
+              <label>
+                Hora de Inicio:
+                <input type="time" value={startTime} onChange={handleStartTimeChange} />
+              </label>
+              <label>
+                Hora de Fin:
+                <input type="time" value={endTime} onChange={handleEndTimeChange} />
+              </label>
+              <label>
+                Intervalo:
+                <input type="number" value={interval} onChange={handleIntervalChange} />
+              </label>
+              <label>
+                Disponible:
+                <input type="checkbox" checked={available} onChange={handleAvailableChange} />
+              </label>
             </div>
             <label>
               Fechas:
-              <Calendar 
-                onChange={handleDatesChange}
-                value={selectedDates}
-                selectRange={true}
-                tileDisabled={({ date }) => date.getDay() === 0 || date.getDay() === 6}
+              <Calendar
+                onClickDay={handleDatesChange}
+                tileClassName={({ date }) => selectedDates.includes(date.toDateString()) ? 'selected' : null}
               />
             </label>
-            </div>
-            </form>
-            <button className='btnCreateSchedule'  type="submit">Crear Agenda</button>
-            {error && <div className="error-message" >{error}</div>}
-        {success && <div className="succes-message">{success}</div>}
-       
+          </div>
+          <button className='btnCreateSchedule' type="submit">Crear Agenda</button>
+          {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
+        </form>
       </div>
     </>
   );
