@@ -14,8 +14,10 @@ import "./Styles/SharedStyles/BtnEditar.css";
 import "./Styles/SharedStyles/FormContainer.css";
 import "./Styles/SharedStyles/ErrorSuccesMessage.css";
 import "./Styles/SharedStyles/FourSections.css";
+import "./Styles/SharedStyles/Slides.css";
 import "./Styles/FormProfesionals.css";
 import "./Styles/Contacto.css";
+
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
