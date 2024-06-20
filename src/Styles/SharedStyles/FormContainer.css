@@ -13,8 +13,8 @@
 .createForm {
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: center;
+  align-items: center;
+  justify-content: left;
   background-color: transparent;
   backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.2);
@@ -26,4 +26,5 @@
 .input-container { 
   width: 22rem;
   padding: 0.5rem;
+  align-self: center;
 }

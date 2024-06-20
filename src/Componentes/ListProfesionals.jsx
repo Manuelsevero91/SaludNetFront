@@ -140,9 +140,9 @@ const ListProfesionals = () => {
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
       </div>
-    <div className="list">     
+      <div className="search-bar">    
      
-      <div className="search-bar">
+     
         <label htmlFor="searchName">Nombre:</label>
         <input
           type="text"
@@ -163,6 +163,7 @@ const ListProfesionals = () => {
             </option>
           ))}
         </select>
+   
       </div>
       {loading ? (
         <p>Cargando doctores...</p>
@@ -272,8 +273,8 @@ const ListProfesionals = () => {
           </div>
         </form>
       </Modal>
-      </div>
-    {/* </div> */}
+    
+  
     </>
   );
 };

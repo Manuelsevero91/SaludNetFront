@@ -495,9 +495,8 @@ const CreateSchedule = ({ doctorId }) => {
             </div>
             </form>
             <button className='btnCreateSchedule'  type="submit">Crear Agenda</button>
-            {successMessage && <p>{successMessage}</p>}
-            {errorMessage && <p>{errorMessage}</p>}
-          
+            {error && <div className="error-message" >{error}</div>}
+        {success && <div className="succes-message">{success}</div>}
        
       </div>
     </>
