@@ -48,6 +48,7 @@ const ListProfesionals = () => {
     fetchDoctors();
     fetchSpecialities();
   }, []);
+  
   const openModal = (doctor) => {
     setEditData(doctor);
     setShowModal(true);

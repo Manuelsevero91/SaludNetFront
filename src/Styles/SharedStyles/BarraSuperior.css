@@ -2,16 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin-top: 0;
+  justify-content: center;
+  margin-top:0;
   background-color: rgba(46, 42, 51, 0.959);
+height: 3rem;
 }
 
 .titulo-section{
   text-align: left;
   color: white;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
-  margin-bottom: 15px;
-  margin-top: 13px;
+  margin-top: .5rem;
   font-size: 1.5rem;
   margin-left: 2rem;
 }
