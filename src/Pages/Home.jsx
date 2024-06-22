@@ -6,7 +6,7 @@ import SpanContinue from "../Componentes/SpanContinue";
 import Footer from "../Componentes/Footer";
 import "../Styles/Footer.css";
 import { Link } from "react-router-dom";
-import "../Styles/Responsive.css";
+
 
 
 function Home() {

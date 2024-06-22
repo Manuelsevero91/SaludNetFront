@@ -6,13 +6,13 @@
     background-color: transparent;
     backdrop-filter: blur(15px);
     background-color: rgba(0, 0, 0, 0.2);
-    height: 30rem;
-    width: 50rem;
+    height: 30.5rem;
+    width: 60rem;
     border-radius: 10px;
  
 }
 .btnCreateSchedule{
-  font-size: 2rem; 
+  font-size: 1.5rem; 
   cursor: pointer;
   color: white; 
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
@@ -30,6 +30,12 @@ background-color: transparent;
 .inputContainerSchedule{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content:left;
+  align-items: center;
+}
+.inputSchedule{
+width: 1rem;
+padding-left: 4rem;
+
 
 }

@@ -3,7 +3,7 @@ import "./Styles/App.css";
 import "./Styles/Home.css";
 import "./Styles/Form.css";
 import "./Styles/Login.css";
-import "./Styles/Responsive.css";
+
 import "./Styles/Profesionales.css";
 
 import "./Styles/CreateSchedule.css";
@@ -35,7 +35,7 @@ import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
 import Coverage from "./Componentes/Coverage";
-import ShiftSelection from "./Componentes/ShiftSelection";
+import ShiffSelection from "./Componentes/ShiffSelection";
 
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
           <Route path="/Turnos" element={<Turnos />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/ShiftSelection" element={<ShiftSelection />} />
+          <Route path="/ShiffSelection" element={<ShiffSelection />} />
        
         </Routes>
       </UserProvider>

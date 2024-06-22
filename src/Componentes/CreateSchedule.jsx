@@ -86,27 +86,27 @@ const CreateSchedule = () => {
             <div className="input-container">
               <label>
                 Doctor ID:
-                <input type="text" value={currentDoctorId} onChange={handleDoctorIdChange} />
+                <input className='inputSchedule'type="text" value={currentDoctorId} onChange={handleDoctorIdChange} />
               </label>
               <label>
                 Hora de Inicio:
-                <input type="time" value={startTime} onChange={handleStartTimeChange} />
+                <input className='inputSchedule' type="time" value={startTime} onChange={handleStartTimeChange} />
               </label>
               <label>
                 Hora de Fin:
-                <input type="time" value={endTime} onChange={handleEndTimeChange} />
+                <input className='inputSchedule' type="time" value={endTime} onChange={handleEndTimeChange} />
               </label>
               <label>
                 Intervalo:
-                <input type="number" value={interval} onChange={handleIntervalChange} />
+                <input className='inputSchedule' type="number" value={interval} onChange={handleIntervalChange} />
               </label>
               <label>
                 Disponible:
-                <input type="checkbox" checked={available} onChange={handleAvailableChange} />
+                <input className='inputSchedule' type="checkbox" checked={available} onChange={handleAvailableChange} />
               </label>
             </div>
             <label>
-              Fechas:
+           
               <Calendar
                 onClickDay={handleDatesChange}
                 tileClassName={({ date }) => selectedDates.includes(date.toDateString()) ? 'selected' : null}
