@@ -9,7 +9,7 @@ function SpanContinue({ marketingRef }) {
   };
 
   return (
-    <button className="btn" onClick={scrollToMarketing}>
+    <button className="spanContinue" onClick={scrollToMarketing}>
       Continuar
     </button>
   );

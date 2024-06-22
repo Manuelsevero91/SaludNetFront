@@ -11,13 +11,13 @@ h2 {
   color: #fff;
   text-shadow: 5px 5px 5px rgb(3, 3, 3);
   margin-top: 0;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   position: relative; 
   z-index: 2;   
 }
 label,th {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-shadow: 5px 5px 5px rgb(5, 5, 5);
   width: auto;
   color: white;
@@ -25,8 +25,8 @@ label,th {
 }
 input,
 select {
-  width: auto;
-  min-width: 30rem;
+  width: 20rem;
+  min-width: 16rem;
   padding: .75rem;
   border-radius: 10px;
 }
@@ -57,4 +57,23 @@ h4 {
   font-weight:normal;
 margin: 0.2rem;
   
+}
+.options {
+  position: absolute;
+  display: flex;  
+  justify-content:space-between; 
+  align-items: center;
+  top: calc(5% + 2.3vw);
+  width:80%;
+  height: 50%;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 65px;
+  padding: 2vw;
+  box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
+  z-index: 1;
+  text-shadow: 5px 5px 5px rgb(3, 3, 3);
+  margin-left: 3vw;
+
 }

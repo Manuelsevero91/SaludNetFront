@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from '../Componentes/NavBar';
 
-const ListProfesionals = () => {
+const Profesionals = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [specialities, setSpecialities] = useState([]);
@@ -88,7 +88,7 @@ const ListProfesionals = () => {
               <h3>{doctor.fullName}</h3>              
               <h4>{doctor.speciality.name}</h4>
               <h4>{doctor.license}</h4>
-              <a href={`/appointments/${doctor.id}`} className="appointments-link">Ver Turnos Disponibles</a>
+             
             </div>
           </div>
         ))}
@@ -97,4 +97,4 @@ const ListProfesionals = () => {
   );
 };
 
-export default ListProfesionals;
+export default Profesionals;

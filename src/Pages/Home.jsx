@@ -8,40 +8,39 @@ import "../Styles/Footer.css";
 import { Link } from "react-router-dom";
 import "../Styles/Responsive.css";
 
+
 function Home() {
   const { isLoggedIn } = useAuth;
   const marketingRef = useRef(null);
   return (
+    <>
     <div className="general-container">
-      <div className="inicio">
-        <div className="link-container">
-          <ul>
+
+      <div className="inicio">  
+   
+        <div className="headerHome">  
+     
+        <img src={logoSN} alt="Logo de Salud Net" className="logo" />
             <li>
-              <Link to="/contacto">Contacto</Link></li>
-
-            {/* <li>
-              <Link to="/login">Admin</Link></li> */}
-
-          </ul>
-        </div>
-
-        <section className="container">
-          <img src={logoSN} alt="Logo de Salud Net" className="logo" />
-          {!isLoggedIn && (
-            <h1 className="tittleHome">BIENVENIDOS A SALUD NET</h1>
-          )}
-          <p className="pHome">
-            En nuestra página podrá consultar sobre los profesionales que
-            atienden en Salud Net como también reservar un turno
-          </p>
-          <SpanContinue marketingRef={marketingRef}/>
-        </section>
+              <Link to="/contacto">Contacto</Link>
+            </li>  
+           </div>
+        {!isLoggedIn && <h1 className="tittleHome">BIENVENIDOS A SALUD NET</h1>}
+        <p className="pHome">
+          En nuestra página podrá consultar sobre los profesionales que atienden
+          en Salud Net como también reservar un turno
+        </p>
+        <SpanContinue  marketingRef={marketingRef} />
       </div>
+     
+
+
       <div ref={marketingRef}>
-      <Marketing />
+        <Marketing />
       </div>
       <Footer />
     </div>
+    </>
   );
 }
 export default Home;

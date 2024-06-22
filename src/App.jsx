@@ -5,7 +5,7 @@ import "./Styles/Form.css";
 import "./Styles/Login.css";
 import "./Styles/Responsive.css";
 import "./Styles/Profesionales.css";
-import "./Styles/Admin.css";
+
 import "./Styles/CreateSchedule.css";
 import "./Styles/SharedStyles/Btn.css";
 import "./Styles/SharedStyles/BarraSuperior.css";
@@ -18,6 +18,7 @@ import "./Styles/SharedStyles/Slides.css";
 import "./Styles/SharedStyles/SearchBar.css";
 import "./Styles/FormProfesionals.css";
 import "./Styles/Contacto.css";
+
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -35,6 +36,7 @@ import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
 import Coverage from "./Componentes/Coverage";
 import ShiftSelection from "./Componentes/ShiftSelection";
+
 
 function App() {
 
@@ -60,7 +62,7 @@ function App() {
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/ShiftSelection" element={<ShiftSelection />} />
-
+       
         </Routes>
       </UserProvider>
 

@@ -1,88 +1,83 @@
-
-
 .general-container {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-.link-container {
-  position: relative;
-  display: flex;
-  justify-content: flex-end; 
-  padding:10px;
-  width: 100%;  
-  top: 2vh;
-  right: 6vw; 
-  margin: 0
+  max-width: 1440px;
 }
 
-.link-container ul {
+.headerHome {
   display: flex;
-  gap: 1.5vw;
-  list-style: none;
-  margin-top: 2vw;
-  padding: 0;
-  margin:0;
+  flex-direction: row;
+  width: 1300px;
+  height: 8rem;
+  align-items: normal;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+    width: 800px;
+    @media screen and (max-width: 320px) {
+      flex-direction: row;
+      width: 500px;
+      height: 3rem;
+    }
+  }
 }
-
 
 .inicio {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  width: 100%;
-  height:max-content;
-  min-height: 50vh;
+  justify-content: space-evenly;
+  max-width: 1440px;
   background-image: url("https://media.istockphoto.com/id/1343098418/es/foto/examen-m%C3%A9dico-y-negocio-de-seguros-de-salud-a-trav%C3%A9s-de-la-tecnolog%C3%ADa-de-interfaz-virtual.jpg?s=612x612&w=0&k=20&c=D4gW3RcySVx-8ZkZUCfXOvgmV6Umso1r7A6hjQ2tSVQ=");
   background-size: cover;
   background-position: center;
-  overflow: hidden; 
+  overflow: hidden;
   margin: 0;
-  padding: 0;
+  padding: 0;  
+  height: 580px;  
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-.container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90vh;
-  width: 100%;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+li {
+  list-style: none;
+  padding-right: 5rem;
+  font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    width: 100px;
+    padding: 5rem;
+    @media screen and (max-width: 320px) {
+      width: 50px;
+      height: 3rem;
+      padding: 2rem;
+    }
+  }
 }
-
 .logo {
-  position:absolute;
-top: -3vh;
-  left: 20px;
-  width: 10vw; 
-  max-width: 150px; 
-  height: auto;
+  width: 6.3rem;
+  height: 6rem;
+  margin: 0;
+  @media screen and (max-width: 768px) {
+    width: 4rem;
+    height: auto;
+  }
 }
 
 .tittleHome {
-  height: fit-content;
-  font-size: 5vw;
+  font-size: 3.5rem;
   color: rgb(245, 249, 249);
-  margin-top: 5vh;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
-  animation: h1blue 3s 1 forwards; 
+  animation: h1blue 3s 1 forwards;
 }
 
 .pHome {
-  font-size: 1.6vw; 
+  font-size: 1.5rem;
   font-weight: bolder;
   color: white;
-  margin-top: .5vh; 
-  width: 80vw;
+
+  width: auto;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  align-self: center;
 }
-
-
 
 @keyframes h1blue {
   0% {
@@ -98,5 +93,14 @@ top: -3vh;
     transform: scale(1);
   }
 }
+.spanContinue {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
 
-
+  transition: transform 0.3s ease;
+}

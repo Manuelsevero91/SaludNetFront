@@ -43,7 +43,7 @@ const CreateSchedule = () => {
         interval: interval.toString()
       };
 
-      console.log('Sending scheduleData:', scheduleData); // Log the data being sent
+      console.log('Sending scheduleData:', scheduleData); 
 
       return fetch('http://localhost:3000/schedules', {
         method: 'POST',
