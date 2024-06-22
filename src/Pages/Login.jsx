@@ -51,7 +51,7 @@ function Login({ isLoggedIn }) {
     <>
      <NavBar showLinks={false} />
      <div className="barra-superior">
-        <h2 className="titulo-section">Inicio de Cesión</h2>
+        <h2 className="titulo-section">Inicio de Sesión</h2>
       </div>
       <div className='formContainerInicio'>
         <form className= 'createFormInicio' onSubmit={handleSubmit}>

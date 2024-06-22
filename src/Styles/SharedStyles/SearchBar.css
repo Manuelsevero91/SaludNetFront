@@ -1,14 +1,15 @@
 .search-bar {
     display: flex;
     flex-direction: row;
-    justify-content:space-evenly;  
+    justify-content:left;  
     align-items: center;  
-   width: 100%;
-    gap: 1px;
-    padding: 1.6rem;  
+   width:100%;
+    gap: 5px;
+    padding: 2rem;  
     background-color:rgba(44, 99, 103, 0.8); 
-    
-  
+    margin: 0;  
   height: 2rem;
-  width: 100%
+  }
+  .search{
+    padding: 3rem;
   }

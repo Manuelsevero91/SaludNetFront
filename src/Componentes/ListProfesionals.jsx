@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import "../Styles/ListProfesionals.css";
+
 import NavBar from '../Componentes/NavBar';
 
 
@@ -131,10 +131,6 @@ const ListProfesionals = () => {
     return fullNameMatch && specialityMatch;
   });
 
-
-
-
-
   return (
 <>
  <NavBar showLinks={true} />
@@ -144,14 +140,14 @@ const ListProfesionals = () => {
       <div className="search-bar">    
      
      
-        <label htmlFor="searchName">Nombre:</label>
+        <label className="search" htmlFor="searchName">Nombre:</label>
         <input
           type="text"
           id="searchName"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
         />
-        <label htmlFor="searchSpeciality">Especialidad:</label>
+        <label className="search" htmlFor="searchSpeciality">Especialidad:</label>
         <select
           id="searchSpeciality"
           value={searchSpeciality}
@@ -169,6 +165,8 @@ const ListProfesionals = () => {
       {loading ? (
         <p>Cargando doctores...</p>
       ) : (
+        
+        <div className="tableContainer">
         <table>
           <thead>
             <tr>
@@ -213,6 +211,7 @@ const ListProfesionals = () => {
             ))}
           </tbody>
         </table>
+        </div>
       )}
       
       <Modal  isOpen={showModal} onRequestClose={closeModal} className=" formContainer" >

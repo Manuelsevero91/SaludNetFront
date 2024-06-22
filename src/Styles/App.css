@@ -12,12 +12,12 @@ h2 {
   text-shadow: 5px 5px 5px rgb(3, 3, 3);
   margin-top: 0;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight:bolder;
   position: relative; 
   z-index: 2;   
 }
 label,th {
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-shadow: 5px 5px 5px rgb(5, 5, 5);
   width: auto;
   color: white;
@@ -27,7 +27,7 @@ input,
 select {
   width: 20rem;
   min-width: 16rem;
-  padding: .75rem;
+  padding: .7rem;
   border-radius: 10px;
 }
 input[type="checkbox"] {
