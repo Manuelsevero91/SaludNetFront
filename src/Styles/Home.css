@@ -102,5 +102,5 @@ li {
   color: white;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
 
-  transition: transform 0.3s ease;
+  transition: transform 1s ease;
 }
