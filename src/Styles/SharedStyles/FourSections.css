@@ -21,6 +21,17 @@
   background-position: center;
   position: relative;
   cursor: pointer;  
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+    justify-content:center;  
+
+    @media screen and (max-width: 320px) {
+  
+
+    }
+  }
 }
 
 .box:hover {
