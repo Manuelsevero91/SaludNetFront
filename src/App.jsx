@@ -33,7 +33,7 @@ import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
-import EditShiffs from "./Componentes/EditShiffs";
+//import EditShiffs from "./Componentes/EditShiffs";
 import Coverage from "./Componentes/Coverage";
 
 
@@ -54,7 +54,7 @@ function App() {
             <Route path="/FormProfesionales" element={<FormProfesionals />} />
             <Route path="/ListProfesionales" element={<ListProfesionals />} />
             <Route path="/Agenda" element={<CreateSchedule />} />
-            <Route path="/EditarTurnos" element={<EditShiffs />} />
+            {/*<Route path="/EditarTurnos" element={<EditShiffs />} />*/}
             <Route path="/Coverage" element={<Coverage />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
