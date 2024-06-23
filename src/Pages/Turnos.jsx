@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../Componentes/NavBar";
 
-const ShiffSelection = () => {
+const Turnos = () => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
   const [schedules, setSchedules] = useState([]);
@@ -16,7 +16,7 @@ const ShiffSelection = () => {
       try {
         const response = await fetch("http://localhost:3000/doctors");
         if (!response.ok) {
-          throw new Error(`Error fetching doctors: ${response.status}`);
+          throw new Error(`No se puede mostrar la lista de doctores: ${response.status}`);
         }
         const result = await response.json();
         setDoctors(result.data);
@@ -53,6 +53,7 @@ const ShiffSelection = () => {
       }
       const result = await response.json();
 
+
       // Filtrar agendas solo para días futuros y ordenar por día y hora de inicio
       const currentDate = new Date();
       const filteredSchedules = result.data.filter(schedule => {
@@ -66,9 +67,11 @@ const ShiffSelection = () => {
       });
       
       setSchedules(filteredSchedules);
+
       setLoadingSchedules(false);
     } catch (error) {
       console.error("Error fetching schedules:", error);
+      setSchedules([]);
       setLoadingSchedules(false);
       setSchedules([]); // Limpiar las agendas en caso de error
     }
@@ -229,7 +232,9 @@ const ShiffSelection = () => {
   );
 };
 
+
 export default ShiffSelection;
+
 
 
 
