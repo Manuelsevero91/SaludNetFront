@@ -53,27 +53,14 @@ const Turnos = () => {
       }
       const result = await response.json();
 
-
-      // Filtrar agendas solo para días futuros y ordenar por día y hora de inicio
-      const currentDate = new Date();
-      const filteredSchedules = result.data.filter(schedule => {
-        const scheduleDate = new Date(schedule.day);
-        return scheduleDate >= currentDate;
-      }).sort((a, b) => {
-        if (a.day !== b.day) {
-          return new Date(a.day) - new Date(b.day); // Ordenar por fecha
-        }
-        return a.start_Time.localeCompare(b.start_Time); // Si el día es el mismo, ordenar por hora de inicio
-      });
-      
-      setSchedules(filteredSchedules);
+      setSchedules(result.data || []);
 
       setLoadingSchedules(false);
     } catch (error) {
       console.error("Error fetching schedules:", error);
       setSchedules([]);
       setLoadingSchedules(false);
-      setSchedules([]); // Limpiar las agendas en caso de error
+
     }
   };
 
@@ -83,60 +70,15 @@ const Turnos = () => {
   };
 
   const filteredDoctors = doctors.filter((doctor) => {
-    const fullNameMatch = doctor.fullName.toLowerCase().includes(searchName.toLowerCase());
-    const specialityMatch = doctor.speciality.name.toLowerCase().includes(searchSpeciality.toLowerCase());
+    const fullNameMatch = doctor.fullName
+      .toLowerCase()
+      .includes(searchName.toLowerCase());
+    const specialityMatch = doctor.speciality.name
+      .toLowerCase()
+      .includes(searchSpeciality.toLowerCase());
     return fullNameMatch && specialityMatch;
   });
 
-  const renderScheduleTables = () => {
-    if (!selectedDoctor || loadingSchedules) {
-      return null;
-    }
-
-    // Agrupar los horarios por día
-    const groupedSchedules = schedules.reduce((acc, schedule) => {
-      if (!acc[schedule.day]) {
-        acc[schedule.day] = [];
-      }
-      acc[schedule.day].push(schedule);
-      return acc;
-    }, {});
-
-    // Ordenar horarios dentro de cada día por hora de inicio
-    Object.keys(groupedSchedules).forEach((day) => {
-      groupedSchedules[day].sort((a, b) => a.start_Time.localeCompare(b.start_Time));
-    });
-
-    return Object.entries(groupedSchedules).map(([day, schedulesOfDay]) => (
-      <div key={day} className="schedule-table">
-        <h4>{formatDayTitle(day)}</h4>
-        <ul>
-          {schedulesOfDay.map((schedule) => (
-            <li key={schedule.idSchedule}>
-              {formatTime(schedule.start_Time)} - <button onClick={() => handleTakeAppointment(schedule)}>Tomar turno</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ));
-  };
-
-  const formatDayTitle = (day) => {
-    // Convertir la fecha a un formato más legible
-    const date = new Date(day);
-    const options = { weekday: 'long', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('es-AR', options); // Formato español para Argentina
-  };
-
-  const formatTime = (time) => {
-    // Formatear la hora si es necesario
-    return time; // Por ahora, simplemente devolvemos la hora
-  };
-
-  const handleTakeAppointment = (schedule) => {
-    // Aquí puedes implementar la lógica para reservar el turno
-    console.log(`Se reservó el turno para el día ${formatDayTitle(schedule.day)} a las ${formatTime(schedule.start_Time)}.`);
-  };
 
   return (
     <>
@@ -218,13 +160,19 @@ const Turnos = () => {
           {loadingSchedules ? (
             <p>Cargando turnos...</p>
           ) : (
-            <div>
+
+            <ul>
               {schedules.length > 0 ? (
-                renderScheduleTables()
+                schedules.map((schedule) => (
+                  <li key={schedule.idSchedule}>
+                    {schedule.day} - {schedule.start_Time} a {schedule.end_Time}
+                  </li>
+                ))
               ) : (
                 <p>No hay turnos disponibles</p>
               )}
-            </div>
+            </ul>
+
           )}
         </div>
       )}
@@ -233,21 +181,5 @@ const Turnos = () => {
 };
 
 
-export default ShiffSelection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Turnos;
 
