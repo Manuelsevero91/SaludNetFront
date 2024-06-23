@@ -52,12 +52,15 @@ const Turnos = () => {
         throw new Error(`Error fetching schedules: ${response.status}`);
       }
       const result = await response.json();
+
       setSchedules(result.data || []);
+
       setLoadingSchedules(false);
     } catch (error) {
       console.error("Error fetching schedules:", error);
       setSchedules([]);
       setLoadingSchedules(false);
+
     }
   };
 
@@ -75,6 +78,7 @@ const Turnos = () => {
       .includes(searchSpeciality.toLowerCase());
     return fullNameMatch && specialityMatch;
   });
+
 
   return (
     <>
@@ -156,6 +160,7 @@ const Turnos = () => {
           {loadingSchedules ? (
             <p>Cargando turnos...</p>
           ) : (
+
             <ul>
               {schedules.length > 0 ? (
                 schedules.map((schedule) => (
@@ -167,6 +172,7 @@ const Turnos = () => {
                 <p>No hay turnos disponibles</p>
               )}
             </ul>
+
           )}
         </div>
       )}
@@ -174,4 +180,6 @@ const Turnos = () => {
   );
 };
 
+
 export default Turnos;
+

@@ -10,12 +10,14 @@
   align-items:center;
   justify-content: space-between;
   @media screen and (max-width: 768px) {
+
     flex-direction: row;
     width: 500px;
     @media screen and (max-width: 320px) {
       flex-direction: row;
       width: 170px;
       height: 3rem;
+
     }
   }
 }
@@ -47,20 +49,7 @@
     }
   }
 }
-li {
-  list-style: none;
-  padding-right: 5rem;
-  font-size: 2rem;
-  @media screen and (max-width: 768px) {
-    width: 100px;
-    padding: 5rem;
-    @media screen and (max-width: 320px) {
-      width: 50px;
-      height: 3rem;
-      padding: 2rem;
-    }
-  }
-}
+
 .logo {
   width: 6.3rem;
   height: 6rem;
@@ -75,6 +64,7 @@ li {
   font-size: 3.5rem;
   color: rgb(245, 249, 249);
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
+
   animation: h1blue 3s 1 forwards;
   @media screen and (max-width: 768px) {
     width:500px;
@@ -84,9 +74,9 @@ li {
       height: 2rem;
       font-size:1.8rem;
     }
+
   }
 }
-
 .pHome {
   font-size: 1.5rem;
   font-weight: bolder;
@@ -95,6 +85,7 @@ li {
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
   align-self: center;
   @media screen and (max-width: 768px) {
+
     width:auto;
     font-size:2rem;
     margin:.5rem;
@@ -104,6 +95,7 @@ li {
       font-size:1rem;
     }
   }
+
 }
 
 @keyframes h1blue {
@@ -128,6 +120,5 @@ li {
   cursor: pointer;
   color: white;
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
-
   transition: transform 1s ease;
 }
