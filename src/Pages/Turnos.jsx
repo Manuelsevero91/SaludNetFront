@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../Componentes/NavBar";
 
-const ShiffSelection = () => {
+const Turnos = () => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
   const [schedules, setSchedules] = useState([]);
@@ -16,7 +16,7 @@ const ShiffSelection = () => {
       try {
         const response = await fetch("http://localhost:3000/doctors");
         if (!response.ok) {
-          throw new Error(`Error fetching doctors: ${response.status}`);
+          throw new Error(`No se puede mostrar la lista de doctores: ${response.status}`);
         }
         const result = await response.json();
         setDoctors(result.data);
@@ -52,10 +52,11 @@ const ShiffSelection = () => {
         throw new Error(`Error fetching schedules: ${response.status}`);
       }
       const result = await response.json();
-      setSchedules(result.data);
+      setSchedules(result.data || []);
       setLoadingSchedules(false);
     } catch (error) {
       console.error("Error fetching schedules:", error);
+      setSchedules([]);
       setLoadingSchedules(false);
     }
   };
@@ -173,4 +174,4 @@ const ShiffSelection = () => {
   );
 };
 
-export default ShiffSelection;
+export default Turnos;
