@@ -33,8 +33,8 @@ import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
-import Coverage from "./Componentes/Coverage";
 import ShiftSelection from "./Componentes/ShiftSelection";
+import InformacionAdicional from "./Componentes/InformacionAdi";
 
 function App() {
 
@@ -53,7 +53,7 @@ function App() {
             <Route path="/ListProfesionales" element={<ListProfesionals />} />
             <Route path="/Agenda" element={<CreateSchedule />} />
             <Route path="/EditarTurnos" element={<EditShifts />} />
-            <Route path="/Coverage" element={<Coverage />} />
+            <Route path="/Listados" element={<InformacionAdicional />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />

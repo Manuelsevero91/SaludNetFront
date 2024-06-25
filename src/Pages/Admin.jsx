@@ -65,7 +65,7 @@ const Admin = () => {
                 label: "Modificar/Eliminar Profesional",
                 link: "/ListProfesionales",
               },
-              // { label: 'Borrar Profesional', link: '/borrar-profesional' }
+              { label: 'Información adicional', link: '/informacion' }
             ]}
           />
 

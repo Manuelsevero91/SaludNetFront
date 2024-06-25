@@ -1,66 +1,62 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import NavBar from "../Componentes/NavBar";
-// import "../Styles/Coverage.css";
-import "../Styles/Informacion.css"
+import "../Styles/Informacion.css";
 import Swal from 'sweetalert2';
 
-
-function ListCoverage() {
-  const [coverages, setCoverages] = useState([]);
+function ListSpeciality() {
+  const [specialities, setSpecialities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
     id: 0,
-    coverages: "",
+    name: "",
   });
-  const [newCoverage, setNewCoverage] = useState("");
-  
+  const [newSpeciality, setNewSpeciality] = useState("");
 
   useEffect(() => {
-    const fetchCoverage = async () => {
+    const fetchSpecialities = async () => {
       try {
-        const listCoverage = await fetch("http://localhost:3000/coverage");
-        const result = await listCoverage.json();
-        setCoverages(result.data);
+        const response = await fetch("http://localhost:3000/speciality");
+        const result = await response.json();
+        setSpecialities(result.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
       }
     };
-    fetchCoverage();
+    fetchSpecialities();
   }, []);
 
   const handleInputChange = (e) => {
-    setNewCoverage(e.target.value);
+    setNewSpeciality(e.target.value);
   };
 
-  const handleAddCoverage = async () => {
+  const handleAddSpeciality = async () => {
     try {
-      const response = await fetch("http://localhost:3000/coverage", {
+      const response = await fetch("http://localhost:3000/speciality", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ coverages: newCoverage }),
+        body: JSON.stringify({ especialidad: newSpeciality }),
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Something went wrong");
+      } else {
+        const data = await response.json();
+        setSpecialities([...specialities, data.data]);
+        Swal.fire({ text: "Especialidad agregada con éxito", icon: 'success' });
+        setNewSpeciality("");
       }
-
-      const data = await response.json();
-      setCoverages([...coverages, data.data]);
-      Swal.fire({text: "Cobertura agregada con exito", icon: 'success'})
-      setNewCoverage("");
     } catch (error) {
-      Swal.fire({text: "Error al agregar la cobertura", icon: 'error'})
+      Swal.fire({ text: "Error al agregar la especialidad", icon: 'error' });
     }
   };
 
-  const openModal = (coverage) => {
-    setEditData(coverage || { id: 0, coverages: "" });
+  const openModal = (speciality) => {
+    setEditData(speciality || { id: 0, name: "" });
     setShowModal(true);
   };
 
@@ -68,7 +64,7 @@ function ListCoverage() {
     setShowModal(false);
     setEditData({
       id: 0,
-      coverages: "",
+      name: "",
     });
   };
 
@@ -79,17 +75,17 @@ function ListCoverage() {
     });
   };
 
-  const handleEditCoverage = async (event) => {
+  const handleEditSpeciality = async (event) => {
     event.preventDefault();
-    const { id, coverages } = editData;
-    const updateCov = { coverages };
+    const { id, name } = editData;
+    const updatedSpeciality = { name };
     try {
-      const response = await fetch(`http://localhost:3000/coverage/${id}`, {
+      const response = await fetch(`http://localhost:3000/speciality/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updateCov),
+        body: JSON.stringify(updatedSpeciality),
       });
 
       if (!response.ok) {
@@ -98,20 +94,20 @@ function ListCoverage() {
       }
 
       const data = await response.json();
-      setCoverages((prevCoverages) =>
-        prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
+      setSpecialities((prevSpecialities) =>
+        prevSpecialities.map((spe) => (spe.id === id ? data.data : spe))
       );
 
       closeModal();
-      Swal.fire({text: "Se ha editado correctamente", icon: 'success'})
+      Swal.fire({ text: "Se ha editado correctamente", icon: 'success' });
     } catch (error) {
-      Swal.fire({text: "Error al enviar la solicitud", icon: 'error'})
+      Swal.fire({ text: "Error al enviar la solicitud", icon: 'error' });
     }
   };
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás segura que desea elimina la obra social?',
+      title: '¿Estás segura que desea eliminar la especialidad?',
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
@@ -122,20 +118,19 @@ function ListCoverage() {
     });
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://localhost:3000/coverage/${id}`, {
+        const response = await fetch(`http://localhost:3000/speciality/${id}`, {
           method: "DELETE",
         });
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || "Something went wrong");
         }
-        setCoverages((prevCoverages) =>
-          prevCoverages.filter((cov) => cov.id !== id)
+        setSpecialities((prevSpecialities) =>
+          prevSpecialities.filter((spe) => spe.id !== id)
         );
-
-        Swal.fire({text:"La cobertura ha sido eliminada.", icon:"success"});
+        Swal.fire({ text: "La especialidad ha sido eliminada.", icon: "success" });
       } catch (error) {
-        Swal.fire({text: "Error al enviar la solicitud", icon: 'error'})
+        Swal.fire({ text: "Error al enviar la solicitud", icon: 'error' });
       }
     }
   };
@@ -146,41 +141,35 @@ function ListCoverage() {
 
   return (
     <div>
-      <h1>Obras sociales</h1>
-      <div className="coverage">
+      <h1>Especialidades</h1>
+      <div className="speciality">
         <div>
           <input
             type="text"
-            placeholder="Nombre de la cobertura"
-            value={newCoverage}
+            placeholder="Nombre de la especialidad"
+            value={newSpeciality}
             onChange={handleInputChange}
           />
-          <button className="save" onClick={handleAddCoverage}>
+          <button className="save" onClick={handleAddSpeciality}>
             Guardar
           </button>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Obra social</th>
+              <th>Especialidad</th>
               <th>Controles</th>
             </tr>
           </thead>
           <tbody>
-            {coverages.map((coverage) => (
-              <tr key={coverage.id}>
-                <td>{coverage.coverages}</td>
+            {specialities.map((speciality) => (
+              <tr key={speciality.id}>
+                <td>{speciality.name}</td>
                 <td>
-                  <button
-                    className="edit-button"
-                    onClick={() => openModal(coverage)}
-                  >
+                  <button className="edit-button" onClick={() => openModal(speciality)}>
                     Edit
                   </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(coverage.id)}
-                  >
+                  <button className="delete-button" onClick={() => handleDelete(speciality.id)}>
                     Delete
                   </button>
                 </td>
@@ -195,12 +184,12 @@ function ListCoverage() {
           className="modal"
           overlayClassName="overlay"
         >
-          <form onSubmit={handleEditCoverage}>
-            <label>Nombre de la cobertura:</label>
+          <form onSubmit={handleEditSpeciality}>
+            <label>Nombre de la especialidad:</label>
             <input
               type="text"
-              name="coverages"
-              value={editData.coverages}
+              name="name"
+              value={editData.name}
               onChange={handleChange}
             />
             <button type="submit">Guardar</button>
@@ -214,4 +203,4 @@ function ListCoverage() {
   );
 }
 
-export default ListCoverage;
+export default ListSpeciality;

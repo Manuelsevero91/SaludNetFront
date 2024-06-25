@@ -1,0 +1,83 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+  }
+  
+  table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  table tbody tr:nth-of-type(even) {
+    background-color: #7bade6;
+  }
+  
+  table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  
+  table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button.edit {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button.delete {
+    background-color: #f44336;
+    color: white;
+  }
+
+
+  
+  button.save{
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  button.save-button:hover {
+    background-color: #68d81d;
+  }
+  
+  .coverage {
+    display:block;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .coverage label {
+    color: white;
+    font-size: 1.2em;
+  }
+  
+  .coverage input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
