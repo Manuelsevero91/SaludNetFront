@@ -3,9 +3,9 @@ import "./Styles/App.css";
 import "./Styles/Home.css";
 import "./Styles/Form.css";
 import "./Styles/Login.css";
-
+import "./Styles/ListProfesionals.css";
 import "./Styles/Profesionales.css";
-
+import "./Styles/Shiff.css";
 import "./Styles/CreateSchedule.css";
 import "./Styles/SharedStyles/Btn.css";
 import "./Styles/SharedStyles/BarraSuperior.css";
