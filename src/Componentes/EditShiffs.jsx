@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Spinner from "./Spinner";
 import Swal from "sweetalert2";
 import NavBar from "./NavBar";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
 
 const EditShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
@@ -112,7 +114,9 @@ const EditShiffs = () => {
               <td>{shiff.Schedules.day}</td>
               <td>{shiff.Schedules.start_Time}</td>
               <td>
-                <button onClick={() => handleDelete(shiff.id)}>Eliminar</button>
+                <button onClick={() => handleDelete(shiff.id)}>
+                <FontAwesomeIcon icon={faTrash} />
+                  </button>
               </td>
             </tr>
           ))}
