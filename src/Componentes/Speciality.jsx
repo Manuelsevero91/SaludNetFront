@@ -13,6 +13,7 @@ function ListSpeciality() {
     name: "",
   });
   const [newSpeciality, setNewSpeciality] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     const fetchSpecialities = async () => {
@@ -135,6 +136,18 @@ function ListSpeciality() {
     }
   };
 
+  const sortSpeciality = () => {
+    const sortedSpecialities = [...specialities].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.specialities.localeCompare(b.specialities);
+      } else {
+        return b.specialities.localeCompare(a.specialities);
+      }
+    });
+    setSpecialities(sortedSpecialities);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -157,7 +170,11 @@ function ListSpeciality() {
         <table>
           <thead>
             <tr>
-              <th>Especialidad</th>
+              <th>Especialidad
+              <button onClick={sortSpeciality}>
+              <FontAwesomeIcon icon={faSort} /> 
+        </button>
+              </th>
               <th>Controles</th>
             </tr>
           </thead>
@@ -167,10 +184,10 @@ function ListSpeciality() {
                 <td>{speciality.name}</td>
                 <td>
                   <button className="edit-button" onClick={() => openModal(speciality)}>
-                    Edit
+                  <FontAwesomeIcon icon={faPenToSquare} />
                   </button>
                   <button className="delete-button" onClick={() => handleDelete(speciality.id)}>
-                    Delete
+                  <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>
@@ -185,7 +202,7 @@ function ListSpeciality() {
           overlayClassName="overlay"
         >
           <form onSubmit={handleEditSpeciality}>
-            <label>Nombre de la especialidad:</label>
+            <label>Nombre de la nueva especialidad:</label>
             <input
               type="text"
               name="name"

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import NavBar from "../Componentes/NavBar";
-// import "../Styles/Coverage.css";
-import "../Styles/Informacion.css"
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort, faPenToSquare, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
 
+import "../Styles/Informacion.css";
 
 function ListCoverage() {
   const [coverages, setCoverages] = useState([]);
@@ -15,7 +15,9 @@ function ListCoverage() {
     coverages: "",
   });
   const [newCoverage, setNewCoverage] = useState("");
-  
+  const [searchName, setSearchName] = useState("");
+  const [filteredCoverages, setFilteredCoverages] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     const fetchCoverage = async () => {
@@ -23,6 +25,7 @@ function ListCoverage() {
         const listCoverage = await fetch("http://localhost:3000/coverage");
         const result = await listCoverage.json();
         setCoverages(result.data);
+        setFilteredCoverages(result.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -33,6 +36,11 @@ function ListCoverage() {
 
   const handleInputChange = (e) => {
     setNewCoverage(e.target.value);
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchName(e.target.value);
+    filterCoverages(e.target.value);
   };
 
   const handleAddCoverage = async () => {
@@ -52,10 +60,11 @@ function ListCoverage() {
 
       const data = await response.json();
       setCoverages([...coverages, data.data]);
-      Swal.fire({text: "Cobertura agregada con exito", icon: 'success'})
+      setFilteredCoverages([...coverages, data.data]);
+      Swal.fire({ text: "Cobertura agregada con éxito", icon: 'success' });
       setNewCoverage("");
     } catch (error) {
-      Swal.fire({text: "Error al agregar la cobertura", icon: 'error'})
+      Swal.fire({ text: "Error al agregar la cobertura", icon: 'error' });
     }
   };
 
@@ -101,17 +110,20 @@ function ListCoverage() {
       setCoverages((prevCoverages) =>
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
       );
+      setFilteredCoverages((prevCoverages) =>
+        prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
+      );
 
       closeModal();
-      Swal.fire({text: "Se ha editado correctamente", icon: 'success'})
+      Swal.fire({ text: "Se ha editado correctamente", icon: 'success' });
     } catch (error) {
-      Swal.fire({text: "Error al enviar la solicitud", icon: 'error'})
+      Swal.fire({ text: "Error al enviar la solicitud", icon: 'error' });
     }
   };
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás segura que desea elimina la obra social?',
+      title: '¿Estás segura que desea eliminar la obra social?',
       text: "¡No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
@@ -132,11 +144,37 @@ function ListCoverage() {
         setCoverages((prevCoverages) =>
           prevCoverages.filter((cov) => cov.id !== id)
         );
+        setFilteredCoverages((prevCoverages) =>
+          prevCoverages.filter((cov) => cov.id !== id)
+        );
 
-        Swal.fire({text:"La cobertura ha sido eliminada.", icon:"success"});
+        Swal.fire({ text: "La cobertura ha sido eliminada.", icon: "success" });
       } catch (error) {
-        Swal.fire({text: "Error al enviar la solicitud", icon: 'error'})
+        Swal.fire({ text: "Error al enviar la solicitud", icon: 'error' });
       }
+    }
+  };
+
+  const sortCoverages = () => {
+    const sortedCoverages = [...filteredCoverages].sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.coverages.localeCompare(b.coverages);
+      } else {
+        return b.coverages.localeCompare(a.coverages);
+      }
+    });
+    setFilteredCoverages(sortedCoverages);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
+  const filterCoverages = (searchTerm) => {
+    if (searchTerm === "") {
+      setFilteredCoverages(coverages);
+    } else {
+      const filtered = coverages.filter((coverage) =>
+        coverage.coverages.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredCoverages(filtered);
     }
   };
 
@@ -159,15 +197,30 @@ function ListCoverage() {
             Guardar
           </button>
         </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Buscar cobertura por nombre"
+            value={searchName}
+            onChange={handleSearchInputChange}
+          />
+          <button className="search">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </div>
         <table>
           <thead>
             <tr>
-              <th>Obra social</th>
+              <th>Obra social
+                <button onClick={sortCoverages}>
+                  <FontAwesomeIcon icon={faSort} />
+                </button>
+              </th>
               <th>Controles</th>
             </tr>
           </thead>
           <tbody>
-            {coverages.map((coverage) => (
+            {filteredCoverages.map((coverage) => (
               <tr key={coverage.id}>
                 <td>{coverage.coverages}</td>
                 <td>
@@ -175,13 +228,13 @@ function ListCoverage() {
                     className="edit-button"
                     onClick={() => openModal(coverage)}
                   >
-                    Edit
+                    <FontAwesomeIcon icon={faPenToSquare} />
                   </button>
                   <button
                     className="delete-button"
                     onClick={() => handleDelete(coverage.id)}
                   >
-                    Delete
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>
@@ -191,12 +244,12 @@ function ListCoverage() {
         <Modal
           isOpen={showModal}
           onRequestClose={closeModal}
-          contentLabel="Edit "
+          contentLabel="Editar"
           className="modal"
           overlayClassName="overlay"
         >
           <form onSubmit={handleEditCoverage}>
-            <label>Nombre de la cobertura:</label>
+            <label>Nombre de la nueva cobertura:</label>
             <input
               type="text"
               name="coverages"
