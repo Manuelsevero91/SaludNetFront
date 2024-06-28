@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import NavBar from "../Componentes/NavBar";
 import "../Styles/Informacion.css";
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort, faPenToSquare, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function ListSpeciality() {
   const [specialities, setSpecialities] = useState([]);
@@ -13,6 +15,8 @@ function ListSpeciality() {
     name: "",
   });
   const [newSpeciality, setNewSpeciality] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [filteredSpeciality, setFilteredSpeciality] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
@@ -21,6 +25,7 @@ function ListSpeciality() {
         const response = await fetch("http://localhost:3000/speciality");
         const result = await response.json();
         setSpecialities(result.data);
+        setFilteredSpeciality(result.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -31,6 +36,11 @@ function ListSpeciality() {
 
   const handleInputChange = (e) => {
     setNewSpeciality(e.target.value);
+  };
+
+  const handleSearchInputChange = (e) => {
+    setSearchName(e.target.value);
+    filterSpeciality(e.target.value);  // Corregido aquí
   };
 
   const handleAddSpeciality = async () => {
@@ -48,6 +58,7 @@ function ListSpeciality() {
       } else {
         const data = await response.json();
         setSpecialities([...specialities, data.data]);
+        setFilteredSpeciality([...specialities, data.data])
         Swal.fire({ text: "Especialidad agregada con éxito", icon: 'success' });
         setNewSpeciality("");
       }
@@ -98,6 +109,9 @@ function ListSpeciality() {
       setSpecialities((prevSpecialities) =>
         prevSpecialities.map((spe) => (spe.id === id ? data.data : spe))
       );
+      setFilteredSpeciality((prevSpecialities) =>
+        prevSpecialities.map((spe) => (spe.id === id ? data.data : spe))
+      );
 
       closeModal();
       Swal.fire({ text: "Se ha editado correctamente", icon: 'success' });
@@ -129,6 +143,9 @@ function ListSpeciality() {
         setSpecialities((prevSpecialities) =>
           prevSpecialities.filter((spe) => spe.id !== id)
         );
+        setFilteredSpeciality((prevSpecialities) =>
+          prevSpecialities.filter((spe) => spe.id !== id)
+        );
         Swal.fire({ text: "La especialidad ha sido eliminada.", icon: "success" });
       } catch (error) {
         Swal.fire({ text: "Error al enviar la solicitud", icon: 'error' });
@@ -146,6 +163,17 @@ function ListSpeciality() {
     });
     setSpecialities(sortedSpecialities);
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
+  const filterSpeciality = (searchTerm) => {
+    if (searchTerm === "") {
+      setFilteredSpeciality(specialities);
+    } else {
+      const filtered = specialities.filter((speciality) =>
+        speciality.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredSpeciality(filtered);
+    }
   };
 
   if (loading) {
@@ -167,6 +195,17 @@ function ListSpeciality() {
             Guardar
           </button>
         </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Buscar especialidad por nombre"
+            value={searchName}
+            onChange={handleSearchInputChange}
+          />
+          <button className="search">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </div>
         <table>
           <thead>
             <tr>
@@ -179,7 +218,7 @@ function ListSpeciality() {
             </tr>
           </thead>
           <tbody>
-            {specialities.map((speciality) => (
+            {filteredSpeciality.map((speciality) => (
               <tr key={speciality.id}>
                 <td>{speciality.name}</td>
                 <td>
@@ -221,3 +260,4 @@ function ListSpeciality() {
 }
 
 export default ListSpeciality;
+

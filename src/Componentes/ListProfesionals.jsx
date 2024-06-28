@@ -4,6 +4,8 @@ import "../Styles/ListProfesionals.css";
 import NavBar from '../Componentes/NavBar';
 import Swal from 'sweetalert2';
 import Spinner from "./Spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort, faPenToSquare, faTrash, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const ListProfesionals = () => {
   const [doctors, setDoctors] = useState([]);
@@ -332,13 +334,13 @@ if (loading) {
                           className="edit-button"
                           onClick={() => openModal(doctor)}
                         >
-                          Editar
+                         <FontAwesomeIcon icon={faPenToSquare} />
                         </button>
                         <button
                           className="delete-button"
                           onClick={() => handleDelete(doctor.id)}
                         >
-                          Eliminar
+                          <FontAwesomeIcon icon={faTrash} />
                         </button>
                         <button
                           className="add-button"
