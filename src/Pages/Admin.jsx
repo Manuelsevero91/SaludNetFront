@@ -82,16 +82,17 @@ const Admin = () => {
 
         <AdminSection
           imageSrc="https://bancosdeimagenes.com/wp-content/uploads/2019/03/Getty-Medical-Category-768x443-1.jpg"
-          title="CONFIRMAR TURNOS"
+          title="ADMINISTRAR TURNOS"
           options={[
             {
-              label: "Confirmar turnos reservados",
+              label: "Consultar/Eliminar turnos reservados",
+              //acá hay que poner la ruta de shiff,
               link: "/confirmar turnos reservados",
             },
-            { label: "Enviar confirmación", link: "/enviar confirmacion" },
+            // { label: "Enviar confirmación", link: "/enviar confirmacion" },
             {
-              label: "Eliminar turnos confirmados",
-              link: "/eliminar turnos confirmados",
+              label: "Reservar turno",
+              link: "/Turnos",
             },
           ]}
         />
@@ -107,7 +108,7 @@ const Admin = () => {
               label: "Turnos del mes por médico",
               link: "/turnos del mes por medico",
             },
-            { label: "Solicitar turno como paciente", link: "/turnos" },
+            // { label: "Solicitar turno como paciente", link: "/turnos" },
           ]}
         />
       </div>

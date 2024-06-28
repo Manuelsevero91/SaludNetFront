@@ -94,49 +94,54 @@ function FormProfesionals() {
         </div>
       <div className="formContainer">      
 
-        <form className="createForm-Profesionals" onSubmit={handleSubmit}>
+        <form className="createForm" onSubmit={handleSubmit}>
           <div className="input-container">
-            <label>Nombre y Apellido:</label>
+         
             <input
               type="text"
               name="fullName"
               value={form.fullName}
               onChange={handleChange}
+              placeholder="NOMBRE Y Apellido"
             />
           </div>
           <div className="input-container">
-            <label>Correo Electrónico:</label>
+         
             <input              
               type="email"
               name="mail"
               value={form.mail}
               onChange={handleChange}
+               placeholder="MAIL"
             />
           </div>
           <div className="input-container" >
-            <label>Número de Teléfono:</label>
+        
             <input              
               type="tel"
               name="phone"
               value={form.phone}
               onChange={handleChange}
+               placeholder="CELULAR"
             />
           </div>
           <div className="input-container" >
-            <label>Licencia:</label>
+        
             <input              
               type="text"
               name="license"
               value={form.license}
               onChange={handleChange}
+                placeholder="Matrícula"
             />
           </div>
           <div className="input-container">
-            <label>Especialidad:</label>
+         
             <select
               name="speciality"
               value={form.speciality}
               onChange={handleChange}
+                placeholder="Especialidad"
             >
               <option value="">Seleccione una especialidad</option>
               {specialities.map((speciality) => (

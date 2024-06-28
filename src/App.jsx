@@ -5,7 +5,7 @@ import "./Styles/Form.css";
 import "./Styles/Login.css";
 import "./Styles/ListProfesionals.css";
 import "./Styles/Profesionales.css";
-import "./Styles/Shiff.css";
+
 import "./Styles/CreateSchedule.css";
 import "./Styles/SharedStyles/Btn.css";
 import "./Styles/SharedStyles/BarraSuperior.css";
@@ -35,7 +35,7 @@ import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
 import Coverage from "./Componentes/Coverage";
-
+import VerTurnos from "./Componentes/VerTurnos";
 
 
 function App() {
@@ -56,6 +56,7 @@ function App() {
             <Route path="/Agenda" element={<CreateSchedule />} />
             <Route path="/EditarTurnos" element={<EditShifts />} />
             <Route path="/Coverage" element={<Coverage />} />
+            <Route path="/VerTurnos" element={<VerTurnos />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
