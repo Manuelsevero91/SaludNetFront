@@ -12,10 +12,12 @@ const ShiffList = () => {
     const fetchShiffs = async () => {
       try {
         const response = await fetch('http://localhost:3000/shiff');
+
         if (!response.ok) {
           throw new Error(`Error fetching shiffs: ${response.status}`);
         }
         const result = await response.json();
+        console.log(result.data)
         setShiffs(result.data);
         setLoading(false);
       } catch (error) {
@@ -62,6 +64,7 @@ const ShiffList = () => {
       });
       setShiffs((prevShiffs) => prevShiffs.filter((shiff) => !selectedShiffs.includes(shiff.id)));
       setSelectedShiffs([]);
+      console.log(setShiffs)
       Swal.fire({ text: 'Turnos eliminados con éxito', icon: 'success' });
     } catch (error) {
       Swal.fire({ text: 'Hubo un error al eliminar los turnos', icon: 'error' });
@@ -72,6 +75,7 @@ const ShiffList = () => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const date = new Date(dateString);
     return date.toLocaleDateString('es-ES', options);
+    
   };
 
   return (

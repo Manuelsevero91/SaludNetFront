@@ -22,6 +22,7 @@ const ShowShiffs = () => {
         // Ordenar los turnos por día
         const sortedShiffs = result.data.sort((a, b) => new Date(a.Schedules.day) - new Date(b.Schedules.day));
         setShiffs(sortedShiffs);
+        console.log(sortedShiffs)
         setLoading(false);
       } catch (error) {
         setLoading(false);
