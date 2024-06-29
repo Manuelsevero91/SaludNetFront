@@ -57,11 +57,12 @@ const Admin = () => {
           imageSrc="https://media.istockphoto.com/id/872676342/es/foto/concepto-de-tecnolog%C3%ADa-m%C3%A9dica-registro-m%C3%A9dico-electr%C3%B3nico.jpg?s=612x612&w=0&k=20&c=_Zg00u1zKtFAeH2EiNaA8htvx8yDFsq568pMl3wpyC0="
           title="ADMINISTRAR PROFESIONALES"
           options={[
-            { label: "Agregar Profesional", link: "/FormProfesionales" },
+            { label: "Agregar Profesional", link: "/AgregarProfesional" },
             {
               label: "Modificar/Eliminar Profesional",
-              link: "/ListProfesionales",
+              link: "/EditarProfesional",
             },
+            { label: "Obras Sociales", link: "/ObrasSociales" },
           ]}
         />
 
@@ -75,7 +76,7 @@ const Admin = () => {
             },
             {
               label: "Actualizar/Eliminar turnos disponibles",
-              link: "/EditarTurnos",
+              link: "/",
             },
           ]}
         />
@@ -85,9 +86,9 @@ const Admin = () => {
           title="ADMINISTRAR TURNOS"
           options={[
             {
-              label: "Consultar/Eliminar turnos reservados",
+              label: "Eliminar turnos reservados",
               //acá hay que poner la ruta de shiff,
-              link: "/confirmar turnos reservados",
+              link: "/EliminarTurnos",
             },
             // { label: "Enviar confirmación", link: "/enviar confirmacion" },
             {
@@ -101,14 +102,10 @@ const Admin = () => {
           title="REPORTES"
           options={[
             {
-              label: "Todos los turnos de hoy",
-              link: "/todos los turnos de hoy",
-            },
-            {
-              label: "Turnos del mes por médico",
-              link: "/turnos del mes por medico",
-            },
-            // { label: "Solicitar turno como paciente", link: "/turnos" },
+              label: "Listado de turnos por medico",
+              link: "/VerTurnos",
+            }
+            
           ]}
         />
       </div>

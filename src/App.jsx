@@ -51,11 +51,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/Admin" element={<Admin />} />
-            <Route path="/FormProfesionales" element={<FormProfesionals />} />
-            <Route path="/ListProfesionales" element={<ListProfesionals />} />
+            <Route path="/AgregarProfesional" element={<FormProfesionals />} />
+            <Route path="/EditarProfesional" element={<ListProfesionals />} />
             <Route path="/Agenda" element={<CreateSchedule />} />
-            <Route path="/EditarTurnos" element={<EditShifts />} />
-            <Route path="/Coverage" element={<Coverage />} />
+            <Route path="/EliminarTurnos" element={<EditShifts />} />
+            <Route path="/ObrasSociales" element={<Coverage />} />
             <Route path="/VerTurnos" element={<VerTurnos />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
