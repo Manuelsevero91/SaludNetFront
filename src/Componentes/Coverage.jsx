@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import NavBar from "../Componentes/NavBar";
-// import "../Styles/Coverage.css";
+
 function ListCoverage() {
   const [coverages, setCoverages] = useState([]);
   const [loading, setLoading] = useState(true);
