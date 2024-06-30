@@ -42,7 +42,11 @@ const EditShiffs = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching data:", error);
+        Swal.fire({
+        text: "No se pudo traer la lista de turnos",
+        icon: "warning",
+      });
+
       }
     };
     fetchData();
@@ -71,7 +75,7 @@ const EditShiffs = () => {
           setShiffs((prevShiff) =>
             prevShiff.filter((shiff) => shiff.id !== id)
           );
-          Swal.fire("Eliminado", "El Turno ha sido eliminado", "success");
+          Swal.update("El Turno ha sido eliminado", "success");
         }
       } catch {
         Swal.fire(
