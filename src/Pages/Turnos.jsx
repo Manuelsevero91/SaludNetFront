@@ -19,63 +19,86 @@ const Turnos = () => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/doctors");
-        if (!response.ok) {
-          throw new Error(`Error fetching doctors: ${response.status}`);
-        }
-        const result = await response.json();
-        setDoctors(result.data);
-        setTimeout(() => {
-          setLoadingDoctors(false);
-        }, 2000);
-      } catch (error) {
-        setLoadingDoctors(false);
+  const fetchDoctors = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/doctors");
+      if (!response.ok) {
+        throw new Error(`Error al traer doctores: ${response.status}`);
       }
-    };
+      const result = await response.json();
+      setDoctors(result.data);
+      setTimeout(() => {
+        setLoadingDoctors(false);
+      }, 2000);
+    } catch (error) {
+      setLoadingDoctors(false);
+    }
+  };
+
+  const fetchSchedules = async () => {
+    if (doctorId) {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/schedules/by-doctor/${doctorId}`
+        );
+        if (!response.ok) {
+          throw new Error(`Error al traer agenda: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (data.data.length === 0) {
+          Swal.fire({
+            text: "El doctor no tiene turnos disponibles",
+            icon: "warning",
+          });
+        } else {
+          setSchedules(data.data);
+        }
+      } catch (error) {
+        Swal.fire({
+          text: "El Profesional no tiene turnos disponibles",
+          icon: "error",
+        });
+      }
+    } else {
+      setSchedules([]);
+    }
+  };
+
+  useEffect(() => {
     fetchDoctors();
   }, []);
 
   useEffect(() => {
-    const fetchSchedules = async () => {
-      if (doctorId) {
-        try {
-          const response = await fetch(`http://localhost:3000/schedules/by-doctor/${doctorId}`);
-          if (!response.ok) {
-            throw new Error(`Error fetching schedules: ${response.status}`);
-          }
-          const data = await response.json();
-  
-          if (data.data.length === 0) {
-            Swal.fire({
-              text: "El doctor no tiene turnos disponibles",
-              icon: "warning",
-            });
-          } else {
-            setSchedules(data.data);
-          }
-          
-        } catch (error) {
-          Swal.fire({
-            text: "El Profesional no tiene turnos disponibles",
-            icon: "error",
-          });
-        }
-      } else {
-        setSchedules([]);
-      }
-    };
-  
     fetchSchedules();
   }, [doctorId]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setPatientData({
-      ...patientData,
-      [name]: value,
-    });
+    let isValid = true;
+
+    switch (name) {
+      case "phone":
+        isValid = /^[1-9]\d{0,9}$/.test(value);
+        break;
+      case "dni":
+        isValid = /^\d{0,8}$/.test(value);
+        break;
+      case "fullName":
+        isValid = value.length <= 25;
+        break;
+      case "address":
+        isValid = value.length <= 25;
+        break;
+      default:
+        break;
+    }
+    if (isValid || value === "") {
+      setPatientData({
+        ...patientData,
+        [name]: value,
+      });
+    }
   };
 
   const handleDoctorChange = (e) => {
@@ -88,22 +111,45 @@ const Turnos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (patientData.dni.length < 7 || patientData.dni.length > 8) {
+      Swal.fire({ text: "El DNI debe tener 7 u 8 dígitos", icon: "error" });
+      return;
+    }
+
+    if (patientData.phone.length !== 10) {
+      Swal.fire({ text: "El teléfono debe tener 10 dígitos", icon: "error" });
+      return;
+    }
 
     try {
-      const patientResponse = await fetch("http://localhost:3000/patients", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(patientData),
-      });
-
-      if (!patientResponse.ok) {
-        throw new Error("Error creating patient");
+      const existingPatientResponse = await fetch(
+        `http://localhost:3000/patients?dni=${patientData.dni}`
+      );
+      if (!existingPatientResponse.ok) {
+        throw new Error("Error verificando la existencia del paciente");
       }
 
-      const patientResult = await patientResponse.json();
-      const patientId = patientResult.data.id;
+      const existingPatientResult = await existingPatientResponse.json();
+      let patientId;
+
+      if (existingPatientResult.data.length > 0) {
+        patientId = existingPatientResult.data[0].id;
+      } else {
+        const patientResponse = await fetch("http://localhost:3000/patients", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(patientData),
+        });
+
+        if (!patientResponse.ok) {
+          throw new Error("Error al crear el paciente");
+        }
+
+        const patientResult = await patientResponse.json();
+        patientId = patientResult.data.id;
+      }
 
       const shiffResponse = await fetch("http://localhost:3000/shiff", {
         method: "POST",
@@ -117,23 +163,38 @@ const Turnos = () => {
       });
 
       if (!shiffResponse.ok) {
-        throw new Error("Error creando el turno");
+        throw new Error(await shiffResponse.text());
       }
-      Swal.fire({ text: "Turno reservado con éxito", icon: "success" });
-      setPatientData({
-        fullName: "",
-        dni: "",
-        mail: "",
-        phone: "",
-        address: "",
-        birthday: "",
-      });
-      setDoctorId(null);
-      setScheduleId(null);
-      setSchedules([]);
-      setDoctors([]);
+      Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
+        () => {
+          setPatientData({
+            fullName: "",
+            dni: "",
+            mail: "",
+            phone: "",
+            address: "",
+            birthday: "",
+          });
+          setDoctorId(null);
+          setScheduleId(null);
+          setSchedules([]);
+          fetchDoctors();
+          fetchSchedules() 
+        }
+      );
     } catch (error) {
-      Swal.fire({ text: "Hubo un error al reservar el turno", icon: "error" });
+      if (error.message.includes("El paciente con DNI")) {
+        const errorMessage = JSON.parse(error.message); 
+        Swal.fire({
+          text: `${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          text: error.message || "Hubo un error al reservar el turno",
+          icon: "error",
+        });
+      }
     }
   };
 
@@ -153,7 +214,7 @@ const Turnos = () => {
             name="fullName"
             value={patientData.fullName}
             onChange={handleInputChange}
-            placeholder="NOMBRE Y Apellido"
+            placeholder="Nombre Y Apellido"
             required
           />
           <input
@@ -161,7 +222,7 @@ const Turnos = () => {
             name="dni"
             value={patientData.dni}
             onChange={handleInputChange}
-            placeholder="DNI"
+            placeholder="DNI (sin puntos)"
             required
           />
           <input
@@ -177,7 +238,7 @@ const Turnos = () => {
             name="phone"
             value={patientData.phone}
             onChange={handleInputChange}
-            placeholder="CELULAR"
+            placeholder="CELULAR (Sin el '0' ni '-')"
             required
           />
           <input
@@ -193,7 +254,7 @@ const Turnos = () => {
             name="birthday"
             value={patientData.birthday}
             onChange={handleInputChange}
-            placeholder="FECHA DE NACIMIENTO: AAAA-MM-DD"
+            placeholder="FECHA DE NACIMIENTO (AAAA-MM-DD)"
             required
           />
           <select onChange={handleDoctorChange} required>
