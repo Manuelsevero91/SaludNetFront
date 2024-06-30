@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import NavBar from './NavBar';
-
+import Swal from "sweetalert2";
 
 const CreateSchedule = () => {
-  const [currentDoctorId, setCurrentDoctorId] = useState('');
+  const [currentDoctorId, setCurrentDoctorId] = useState(0);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [interval, setInterval] = useState(30);
@@ -56,22 +56,25 @@ const CreateSchedule = () => {
 
     try {
       const responses = await Promise.all(requests);
-      const successfulResponses = responses.filter(res => res.status === 201);
+      const successfulResponses = responses.filter(res => {res.status === 201});
       if (successfulResponses.length > 0) {
-        setSuccess(`Se han creado ${successfulResponses.length} horarios exitosamente`);
-      } else {
-        setError('No se pudo crear ningún horario');
-      }
-    } catch (err) {
-      setError('Hubo un error al crear los horarios');
-    }
+
+    
+        Swal.fire("Creado", `Se han creado ${successfulResponses.length} horarios exitosamente`, "success");
+ }
+    } catch { 
+      Swal.fire(
+      "Error!",
+      "Hubo un error al crear los horarios",
+      "error"
+    );
   };
 
 
   const isDateSelected = (date) => {
     return selectedDates.find((d) => d.toISOString().split("T")[0] === date.toISOString().split("T")[0]);
   };
-
+};
 
   return (
     <>
