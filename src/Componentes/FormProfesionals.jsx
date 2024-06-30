@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Componentes/NavBar";
-
+import Swal from "sweetalert2";
 function FormProfesionals() {
   const [form, setForm] = useState({
     fullName: "",
@@ -58,7 +58,7 @@ function FormProfesionals() {
       });
 
       if (response.ok) {
-        setSuccess("Registro exitoso");
+        Swal.fire("El profesional ha sido agregado con éxito", "success");
         setError("");
         setForm({
           fullName: "",
@@ -69,11 +69,19 @@ function FormProfesionals() {
         });
       } else {
         const errorData = await response.json();
-        setError(`Error en el registro`);
+        Swal.fire(
+          "Error!",
+          "Hubo un error al registrar al profesional",
+          "error"
+        );
         setSuccess("");
       }
     } catch (error) {
-      setError(`Error al enviar la solicitud`);
+      Swal.fire(
+        "Error!",
+        "Hubo un error al registrar al profesional",
+        "error"
+      );
       setSuccess("");
     }
   };

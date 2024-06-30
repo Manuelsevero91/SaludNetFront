@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 30.8rem;
+  height:30.85rem;
   padding-top: .3rem;
   padding-bottom: .3rem;
 }
@@ -21,8 +21,7 @@
   height: auto;
   width: auto;
   border-radius: 10px;
-  padding: 1.5rem;
-  row-gap: .5rem;
+  padding: .5rem;
 }
 
 .input-container { 
@@ -30,7 +29,5 @@
   flex-direction: column;
   width: auto;
   height: auto;
- padding: 1.5rem;
- 
-
+ padding: 1rem;
 }
