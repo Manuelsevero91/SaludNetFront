@@ -1,143 +1,131 @@
-import React, { useState, useEffect } from 'react';
-import Spinner from '../Componentes/Spinner';
-import Swal from 'sweetalert2';
-import NavBar from '../Componentes/NavBar';
+import React, { useState, useEffect } from "react";
+import Spinner from "../Componentes/Spinner";
+import Swal from "sweetalert2";
+import NavBar from "../Componentes/NavBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ShiffList = () => {
+const EditShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedShiffs, setSelectedShiffs] = useState([]);
 
   useEffect(() => {
-    const fetchShiffs = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/shiff');
+        const [shiffRes, patientRes, doctorRes] = await Promise.all([
+          fetch("http://localhost:3000/shiff"),
+          fetch("http://localhost:3000/patients"),
+          fetch("http://localhost:3000/doctors"),
+        ]);
 
-        if (!response.ok) {
-          throw new Error(`Error fetching shiffs: ${response.status}`);
-        }
-        const result = await response.json();
-        console.log(result.data)
-        setShiffs(result.data);
+        const [shiffData, patientData, doctorData] = await Promise.all([
+          shiffRes.json(),
+          patientRes.json(),
+          doctorRes.json(),
+        ]);
+
+        const combinedData = shiffData.data.map((shiff) => {
+          const patient = patientData.data.find(
+            (p) => p.id === shiff.Patient.id
+          );
+          const doctor = doctorData.data.find(
+            (d) => d.id === shiff.Schedules.idDoctor
+          );
+          return {
+            ...shiff,
+            patient: patient,
+            doctor: doctor,
+          };
+        });
+
+        setShiffs(combinedData);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        Swal.fire({ text: 'Hubo un error al traer los turnos', icon: 'error' });
+        console.error("Error fetching data:", error);
       }
     };
-    fetchShiffs();
+    fetchData();
   }, []);
 
-  const handleSelectShiff = (id) => {
-    setSelectedShiffs((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((shiffId) => shiffId !== id)
-        : [...prevSelected, id]
-    );
-  };
-
-  const handleConfirmShiffs = async () => {
-    try {
-      await Promise.all(selectedShiffs.map(async (id) => {
-        await fetch(`http://localhost:3000/shiff/confirm/${id}`, {
-          method: 'PUT',
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
+      text: "No podrás revertir esto",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, deseo eliminarlo",
+      cancelButtonText: "Cancelar",
+    });
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://localhost:3000/shiff/${id}`, {
+          method: "DELETE",
         });
-      }));
-      Swal.fire({ text: 'Turnos confirmados', icon: 'success' });
-    } catch (error) {
-      Swal.fire({ text: 'Hubo un error al confirmar los turnos', icon: 'error' });
+        if (!response.ok) {
+          throw new Error(`Error Deleting shiff: ${response.status}`);
+        } else {
+          await response.json();
+          setShiffs((prevShiff) =>
+            prevShiff.filter((shiff) => shiff.id !== id)
+          );
+          Swal.fire("Eliminado", "El Turno ha sido eliminado", "success");
+        }
+      } catch {
+        Swal.fire(
+          "Error!",
+          "Hubo un error al intentar eliminar el turno",
+          "error"
+        );
+      }
     }
-  };
-
-  const handleDeleteShiffs = async (id) => {
-    try {
-      const shiff = shiffs.find((shiff) => shiff.id === id);
-      await fetch(`http://localhost:3000/shiff/${id}`, {
-        method: 'DELETE',
-      });
-      await fetch(`http://localhost:3000/schedules/${shiff.Schedules.idSchedule}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ available: true }),
-      });
-      setShiffs((prevShiffs) => prevShiffs.filter((shiff) => !selectedShiffs.includes(shiff.id)));
-      setSelectedShiffs([]);
-      console.log(setShiffs)
-      Swal.fire({ text: 'Turnos eliminados con éxito', icon: 'success' });
-    } catch (error) {
-      Swal.fire({ text: 'Hubo un error al eliminar los turnos', icon: 'error' });
-    }
-  };
-
-  const formatDate = (dateString) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', options);
-    
   };
 
   return (
     <>
+      <Spinner loading={loading} />
       <NavBar showLinks={true} />
       <div className="barra-superior">
-        <h2 className="titulo-section">Lista de turnos reservados</h2>
+        <h2 className="titulo-section">Eliminar turnos</h2>
       </div>
-
-      <Spinner loading={loading} />
-
-      {!loading && (
-        <div >
-          {shiffs.length > 0 ? (
-            <>
-               <div className="tableContainer">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Día</th>
-                    <th>Hora</th>
-                    <th>Doctor</th>
-                    <th>Paciente</th>
-                    <th>Seleccionar</th>                    
+      <div>
+        <>
+          <div className="tableContainer">
+            <table className="Table">
+              <thead>
+                <tr>
+                  <th>Doctor</th>
+                  <th>Paciente</th>
+                  <th>Telefono Paciente</th>
+                  <th>Fecha Turno</th>
+                  <th>Horario Turno</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shiffs.map((shiff) => (
+                  <tr key={shiff.id}>
+                    <td>{shiff.Schedules.doctorFullName}</td>
+                    <td>{shiff.patient.fullName}</td>
+                    <td>{shiff.patient.phone}</td>
+                    <td>{shiff.Schedules.day}</td>
+                    <td>{shiff.Schedules.start_Time}</td>
+                    <td>
+                    <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
+                          <FontAwesomeIcon icon={faTrash} /> 
+                        </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {shiffs.map((shiff) => (
-                    <tr key={shiff.id}>
-                      <td>{formatDate(shiff.Schedules?.day) || 'N/A'}</td>
-                      <td>{shiff.Schedules?.start_Time || 'N/A'}</td>
-                      <td>{shiff.Schedules?.idDoctors?.fullName || 'N/A'}</td>
-                      <td>{shiff.Patient?.fullName || 'N/A'}</td>
-                      <td>
-                        <input
-                          type="checkbox"
-                          checked={selectedShiffs.includes(shiff.id)}
-                          onChange={() => handleSelectShiff(shiff.id)}
-                        />
-                      </td>
-                      
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="buttonContainer">
-                <button className="btn" onClick={handleConfirmShiffs}>Confirmar Seleccionados</button>
-                <button className="btn" onClick={handleDeleteShiffs}>Eliminar Seleccionados</button>
-              </div>
-              </div>
-            </>
-          ) : (
-            <p>No hay turnos reservados.</p>
-          )}
-        </div>
-      )}
-      
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      </div>
     </>
   );
 };
 
-export default ShiffList;
-
-
-
+export default EditShiffs;

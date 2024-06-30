@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import NavBar from "../Componentes/NavBar";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import Modal from "react-modal";
 
 function ListCoverage() {
   const [coverages, setCoverages] = useState([]);
@@ -11,8 +15,7 @@ function ListCoverage() {
     coverages: "",
   });
   const [newCoverage, setNewCoverage] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  
   useEffect(() => {
     const fetchCoverage = async () => {
       try {
@@ -21,15 +24,21 @@ function ListCoverage() {
         setCoverages(result.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching coverages:", error);
+        Swal.fire(
+        "Error!",
+        "Hubo un error al traer la lista de obras sociales",
+        "error"
+      );
         setLoading(false);
       }
     };
     fetchCoverage();
   }, []);
+
   const handleInputChange = (e) => {
     setNewCoverage(e.target.value);
   };
+
   const handleAddCoverage = async () => {
     try {
       const response = await fetch("http://localhost:3000/coverage", {
@@ -41,20 +50,25 @@ function ListCoverage() {
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Something went wrong");
+        throw new Error(errorData.message || "Algo salió mal");
       }
       const data = await response.json();
       setCoverages([...coverages, data.data]);
-      setSuccess("Cobertura agregada exitosamente");
-      setError("");
-      setNewCoverage("");
-    } catch (error) {
+      Swal.fire({ text: "Obra social agregada con éxito", icon: "success" });
+
      
-      setError("Error al agregar la cobertura: " + error.message);
-      setSuccess("");
+      setNewCoverage("");
+    } catch (error){
+      Swal.fire(
+        "Error!",
+        "Hubo un error al intentar eliminar la obra social",
+        "error"
+      );
+    
     }
   };
   const openModal = (coverage) => {
+    console.log("Opening modal for coverage:", coverage); 
     setEditData(coverage || { id: "", coverages: "" });
     setShowModal(true);
   };
@@ -85,121 +99,144 @@ function ListCoverage() {
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Something went wrong");
+        throw new Error(errorData.message || "Algo salió mal");
       }
       const data = await response.json();
+      console.log("Response data:", data); 
+
       setCoverages((prevCoverages) =>
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
       );
       closeModal();
-      setSuccess("Registro exitoso");
-      setError("");
+      console.error("Error updating coverage:", error); 
+      Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" })
+     .then(()=> {
+      window.location.reload();
+     });
     } catch (error) {
-      console.error("Error updating coverage:", error);
-      setError("Error al enviar la solicitud: " + error.message);
-      setSuccess("");
+      Swal.fire({
+        text: "La obra social no pudo ser actualizada",
+        icon: "warning",
+      });
+
+    
     }
   };
   const handleDelete = async (id) => {
+    const result = await Swal.fire({    
+      html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
+     
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, deseo eliminarlo",
+      cancelButtonText: "Cancelar",
+    });
+    if (result.isConfirmed) {
     try {
       const response = await fetch(`http://localhost:3000/coverage/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Something went wrong");
+        throw new Error(errorData.message || "Algo salió mal");
       }
       setCoverages((prevCoverages) =>
         prevCoverages.filter((cov) => cov.id !== id)
       );
-      setSuccess("Eliminación exitosa");
-      setError("");
+      Swal.fire({ text: "Obra social eliminada con éxito", icon: "succes" });
+      
     } catch (error) {
-      console.error("Error deleting coverage:", error);
-      setError("Error al enviar la solicitud de eliminación: " + error.message);
-      setSuccess("");
+      Swal.fire({
+        text: "No es posible eliminar la obra social",
+        icon: "error",
+      });
+    
     }
-  };
+  }
+};
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <>
-    <NavBar showLinks={true} />        
-        <div className="barra-superior">
-          <h2 className="titulo-section">Administrar agenda: Seleccionar Obras Sociales</h2>
-        </div>
-        <div className="list">  
-    <div>
-    {error && <div className="error-message" >{error}</div>}
-    {success && <div className="succes-message">{success}</div>}
-     
-      <div className="create">
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Nombre de la cobertura"
-            value={newCoverage}
-            onChange={handleInputChange}
-          />
-          <button className="btn" onClick={handleAddCoverage}>
-            Guardar
-          </button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Obra social</th>
-              <th>Controles</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coverages.map((coverage) => (
-              <tr key={coverage.id}>
-                <td>{coverage.coverages}</td>
-                <td>
-                  <button
-                    className="edit-button"
-                    onClick={() => openModal(coverage)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => handleDelete(coverage.id)}
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Modal
-          isOpen={showModal}
-          onRequestClose={closeModal}
-          contentLabel="Edit "
-          className="modal"
-          overlayClassName="overlay"
-        >
-          <form onSubmit={handleEditCoverage}>
-            <label>Nombre de la cobertura:</label>
+      <NavBar showLinks={true} />
+      <div className="barra-superior">
+        <h2 className="titulo-section">
+          Administrar obras sociales
+        </h2>
+      </div>
+
+      <div>
+        <div className="create">
+          <div className="search-bar">
             <input
               type="text"
-              name="coverages"
-              value={editData.coverages}
-              onChange={handleChange}
+              placeholder="Nombre de la cobertura"
+              value={newCoverage}
+              onChange={handleInputChange}
             />
-            <button type="submit">Guardar</button>
-            <button type="button" onClick={closeModal}>
-              Cancelar
+            <button className="btn" onClick={handleAddCoverage}>
+              Guardar
             </button>
-          </form>
-        </Modal>
+          </div>
+          <div className="tableContainer">
+            <table>
+              <thead>
+                <tr>
+                  <th>Obra social</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {coverages.map((coverage) => (
+                  <tr key={coverage.id}>
+                    <td>{coverage.coverages}</td>
+                    <td>
+                      <button
+                        className="edit-button"
+                        onClick={() => openModal(coverage.id)}
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      
+                      </button>
+
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(coverage.id)}
+                      >
+                         <FontAwesomeIcon icon={faTrash} />
+                        
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+       
+          <Modal
+            className="formContainerModal"
+            isOpen={showModal}
+            onRequestClose={closeModal}
+            contentLabel="Editar obra social"
+          >
+             <h3>Editar Obra Social</h3>
+            <form onSubmit={handleEditCoverage}>
+              <input
+                type="text"
+                name="coverages"
+                value={editData.coverages}
+                onChange={handleChange}
+              />
+              <button className="edit-button"  type="submit">Guardar cambios</button>
+            </form>
+          </Modal>
+        </div>
       </div>
-    </div>
-    </div>
     </>
   );
 }
 export default ListCoverage;
+
