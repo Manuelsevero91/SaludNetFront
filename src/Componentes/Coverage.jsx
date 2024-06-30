@@ -68,7 +68,7 @@ function ListCoverage() {
     }
   };
   const openModal = (coverage) => {
-    console.log("Opening modal for coverage:", coverage); 
+
     setEditData(coverage || { id: "", coverages: "" });
     setShowModal(true);
   };

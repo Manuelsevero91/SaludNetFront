@@ -1,5 +1,5 @@
 .edit-button,
-.delete-button {
+.delete-button, .add-button {
   color: white;
   padding: 0.5rem;
   font-size: medium;
@@ -15,4 +15,7 @@
 }
 .delete-button {
   background-color: #d8763d;
+}
+.add-button {
+  background-color: rgb(149, 26, 231);
 }

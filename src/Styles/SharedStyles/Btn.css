@@ -12,3 +12,11 @@
 .btn:hover{
   transform: scale(1.05); 
 }
+.btn-container{
+  margin-top: 1rem;
+ gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Componentes/NavBar";
+import Swal from "sweetalert2";
 
 function FormProfesionals() {
   const [form, setForm] = useState({
@@ -26,9 +27,10 @@ function FormProfesionals() {
 
         setSpecialities(responseData.data);
       } catch (error) {
-        throw new Error(
-          "Error al obtener las especialidades: " + error.message
-        );
+        Swal.fire({
+          text: "No se pudo obtener la lista de especialidades",
+          icon: "error",
+        });
       }
     };
 
@@ -58,7 +60,7 @@ function FormProfesionals() {
       });
 
       if (response.ok) {
-        setSuccess("Registro exitoso");
+        Swal.fire({ html: "<span class='custom-swal-title'>El profesional ha sido agregado</span>"},"success");
         setError("");
         setForm({
           fullName: "",
@@ -69,11 +71,17 @@ function FormProfesionals() {
         });
       } else {
         const errorData = await response.json();
-        setError(`Error en el registro`);
+        Swal.fire({
+          text: "Error en el registro del profesional",
+          icon: "error",
+        });
         setSuccess("");
       }
     } catch (error) {
-      setError(`Error al enviar la solicitud`);
+      Swal.fire({
+        text: "Error en el registro del profesional",
+        icon: "error",
+      });
       setSuccess("");
     }
   };
@@ -87,16 +95,13 @@ function FormProfesionals() {
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: registrar</h2>
-      
-      {error && <div className="error-message" >{error}</div>}
-        {success && <div className="succes-message">{success}</div>}
-      
-        </div>
-      <div className="formContainer">      
 
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="succes-message">{success}</div>}
+      </div>
+      <div className="formContainer">
         <form className="createForm" onSubmit={handleSubmit}>
           <div className="input-container">
-         
             <input
               type="text"
               name="fullName"
@@ -106,42 +111,38 @@ function FormProfesionals() {
             />
           </div>
           <div className="input-container">
-         
-            <input              
+            <input
               type="email"
               name="mail"
               value={form.mail}
               onChange={handleChange}
-               placeholder="MAIL"
+              placeholder="MAIL"
             />
           </div>
-          <div className="input-container" >
-        
-            <input              
+          <div className="input-container">
+            <input
               type="tel"
               name="phone"
               value={form.phone}
               onChange={handleChange}
-               placeholder="CELULAR"
+              placeholder="CELULAR"
             />
           </div>
-          <div className="input-container" >
-        
-            <input              
+          <div className="input-container">
+            <input
               type="text"
               name="license"
               value={form.license}
               onChange={handleChange}
-                placeholder="Matrícula"
+              placeholder="Matrícula"
             />
           </div>
           <div className="input-container">
-         
             <select
               name="speciality"
               value={form.speciality}
               onChange={handleChange}
-                placeholder="Especialidad"
+              placeholder="Especialidad"
             >
               <option value="">Seleccione una especialidad</option>
               {specialities.map((speciality) => (
@@ -155,8 +156,6 @@ function FormProfesionals() {
           <button className="btn" type="submit">
             Enviar
           </button>
-          
-
         </form>
       </div>
     </>

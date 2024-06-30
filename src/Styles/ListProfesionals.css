@@ -46,10 +46,15 @@ table tr.deleted-doctor {
     height: 70%;
     width: 80%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;   
   } 
   
+  .checkCoverages{
+    display: block;
+  flex-direction: column;
   
+  }
   
   

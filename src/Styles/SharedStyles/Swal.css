@@ -1,13 +1,12 @@
 .custom-swal-title {
-    font-size: 1.5em; 
-    font-weight: bold;
-    color: #333; 
+    font-size: 1.2em; 
+    font-weight:lighter  ;
+    color: #423d3d; 
    
   }
   
   .trash-icon{
     color: red;
-    width: 1rem;
-   
+    width: 1rem;   
     height: auto;
   }
