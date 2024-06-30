@@ -60,7 +60,9 @@ function FormProfesionals() {
       });
 
       if (response.ok) {
+
         Swal.fire({ html: "<span class='custom-swal-title'>El profesional ha sido agregado</span>"},"success");
+
         setError("");
         setForm({
           fullName: "",
@@ -71,6 +73,7 @@ function FormProfesionals() {
         });
       } else {
         const errorData = await response.json();
+
         Swal.fire({
           text: "Error en el registro del profesional",
           icon: "error",
@@ -82,6 +85,8 @@ function FormProfesionals() {
         text: "Error en el registro del profesional",
         icon: "error",
       });
+
+       
       setSuccess("");
     }
   };

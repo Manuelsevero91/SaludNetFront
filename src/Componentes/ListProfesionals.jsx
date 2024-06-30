@@ -411,11 +411,13 @@ const filteredDoctors = doctors.filter((doctor) => {
         </form>
       </Modal>
       <Modal className="formContainerModal" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
+
   <h2>Agregar obras sociales al profesional</h2>
   <form className="createForm" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
     {coverages.map((coverage) => (
       <div  key={coverage.id}>
        <div className="checkCoverages">
+
         <label>
           <input
             type="checkbox"
@@ -426,16 +428,21 @@ const filteredDoctors = doctors.filter((doctor) => {
           {coverage.coverages}
         </label>
       </div>
+
       </div>
     ))}
      <div className="btn-container">
+
     <button className="btn" type="submit">
       Guardar
     </button>
     <button className="btn" type="button" onClick={closeCoverageModal}>
       Cancelar
     </button>
+
     </div>
+
+
   </form>
 </Modal>
    </div>
@@ -444,4 +451,6 @@ const filteredDoctors = doctors.filter((doctor) => {
 };
 
 
+
 export default ListProfesionals;
+

@@ -30,7 +30,7 @@ const Profesionals = () => {
         const responseData = await response.json();
         setSpecialities(responseData.data);
       } catch (error) {
-        console.error("Error fetching specialities:", error);
+        console.error("No se pudo obtener la lista de especialidades", error);
       }
     };
 

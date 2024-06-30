@@ -41,6 +41,7 @@ select {
   padding: .7rem;
   border-radius: 10px;
   margin-left: 1rem;
+  margin:.3rem;
   @media screen and (max-width: 768px) {
  margin:.5rem;   
     height: auto;  
@@ -49,8 +50,7 @@ select {
     @media screen and (max-width: 320px) {
       margin:.5rem;
       width: 100%;
-      height: auto;
-      width: 3rem;
+      height: auto;    
     }
   }
 }
