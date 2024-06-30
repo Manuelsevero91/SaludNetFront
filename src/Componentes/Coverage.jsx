@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Componentes/NavBar";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
@@ -11,7 +10,7 @@ function ListCoverage() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
-    id: "",
+    id: 0,
     coverages: "",
   });
   const [newCoverage, setNewCoverage] = useState("");
@@ -67,15 +66,14 @@ function ListCoverage() {
     
     }
   };
-  const openModal = (coverage) => {
-    console.log("Opening modal for coverage:", coverage); 
-    setEditData(coverage || { id: "", coverages: "" });
+  const openModal = (coverage) => { 
+    setEditData(coverage || { id: 0, coverages: "" });
     setShowModal(true);
   };
   const closeModal = () => {
     setShowModal(false);
     setEditData({
-      id: "",
+      id: 0,
       coverages: "",
     });
   };
@@ -102,30 +100,24 @@ function ListCoverage() {
         throw new Error(errorData.message || "Algo salió mal");
       }
       const data = await response.json();
-      console.log("Response data:", data); 
-
       setCoverages((prevCoverages) =>
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
       );
       closeModal();
-      console.error("Error updating coverage:", error); 
       Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" })
-     .then(()=> {
+     /*.then(()=> {
       window.location.reload();
-     });
+     });*/
     } catch (error) {
       Swal.fire({
         text: "La obra social no pudo ser actualizada",
         icon: "warning",
       });
-
-    
     }
   };
   const handleDelete = async (id) => {
     const result = await Swal.fire({    
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
-     
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -152,10 +144,10 @@ function ListCoverage() {
         text: "No es posible eliminar la obra social",
         icon: "error",
       });
-    
     }
   }
 };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -167,7 +159,6 @@ function ListCoverage() {
           Administrar obras sociales
         </h2>
       </div>
-
       <div>
         <div className="create">
           <div className="search-bar">
@@ -196,18 +187,15 @@ function ListCoverage() {
                     <td>
                       <button
                         className="edit-button"
-                        onClick={() => openModal(coverage.id)}
+                        onClick={() => openModal(coverage)}
                       >
                         <FontAwesomeIcon icon={faEdit} />
-                      
                       </button>
-
                       <button
                         className="delete-button"
                         onClick={() => handleDelete(coverage.id)}
                       >
                          <FontAwesomeIcon icon={faTrash} />
-                        
                       </button>
                     </td>
                   </tr>
@@ -231,6 +219,9 @@ function ListCoverage() {
                 onChange={handleChange}
               />
               <button className="edit-button"  type="submit">Guardar cambios</button>
+              <button type="button" onClick={closeModal}>
+              Cancelar
+            </button>
             </form>
           </Modal>
         </div>
