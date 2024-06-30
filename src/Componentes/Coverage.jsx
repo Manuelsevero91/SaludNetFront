@@ -24,10 +24,10 @@ function ListCoverage() {
         setLoading(false);
       } catch (error) {
         Swal.fire(
-        "Error!",
-        "Hubo un error al traer la lista de obras sociales",
-        "error"
-      );
+          "Error!",
+          "Hubo un error al traer la lista de obras sociales",
+          "error"
+        );
         setLoading(false);
       }
     };
@@ -54,22 +54,21 @@ function ListCoverage() {
       const data = await response.json();
       setCoverages([...coverages, data.data]);
       Swal.fire({ text: "Obra social agregada con éxito", icon: "success" });
-
-     
       setNewCoverage("");
-    } catch (error){
+    } catch (error) {
       Swal.fire(
         "Error!",
-        "Hubo un error al intentar eliminar la obra social",
+        "Hubo un error al intentar agregar la obra social",
         "error"
       );
-    
     }
   };
-  const openModal = (coverage) => { 
+
+  const openModal = (coverage) => {
     setEditData(coverage || { id: 0, coverages: "" });
     setShowModal(true);
   };
+
   const closeModal = () => {
     setShowModal(false);
     setEditData({
@@ -77,12 +76,14 @@ function ListCoverage() {
       coverages: "",
     });
   };
+
   const handleChange = (e) => {
     setEditData({
       ...editData,
       [e.target.name]: e.target.value,
     });
   };
+
   const handleEditCoverage = async (event) => {
     event.preventDefault();
     const { id, coverages } = editData;
@@ -104,10 +105,7 @@ function ListCoverage() {
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
       );
       closeModal();
-      Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" })
-     /*.then(()=> {
-      window.location.reload();
-     });*/
+      Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" });
     } catch (error) {
       Swal.fire({
         text: "La obra social no pudo ser actualizada",
@@ -115,8 +113,9 @@ function ListCoverage() {
       });
     }
   };
+
   const handleDelete = async (id) => {
-    const result = await Swal.fire({    
+    const result = await Swal.fire({
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       icon: "warning",
       showCancelButton: true,
@@ -126,31 +125,30 @@ function ListCoverage() {
       cancelButtonText: "Cancelar",
     });
     if (result.isConfirmed) {
-    try {
-      const response = await fetch(`http://localhost:3000/coverage/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Algo salió mal");
+      try {
+        const response = await fetch(`http://localhost:3000/coverage/${id}`, {
+          method: "DELETE",
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Algo salió mal");
+        }
+  
+        setCoverages((prevCoverages) =>
+          prevCoverages.filter((cov) => cov.id !== id)
+        );
+        Swal.fire({ text: "La cobertura ha sido eliminada.", icon: "success" });
+      } catch (error) {
+        Swal.fire({ text: `Error al enviar la solicitud: ${error.message}`, icon: 'error' });
       }
-      setCoverages((prevCoverages) =>
-        prevCoverages.filter((cov) => cov.id !== id)
-      );
-      Swal.fire({ text: "Obra social eliminada con éxito", icon: "succes" });
-      
-    } catch (error) {
-      Swal.fire({
-        text: "No es posible eliminar la obra social",
-        icon: "error",
-      });
     }
-  }
-};
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
   return (
     <>
       <NavBar showLinks={true} />
@@ -210,7 +208,7 @@ function ListCoverage() {
             onRequestClose={closeModal}
             contentLabel="Editar obra social"
           >
-             <h3>Editar Obra Social</h3>
+            <h3>Editar Obra Social</h3>
             <form onSubmit={handleEditCoverage}>
               <input
                 type="text"
@@ -218,10 +216,10 @@ function ListCoverage() {
                 value={editData.coverages}
                 onChange={handleChange}
               />
-              <button className="edit-button"  type="submit">Guardar cambios</button>
+              <button className="edit-button" type="submit">Guardar cambios</button>
               <button type="button" onClick={closeModal}>
-              Cancelar
-            </button>
+                Cancelar
+              </button>
             </form>
           </Modal>
         </div>
@@ -229,5 +227,6 @@ function ListCoverage() {
     </>
   );
 }
+
 export default ListCoverage;
 
