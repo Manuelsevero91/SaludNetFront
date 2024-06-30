@@ -67,13 +67,7 @@ h3 {
   position: relative; 
   z-index: 2;   
 }
-.btn-container{
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-}
+
 h4 {  
   color: #fff;
   text-shadow: 5px 5px 5px rgb(3, 3);
