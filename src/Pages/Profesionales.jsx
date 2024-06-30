@@ -8,12 +8,23 @@ const Profesionals = () => {
   const [searchName, setSearchName] = useState("");
   const [searchSpeciality, setSearchSpeciality] = useState("");
 
+  const doctorImages = [
+    "https://images.pexels.com/photos/5452255/pexels-photo-5452255.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/263337/pexels-photo-263337.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3279197/pexels-photo-3279197.jpeg?auto=compress&cs=tinysrgb&w=600"
+    
+  ];
+
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
         const listDoctors = await fetch("http://localhost:3000/doctors");
         const result = await listDoctors.json();
-        setDoctors(result.data);
+        const doctorsWithPhotos = result.data.map((doctor, index) => ({
+          ...doctor,
+          photo: doctorImages[index % doctorImages.length], // Asigna una imagen de manera cíclica
+        }));
+        setDoctors(doctorsWithPhotos);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -43,10 +54,6 @@ const Profesionals = () => {
     const specialityMatch = doctor.speciality.name.toLowerCase().includes(searchSpeciality.toLowerCase());
     return fullNameMatch && specialityMatch;
   });
-
-  // const getRandomImageUrl = () => {
-  //   return `https://source.unsplash.com/random/200x200?sig=${Math.random()}`;
-  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -83,12 +90,11 @@ const Profesionals = () => {
       <div className="cards-container">
         {filteredDoctors.map((doctor) => (
           <div key={doctor.id} className="card">
-            <img  className="card-image" src='https://media.istockphoto.com/id/174762332/es/foto/sonriente-enfermera.jpg?s=612x612&w=0&k=20&c=WkygicrUf8D6tj-lFcJ3tHTuIMDRtrAmWAc5ImZJTcM=' alt="Doctor" />
+            <img className="card-image" src={doctor.photo} alt={doctor.fullName} />
             <div className="card-content">
-              <h3>{doctor.fullName}</h3>              
+              <h3>{doctor.fullName}</h3>
               <h4>{doctor.speciality.name}</h4>
               <h4>{doctor.license}</h4>
-             
             </div>
           </div>
         ))}
@@ -98,3 +104,4 @@ const Profesionals = () => {
 };
 
 export default Profesionals;
+
