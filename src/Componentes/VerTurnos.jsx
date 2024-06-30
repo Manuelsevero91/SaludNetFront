@@ -150,7 +150,7 @@ const ShowShiffs = () => {
             />
           </div>
 
-          {filteredShiffs.length > 0 ? (
+          {filteredShiffs.length > 0 ? 
             <div className="tableContainer">
               <table>
                 <thead>
@@ -175,8 +175,8 @@ const ShowShiffs = () => {
                 </tbody>
               </table>
             </div>
-          ) : (
-            <p>No hay turnos reservados.</p>
+           : (
+            <p></p>
           )}
         </div>
       )}
