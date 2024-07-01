@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import Spinner from "../Componentes/Spinner";
 import Swal from "sweetalert2";
@@ -53,7 +52,9 @@ const Turnos = () => {
         }
         const data = await response.json();
 
+
         if (data.data.length === 0) {
+
           Swal.fire({
             text: "El doctor no tiene turnos disponibles",
             icon: "warning",
@@ -73,12 +74,14 @@ const Turnos = () => {
           icon: "error",
         });
       }
+
     } else {
       setSchedules([]);
     }
   };
 
   // Función para manejar cambios en los inputs del paciente
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let isValid = true;
@@ -323,3 +326,4 @@ const Turnos = () => {
 };
 
 export default Turnos;
+
