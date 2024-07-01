@@ -5,17 +5,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash , faEdit} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Spinner from "../Componentes/Spinner";
+
 const ListProfesionals = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
-    id: "",
+    id: 0,
     fullName: "",
     mail: "",
     phone: "",
-    // speciality: { id: "", name: "" },
-    // license: "",
+    speciality: { id: 0, name: "" },
+    license: "",
   });
   const [specialities, setSpecialities] = useState([]);
   const [searchName, setSearchName] = useState("");
@@ -59,34 +60,32 @@ const ListProfesionals = () => {
   const closeModal = () => {
     setShowModal(false);
     setEditData({
-      id: "",
+      id: 0,
       fullName: "",
       mail: "",
       phone: "",
-      // speciality: { id: "", name: "" },
-      // license: "",
+      speciality: { id: 0, name: "" },
+      license: "",
     });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // if (name === "speciality") {
-    //   const selectedSpeciality = specialities.find(
-    //     (speciality) => speciality.id === value
-    //   );
-    //   setEditData((prevData) => ({
-    //     ...prevData,
-    //     speciality: selectedSpeciality
-    //       ? { id: selectedSpeciality.id, name: selectedSpeciality.name }
-    //       : { id: "", name: "" },
-    //   }));
-    // } else {
+    if (name === "speciality") {
+      const selectedSpeciality = specialities.find(
+        (speciality) => speciality.id === parseInt(value)
+      );
+      setEditData((prevData) => ({
+        ...prevData,
+        speciality: selectedSpeciality || { id: 0, name: "" }, // Fallback to initial state if not found
+      }));
+    } else {
       setEditData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
-    };
-  
+    }
+  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -95,8 +94,8 @@ const ListProfesionals = () => {
       fullName,
       mail,
       phone,
-      // speciality: { id: speciality.id, name: speciality.name },
-      // license,
+      speciality: { id: speciality.id, name: speciality.name },
+      license,
     };
     try {
       const response = await fetch(`http://localhost:3000/doctors/${id}`, {
@@ -108,15 +107,11 @@ const ListProfesionals = () => {
       });
       const data = await response.json();
       setDoctors(doctors.map((doc) => (doc.id === id ? data.data : doc)));
-      
-      
-      closeModal();
+      closeModal(); // Cierra el modal después de guardar
       Swal.fire({
         text: "El profesional ha sido actualizado con éxito",
         icon: "success",
-      }).then(() => {
-        window.location.reload();
-      })
+      });
     } catch (error) {
       Swal.fire({
         text: "El profesional no pudo ser actualizado",
@@ -126,7 +121,7 @@ const ListProfesionals = () => {
   };
 
   const handleDelete = async (id) => {
-    const result = await Swal.fire({    
+    const result = await Swal.fire({
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       icon: "warning",
       showCancelButton: true,
@@ -135,30 +130,26 @@ const ListProfesionals = () => {
       confirmButtonText: "Sí, deseo eliminarlo",
       cancelButtonText: "Cancelar",
     });
-  if (result.isConfirmed) {
-    try {
-      const response = await fetch(`http://localhost:3000/doctors/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) {
-        throw new Error(`Error deleting doctor: ${response.status}`);
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(`http://localhost:3000/doctors/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Error deleting doctor: ${response.status}`);
+        }
+        await response.json();
+        setDoctors((prevDoctors) => prevDoctors.filter((doc) => doc.id !== id));
+        Swal.fire("Eliminado", "El profesional ha sido eliminado", "success");
+      } catch (error) {
+        Swal.fire(
+          "Error!",
+          "Hubo un error al intentar eliminar el profesional",
+          "error"
+        );
       }
-      else{
-      await response.json();
-      setDoctors((prevDoctors) => prevDoctors.filter((doc) => doc.id !== id));
-    
-      Swal.fire("Eliminado", "El profesional ha sido eliminado", "success");
     }
-    
-    } catch {
-      Swal.fire(
-        "Error!",
-        "Hubo un error al intentar eliminar el profesional",
-        "error"
-      );
-    }
-  }
-}; 
+  }; 
 
   const filteredDoctors = doctors.filter((doctor) => {
     const fullNameMatch = doctor.fullName.toLowerCase().includes(searchName.toLowerCase());
@@ -168,12 +159,12 @@ const ListProfesionals = () => {
 
   return (
     <>
-     <Spinner loading={loading} />
+      <Spinner loading={loading} />
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
       </div>
-      <div className="search-bar">    
+      <div className="search-bar">
         <label className="search" htmlFor="searchName">Nombre:</label>
         <input
           type="text"
@@ -189,61 +180,53 @@ const ListProfesionals = () => {
         >
           <option value="">Todas</option>
           {specialities.map((speciality) => (
-            <option key={speciality.id} value={speciality.name}>
+            <option key={speciality.id} value={speciality.id}>
               {speciality.name}
             </option>
           ))}
         </select>
       </div>
-      {loading ? (
-        <p>Cargando doctores...</p>
-      ) : (
-        <div className="tableContainer">
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>Especialidad</th>
-                <th>Licencia</th>
-                <th>Acciones</th>
+      <div className="tableContainer">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Teléfono</th>
+              <th>Especialidad</th>
+              <th>Licencia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredDoctors.map((doctor) => (
+              <tr key={doctor.id} className={doctor.deleted ? "deleted-doctor" : ""}>
+                <td>{doctor.fullName}</td>
+                <td>{doctor.mail}</td>
+                <td>{doctor.phone}</td>
+                <td>{doctor.speciality.name}</td>
+                <td>{doctor.license}</td>
+                <td>
+                  {!doctor.deleted && (
+                    <div className="btn-container">
+                      <button className="edit-button" onClick={() => openModal(doctor)}>
+                        <FontAwesomeIcon icon={faEdit} /> Editar
+                      </button>
+                      <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
+                        <FontAwesomeIcon icon={faTrash} /> Eliminar
+                      </button>
+                    </div>
+                  )}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredDoctors.map((doctor) => (
-                <tr key={doctor.id} className={doctor.deleted ? "deleted-doctor" : ""}>
-                  <td>{doctor.fullName}</td>
-                  <td>{doctor.mail}</td>
-                  <td>{doctor.phone}</td>
-                  <td>{doctor.speciality.name}</td>
-                  <td>{doctor.license}</td>
-                  <td>
-                    {!doctor.deleted && (
-                      <>
-                       <div className="btn-container">
-                        <button className="edit-button" onClick={() => openModal(doctor)}>
-                          <FontAwesomeIcon icon={faEdit} /> 
-                        </button>
-                        <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
-                          <FontAwesomeIcon icon={faTrash} /> 
-                        </button>
-                        </div>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <Modal className="formContainerModal" isOpen={showModal} onRequestClose={closeModal} >
-      
-         
+      <Modal className="formContainerModal" isOpen={showModal} onRequestClose={closeModal}>
         <form className="createForm-Profesionals" onSubmit={handleSave}>
-          <label htmlFor="fullName">Nombre y Apellido</label>
+          <label htmlFor="fullName">Nombre y Apellido:</label>
           <input
             type="text"
             name="fullName"
@@ -264,7 +247,7 @@ const ListProfesionals = () => {
             value={editData.phone}
             onChange={handleChange}
           />
-          {/* <label htmlFor="speciality">Especialidad:</label>
+          <label htmlFor="speciality">Especialidad:</label>
           <select
             name="speciality"
             value={editData.speciality.id}
@@ -283,14 +266,14 @@ const ListProfesionals = () => {
             name="license"
             value={editData.license}
             onChange={handleChange}
-          /> */}
+          />
           <div className="btn-container">
-          <button className="edit-button" onClick={() => openModal(doctor)}>
-                          <FontAwesomeIcon icon={faEdit} /> 
-                        </button>
-                        <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
-                          <FontAwesomeIcon icon={faTrash} /> 
-                        </button>
+            <button className="edit-button" type="submit">
+              <FontAwesomeIcon icon={faEdit} /> Guardar Cambios
+            </button>
+            <button className="delete-button" type="button" onClick={closeModal}>
+              Cancelar
+            </button>
           </div>
         </form>
       </Modal>
