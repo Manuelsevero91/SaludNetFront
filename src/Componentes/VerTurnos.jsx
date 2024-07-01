@@ -83,7 +83,7 @@ const ShowShiffs = () => {
   };
 
   const filteredShiffs = shiffs.filter((shiff) => {
-    if (selectedDoctor && selectedDoctor !== '' && shiff.Schedules.idDoctors.fullName !== selectedDoctor) {
+    if (selectedDoctor && selectedDoctor !== '' && shiff.Schedules.fullName !== selectedDoctor) {
       return false;
     }
     if (selectedDay && selectedDay !== '' && new Date(shiff.Schedules.day).toISOString().slice(0, 10) !== selectedDay) {
