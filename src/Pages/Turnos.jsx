@@ -188,12 +188,25 @@ const Turnos = () => {
         fetchDoctors();
         fetchSchedules();
       });
-    } catch (error) {
-      Swal.fire({
-        text: error.message || "Hubo un error al reservar el turno",
-        icon: "error",
-      });
-    }
+    }catch (error) {
+      if (error.message.includes("El paciente con DNI")) {
+        const errorMessage = JSON.parse(error.message); 
+        Swal.fire({
+          text: `${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
+          icon: "error",
+          timer: 5000,
+          timerProgressBar: true,
+        }).then(() => {
+          window.location.reload(); 
+        });
+      } else {
+        Swal.fire({
+          text: error.message || "Hubo un error al reservar el turno",
+          icon: "error",
+        }).then(() => {
+          window.location.reload(); 
+        });
+      }}
   };
   
 
