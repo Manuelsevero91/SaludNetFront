@@ -68,6 +68,10 @@ const ShowShiffs = () => {
 
   return `${dayName} ${day} de ${monthName} de ${year}`;
   };
+
+
+  
+
   const handleDoctorChange = (event) => {
     setSelectedDoctor(event.target.value);
  
@@ -142,7 +146,7 @@ const ShowShiffs = () => {
                     <tr key={shiff.id}>
                       <td>{formatDate(shiff.Schedules?.day) || 'N/A'}</td>
                       <td>{shiff.Schedules?.start_Time || 'N/A'}</td>
-                      <td>{shiff.Schedules?.idDoctors?.fullName || 'N/A'}</td>
+                      <td>{shiff.Schedules.fullName || 'N/A'}</td>
                       <td>{shiff.Patient?.fullName || 'N/A'}</td>
                       
                     </tr>
