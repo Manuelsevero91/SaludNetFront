@@ -62,7 +62,7 @@ function FormProfesionals() {
       if (response.ok) {
 
         Swal.fire({
-          html: "<span class='custom-swal-title'>El profesional ha sido agregado,</span>",
+          html: "<span class='custom-swal-title'>El profesional ha sido agregado con éxito,</span>",
           icon: "success"
         });
 
@@ -103,9 +103,7 @@ function FormProfesionals() {
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: registrar</h2>
-
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="succes-message">{success}</div>}
+       
       </div>
       <div className="formContainer">
         <form className="createForm" onSubmit={handleSubmit}>
@@ -133,7 +131,7 @@ function FormProfesionals() {
               name="phone"
               value={form.phone}
               onChange={handleChange}
-              placeholder="CELULAR"
+              placeholder="CELULAR (Sin el '0' ni '-')"
             />
           </div>
           <div className="input-container">
@@ -142,7 +140,7 @@ function FormProfesionals() {
               name="license"
               value={form.license}
               onChange={handleChange}
-              placeholder="Matrícula"
+              placeholder="MATRICULA: MPXXXXXX O MNXXXXXX (6 DÍGITOS)"
             />
           </div>
           <div className="input-container">

@@ -68,10 +68,6 @@ const ShowShiffs = () => {
 
   return `${dayName} ${day} de ${monthName} de ${year}`;
   };
-
-
-  
-
   const handleDoctorChange = (event) => {
     setSelectedDoctor(event.target.value);
  

@@ -52,9 +52,7 @@ const Turnos = () => {
         }
         const data = await response.json();
 
-
         if (data.data.length === 0) {
-
           Swal.fire({
             text: "El doctor no tiene turnos disponibles",
             icon: "warning",
@@ -74,7 +72,6 @@ const Turnos = () => {
           icon: "error",
         });
       }
-
     } else {
       setSchedules([]);
     }
@@ -191,21 +188,9 @@ const Turnos = () => {
 
       Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
         () => {
-          // Limpiar formulario y cargar datos nuevamente
-          setPatientData({
-            fullName: "",
-            dni: "",
-            mail: "",
-            phone: "",
-            address: "",
-            birthday: "",
-          });
-          setDoctorId(null);
-          setScheduleId(null);
-          setSchedules([]);
-          fetchDoctors();
-          fetchSchedules();
+          window.location.reload();
         }
+
       );
     } catch (error) {
       if (error.message.includes("El paciente con DNI")) {
@@ -213,10 +198,8 @@ const Turnos = () => {
         Swal.fire({
           text: `${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
           icon: "error",
-          timer: 5000,
+          timer: 8000,
           timerProgressBar: true,
-        }).then(() => {
-          window.location.reload();
         });
       } else {
         Swal.fire({
@@ -255,7 +238,7 @@ const Turnos = () => {
             name="fullName"
             value={patientData.fullName}
             onChange={handleInputChange}
-            placeholder="Nombre Y Apellido"
+            placeholder="NOMBRE Y APELLIDO"
             required
           />
           <input
@@ -326,4 +309,3 @@ const Turnos = () => {
 };
 
 export default Turnos;
-
