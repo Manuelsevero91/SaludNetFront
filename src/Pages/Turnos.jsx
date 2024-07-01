@@ -19,6 +19,7 @@ const Turnos = () => {
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
 
+  // Función para obtener la lista de doctores
   const fetchDoctors = async () => {
     try {
       const response = await fetch("http://localhost:3000/doctors");
@@ -32,9 +33,14 @@ const Turnos = () => {
       }, 2000);
     } catch (error) {
       setLoadingDoctors(false);
+      Swal.fire({
+        text: "Error al cargar la lista de doctores",
+        icon: "error",
+      });
     }
   };
 
+  // Función para obtener los horarios de un doctor específico
   const fetchSchedules = async () => {
     if (doctorId) {
       try {
@@ -65,14 +71,7 @@ const Turnos = () => {
     }
   };
 
-  useEffect(() => {
-    fetchDoctors();
-  }, []);
-
-  useEffect(() => {
-    fetchSchedules();
-  }, [doctorId]);
-
+  // Función para manejar cambios en los inputs del paciente
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let isValid = true;
@@ -101,56 +100,63 @@ const Turnos = () => {
     }
   };
 
+  // Función para manejar el cambio de doctor seleccionado
   const handleDoctorChange = (e) => {
     setDoctorId(e.target.value);
   };
 
+  // Función para manejar el cambio de horario seleccionado
   const handleScheduleChange = (e) => {
     setScheduleId(e.target.value);
   };
 
+  // Función para enviar la reserva del turno
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (patientData.dni.length < 7 || patientData.dni.length > 8) {
       Swal.fire({ text: "El DNI debe tener 7 u 8 dígitos", icon: "error" });
       return;
     }
-
+  
     if (patientData.phone.length !== 10) {
       Swal.fire({ text: "El teléfono debe tener 10 dígitos", icon: "error" });
       return;
     }
-
+  
     try {
-      const existingPatientResponse = await fetch(
-        `http://localhost:3000/patients?dni=${patientData.dni}`
-      );
-      if (!existingPatientResponse.ok) {
-        throw new Error("Error verificando la existencia del paciente");
-      }
-
-      const existingPatientResult = await existingPatientResponse.json();
       let patientId;
-
-      if (existingPatientResult.data.length > 0) {
-        patientId = existingPatientResult.data[0].id;
-      } else {
-        const patientResponse = await fetch("http://localhost:3000/patients", {
+  
+      // Buscar paciente por DNI
+      const patientResponse = await fetch(`http://localhost:3000/patients/by-dni/${patientData.dni}`);
+      
+      if (patientResponse.ok) {
+        const patientDataResponse = await patientResponse.json();
+        if (patientDataResponse.data) {
+          // Si el paciente ya está registrado, obtén su ID
+          patientId = patientDataResponse.data.id;
+        }
+      } else if (patientResponse.status === 404) {
+        // Si el paciente no existe, crear uno nuevo
+        const newPatientResponse = await fetch("http://localhost:3000/patients", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(patientData),
         });
-
-        if (!patientResponse.ok) {
-          throw new Error("Error al crear el paciente");
+  
+        if (newPatientResponse.ok) {
+          const newPatientData = await newPatientResponse.json();
+          patientId = newPatientData.data.id;
+        } else {
+          throw new Error(`Error al crear paciente: ${newPatientResponse.status}`);
         }
-
-        const patientResult = await patientResponse.json();
-        patientId = patientResult.data.id;
+      } else {
+        throw new Error(`Error al buscar paciente: ${patientResponse.status}`);
       }
-
+  
+      // Reservar turno
       const shiffResponse = await fetch("http://localhost:3000/shiff", {
         method: "POST",
         headers: {
@@ -161,42 +167,45 @@ const Turnos = () => {
           idPatient: patientId,
         }),
       });
-
+  
       if (!shiffResponse.ok) {
         throw new Error(await shiffResponse.text());
       }
-      Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
-        () => {
-          setPatientData({
-            fullName: "",
-            dni: "",
-            mail: "",
-            phone: "",
-            address: "",
-            birthday: "",
-          });
-          setDoctorId(null);
-          setScheduleId(null);
-          setSchedules([]);
-          fetchDoctors();
-          fetchSchedules() 
-        }
-      );
+  
+      Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(() => {
+        // Limpiar formulario y cargar datos nuevamente
+        setPatientData({
+          fullName: "",
+          dni: "",
+          mail: "",
+          phone: "",
+          address: "",
+          birthday: "",
+        });
+        setDoctorId(null);
+        setScheduleId(null);
+        setSchedules([]);
+        fetchDoctors();
+        fetchSchedules();
+      });
     } catch (error) {
-      if (error.message.includes("El paciente con DNI")) {
-        const errorMessage = JSON.parse(error.message); 
-        Swal.fire({
-          text: `${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
-          icon: "error",
-        });
-      } else {
-        Swal.fire({
-          text: error.message || "Hubo un error al reservar el turno",
-          icon: "error",
-        });
-      }
+      Swal.fire({
+        text: error.message || "Hubo un error al reservar el turno",
+        icon: "error",
+      });
     }
   };
+  
+
+  // Efecto para cargar la lista de doctores al montar el componente
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
+  // Efecto para cargar los horarios cuando se selecciona un doctor
+  useEffect(() => {
+    fetchSchedules();
+  }, [doctorId]);
 
   return (
     <>
