@@ -6,7 +6,7 @@ import NavBar from '../Componentes/NavBar';
 const ShowShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedShiffs, setSelectedShiffs] = useState([]);
+ 
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
@@ -46,58 +46,35 @@ const ShowShiffs = () => {
     fetchShiffs();
     fetchDoctors();
   }, []);
-
-  const handleSelectShiff = (id) => {
-    setSelectedShiffs((prevSelected) =>
-      prevSelected.includes(id)
-        ? prevSelected.filter((shiffId) => shiffId !== id)
-        : [...prevSelected, id]
-    );
-  };
-
-  const handleConfirmShiffs = async () => {
-    try {
-      await Promise.all(selectedShiffs.map(async (id) => {
-        await fetch(`http://localhost:3000/shiff/confirm/${id}`, {
-          method: 'PUT',
-        });
-      }));
-      Swal.fire({ text: 'Turnos confirmados', icon: 'success' });
-    } catch (error) {
-      Swal.fire({ text: 'Hubo un error al confirmar los turnos', icon: 'error' });
-    }
-  };
-
-  const handleDeleteShiffs = async (id) => {
-    try {
-      const shiff = shiffs.find((shiff) => shiff.id === id);
-      await fetch(`http://localhost:3000/shiff/${id}`, {
-        method: 'DELETE',
-      });
-      await fetch(`http://localhost:3000/schedules/${shiff.Schedules.idSchedule}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ available: true }),
-      });
-      setShiffs((prevShiffs) => prevShiffs.filter((shiff) => !selectedShiffs.includes(shiff.id)));
-      setSelectedShiffs([]);
-      Swal.fire({ text: 'Turnos eliminados con éxito', icon: 'success' });
-    } catch (error) {
-      Swal.fire({ text: 'Hubo un error al eliminar los turnos', icon: 'error' });
-    }
-  };
+ 
 
   const formatDate = (dateString) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'America/Argentina/Buenos_Aires'
+    };
     const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', options);
+
+   const dateInBA = new Date(date.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+
+//Como lo quiero ver
+  const dayName = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(dateInBA);
+  const day = dateInBA.getDate(); 
+  const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(dateInBA);
+  const year = dateInBA.getFullYear();
+
+  return `${dayName} ${day} de ${monthName} de ${year}`;
   };
+
+
+  
 
   const handleDoctorChange = (event) => {
     setSelectedDoctor(event.target.value);
-    // Reiniciar el filtro por día al cambiar de doctor
+ 
     setSelectedDay('');
   };
 
@@ -112,7 +89,9 @@ const ShowShiffs = () => {
     if (selectedDay && selectedDay !== '' && new Date(shiff.Schedules.day).toISOString().slice(0, 10) !== selectedDay) {
       return false;
     }
+    console.log(shiff.Schedules)
     return true;
+   
   });
 
   return (

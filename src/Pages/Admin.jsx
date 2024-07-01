@@ -59,7 +59,7 @@ const Admin = () => {
           options={[
             { label: "Agregar Profesional", link: "/AgregarProfesional" },
             {
-              label: "Modificar/Eliminar Profesional",
+              label: "Editar Profesional",
               link: "/EditarProfesional",
             },
             { label: "Obras Sociales", link: "/ObrasSociales" },
@@ -75,7 +75,7 @@ const Admin = () => {
               link: "/Agenda",
             },
             {
-              label: "Actualizar/Eliminar turnos disponibles",
+              label: "Eliminar turnos disponibles",
               link: "/",
             },
           ]}
@@ -102,7 +102,7 @@ const Admin = () => {
           title="REPORTES"
           options={[
             {
-              label: "Listado de turnos por medico",
+              label: "Listado de turnos por profesional",
               link: "/VerTurnos",
             }
             

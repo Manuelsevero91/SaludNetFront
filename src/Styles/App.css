@@ -33,6 +33,16 @@ label,th {
   color: white;
   padding-bottom: 1rem;
   margin-left: 1rem;
+  @media screen and (max-width: 768px) {
+    width:auto; 
+    font-size: 1.5rem;
+    @media screen and (max-width: 320px) {
+      width: auto;    
+      font-size: .5rem;
+      padding-left: 0.8rem;
+    }
+  }
+
 }
 input,
 select {
@@ -76,25 +86,7 @@ h4 {
 margin: 0.2rem;
   
 }
-.options {
-  position: absolute;
-  display: flex;  
-  justify-content:space-between; 
-  align-items: center;
-  top: calc(5% + 2.3vw);
-  width:80%;
-  height: 50%;
-  background-color: transparent;
-  backdrop-filter: blur(15px);
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 65px;
-  padding: 2vw;
-  box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
-  z-index: 1;
-  text-shadow: 5px 5px 5px rgb(3, 3, 3);
-  margin-left: 3vw;
 
-}
 li {
   list-style: none;
   padding-right: 5rem;

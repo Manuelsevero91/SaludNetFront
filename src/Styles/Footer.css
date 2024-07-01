@@ -1,36 +1,52 @@
 .footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-color: white;
-  width: 1440px;
-  height:200px;
-  bottom: 0;
+  width: 100%;
+  height: auto;
+margin:.5rem;
   max-width: 1440px;
   @media screen and (max-width: 768px) {
-    margin:.5rem;   
-       height: auto;  
-       gap: 0;
-       width: 100%;
-       flex-direction: column;
-       justify-content: center;
-       @media screen and (max-width: 320px) {
-         margin:.5rem;
-         width: 100%;
-         height: auto;
-         width: 3rem;
-        padding-left: 6rem;
-       }
-     }
+    justify-content: space-around;
+    height: auto;
+    width: auto;
+    flex-direction: row;
+    @media screen and (max-width: 320px) {
+      margin: 0.5rem;
+     
+      height: auto;
+      width: auto;
+      justify-content: space-around;
+      height: auto;
+      width: auto;
+      flex-direction: row;
+    }
+  }
 }
 
 .social-icon {
   display: flex;
   justify-content: center;
-  width: 10rem;
+  padding: 0.3rem;
+  height: auto;
   color: black;
   font-size: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+    height: auto;
+    gap: 0;
+    width: auto;
+
+    @media screen and (max-width: 320px) {
+      margin: 0.5rem;
+      width: 100%;
+      height: auto;
+      width: 3rem;
+      font-size: 1rem;
+    }
+  }
 }
 
 .footer-text {
@@ -38,32 +54,28 @@
   font-size: 1rem;
   width: 10rem;
   @media screen and (max-width: 768px) {
-    margin:.5rem;   
-       height: auto;  
-       gap: 0;
-       width: 10rem;
-       @media screen and (max-width: 320px) {
-         margin:.5rem;
-         width: 10rem;
-         height: auto;
-         justify-content: center;
-       }
-     }
+    height: auto;
+    gap: 0;
+    width: 5rem;
+    @media screen and (max-width: 320px) {
+      margin: 0.5rem;
+      width: 10rem;
+      height: auto;
+      justify-content: center;
+    }
+  }
 }
 
 .qr {
   width: 10rem;
   height: auto;
   @media screen and (max-width: 768px) {
-    margin:.5rem;   
-       height: auto;  
-       gap: 0;
-       width: 7rem;
-       @media screen and (max-width: 320px) {
-         margin:.5rem;
-         width: 3rem;
-         height: auto;
-       
-       }
-     }
+    margin: 0.5rem;
+    height: auto;
+    width: 5rem;
+    @media screen and (max-width: 320px) {
+      width: 3rem;
+      height: auto;
+    }
+  }
 }

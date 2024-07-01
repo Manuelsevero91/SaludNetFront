@@ -61,7 +61,10 @@ function FormProfesionals() {
 
       if (response.ok) {
 
-        Swal.fire({ html: "<span class='custom-swal-title'>El profesional ha sido agregado</span>"},"success");
+        Swal.fire({
+          html: "<span class='custom-swal-title'>El profesional ha sido agregado,</span>",
+          icon: "success"
+        });
 
         setError("");
         setForm({

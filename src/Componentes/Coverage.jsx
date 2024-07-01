@@ -177,16 +177,17 @@ function ListCoverage() {
               value={newCoverage}
               onChange={handleInputChange}
             />
-            <button className="btn" onClick={handleAddCoverage}>
+            <button className="add-button" onClick={handleAddCoverage}>
               Guardar
             </button>
           </div>
           <div className="tableContainer">
+          <div className="tableContainerCoverage">
             <table>
               <thead>
                 <tr>
                   <th>Obra social</th>
-                  <th>Acciones</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -198,7 +199,7 @@ function ListCoverage() {
                         className="edit-button"
                         onClick={() => openModal(coverage.id)}
                       >
-                        <FontAwesomeIcon icon={faEdit} />
+                        <FontAwesomeIcon icon={faEdit} />Editar
                       
                       </button>
 
@@ -206,7 +207,7 @@ function ListCoverage() {
                         className="delete-button"
                         onClick={() => handleDelete(coverage.id)}
                       >
-                         <FontAwesomeIcon icon={faTrash} />
+                         <FontAwesomeIcon icon={faTrash} />Eliminar
                         
                       </button>
                     </td>
@@ -215,7 +216,7 @@ function ListCoverage() {
               </tbody>
             </table>
           </div>
-       
+          </div>
           <Modal
             className="formContainerModal"
             isOpen={showModal}

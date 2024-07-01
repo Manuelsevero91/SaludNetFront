@@ -34,9 +34,9 @@ const ListProfesionals = () => {
         const listDoctors = await fetch("http://localhost:3000/doctors");
         const response = await listDoctors.json();
         setDoctors(response.data);
-        setTimeout(() => {
+      
           setLoading(false);
-        }, 2000);           
+             
       } catch (error) {
         Swal.fire({
           text: "No se pudo obtener la lista de profesionales",
@@ -337,15 +337,15 @@ const filteredDoctors = doctors.filter((doctor) => {
                       <>
                        <div className="btn-container">
                         <button className="edit-button" onClick={() => openModal(doctor)}>
-                          <FontAwesomeIcon icon={faPenToSquare} /> 
+                          <FontAwesomeIcon icon={faPenToSquare} />Editar
                         </button>
                         <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
-                          <FontAwesomeIcon icon={faTrash} /> 
+                          <FontAwesomeIcon icon={faTrash} />Eliminar 
                         </button>
                         <button
                           className="add-button"
                           onClick={() => openCoverageModal(doctor.id)}>
-                         <FontAwesomeIcon icon={faPlus} />                      
+                         <FontAwesomeIcon icon={faPlus} />Agregar                     
                         </button>
                         </div>
                       </>
@@ -356,7 +356,7 @@ const filteredDoctors = doctors.filter((doctor) => {
             </tbody>
           </table>       
       </div>
-      )};
+      )}
       <Modal className="formContainerModal" isOpen={showModal} onRequestClose={closeModal} >      
        <form className="createForm-Profesionals" onSubmit={handleSave}>
           <label htmlFor="fullName">Nombre y Apellido</label>

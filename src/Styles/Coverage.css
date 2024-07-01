@@ -1,0 +1,12 @@
+
+  .checkCoverages{
+    display: block;
+  flex-direction: column;
+  
+  }
+  
+  .tableContainerCoverage{
+    width: 50%;
+    display: flex;
+    justify-content: center; 
+  }
