@@ -3,9 +3,8 @@ import "./Styles/App.css";
 import "./Styles/Home.css";
 import "./Styles/Form.css";
 import "./Styles/Login.css";
-import "./Styles/ListProfesionals.css";
+import "./Styles/Coverage.css";
 import "./Styles/Profesionales.css";
-
 import "./Styles/CreateSchedule.css";
 import "./Styles/SharedStyles/Btn.css";
 import "./Styles/SharedStyles/BarraSuperior.css";
@@ -17,9 +16,10 @@ import "./Styles/SharedStyles/FourSections.css";
 import "./Styles/SharedStyles/Slides.css";
 import "./Styles/SharedStyles/SearchBar.css";
 import "./Styles/SharedStyles/Swal.css";
+import "./Styles/SharedStyles/Table.css";
+import "./Styles/SharedStyles/Options.css";
 import "./Styles/FormProfesionals.css";
 import "./Styles/Contacto.css";
-
 import Profesionales from "./Pages/Profesionales";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";

@@ -1,0 +1,74 @@
+.tableContainer {
+    background-color: rgba(44, 99, 103, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    height: auto;
+    
+  }
+  table {  
+    width:80%;
+    border-collapse: collapse;
+    box-shadow: 5px 5px 5px rgb(5, 5, 8);
+    @media screen and (max-width: 768px) {
+      width:100%;    
+   height: auto;
+   @media screen and (max-width: 320px) {
+     width:100%;    
+     height: auto;
+  
+   }
+  }
+  }
+  
+  table th,
+  table td {
+    padding: .5rem;
+    text-align:center;
+    justify-content:center;
+    color: white;
+    font-size: 1.1rem;
+    @media screen and (max-width: 768px) {
+      width:auto;    
+   height: auto;
+   font-size:.8rem;
+   padding: .2rem;
+   @media screen and (max-width: 320px) {
+     width:auto;    
+     height: auto;
+     font-size:.8rem;
+     padding: .03rem;
+     gap: .2rem;
+   }
+  }
+  }
+  
+  table th {
+    background-color: rgba(56, 58, 58, 0.9);
+    font-size: 1.2rem;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: rgba(90, 89, 95, 0.859);
+  }
+  
+  table tr:nth-child(odd) {
+    background-color: rgba(90, 89, 95, 0.959);
+  }
+  
+  table tr.deleted-doctor {
+    text-decoration: line-through;
+    color: gray;
+  }
+      .formContainerModal {
+      background-color: rgba(44, 99, 103, 0.8);
+      margin-top: 5rem;
+      margin-left: 5rem;
+      height: 70%;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;   
+    } 
+    

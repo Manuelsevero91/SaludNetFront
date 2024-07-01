@@ -1,0 +1,35 @@
+.options {
+    position: absolute;
+    display: flex; 
+    justify-content:space-between; 
+    align-items: center;
+    top: calc(5% + 5px);
+    width:80%;
+    height: 50%;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    padding:.2rem;
+    box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
+    z-index: 1;
+    text-shadow: 5px 5px 5px rgb(3, 3, 3);
+    margin-left: 3vw;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width:100%;    
+   height: auto;
+   @media screen and (max-width: 320px) {
+    display: flex;
+    flex-direction: column;
+   
+     width:100%;    
+     height: auto;
+  padding-bottom: 1rem;
+  margin: 0;
+   }
+  }
+  }

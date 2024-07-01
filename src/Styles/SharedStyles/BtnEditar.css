@@ -9,6 +9,7 @@
   text-shadow: 5px 5px 5px rgb(5, 5, 8);
   border: hidden;
   cursor: pointer;
+  margin: .5rem;
 }
 .edit-button {
   background-color: #5ba848;
