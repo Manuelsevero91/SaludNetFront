@@ -8,6 +8,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const EditShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDoctor, setSelectedDoctor] = useState('');
+  const [selectedDay, setSelectedDay] = useState('');
+  const [doctors, setDoctors] = useState([]);  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,14 +42,14 @@ const EditShiffs = () => {
         });
 
         setShiffs(combinedData);
+        setDoctors(doctorData.data); 
         setLoading(false);
       } catch (error) {
         setLoading(false);
         Swal.fire({
-        text: "No se pudo traer la lista de turnos",
-        icon: "warning",
-      });
-
+          text: "No se pudo traer la lista de turnos",
+          icon: "warning",
+        });
       }
     };
     fetchData();
@@ -75,7 +78,7 @@ const EditShiffs = () => {
           setShiffs((prevShiff) =>
             prevShiff.filter((shiff) => shiff.id !== id)
           );
-          Swal.update("El Turno ha sido eliminado", "success");
+          Swal.fire("El Turno ha sido eliminado", "success");
         }
       } catch {
         Swal.fire(
@@ -87,6 +90,45 @@ const EditShiffs = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'America/Argentina/Buenos_Aires'
+    };
+    const date = new Date(dateString);
+    const dateInBA = new Date(date.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+    const dayName = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(dateInBA);
+    const day = dateInBA.getDate();
+    const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(dateInBA);
+    const year = dateInBA.getFullYear();
+
+    return `${dayName} ${day} de ${monthName} de ${year}`;
+  };
+
+  const handleDoctorChange = (event) => {
+    setSelectedDoctor(event.target.value);
+    setSelectedDay('');
+  };
+
+  const handleDayChange = (event) => {
+    setSelectedDay(event.target.value);
+  };
+
+  const filteredShiffs = shiffs
+    .filter((shiff) => {
+      if (selectedDoctor && selectedDoctor !== '' && shiff.Schedules.fullName !== selectedDoctor) {
+        return false;
+      }
+      if (selectedDay && selectedDay !== '' && new Date(shiff.Schedules.day).toISOString().slice(0, 10) !== selectedDay) {
+        return false;
+      }
+      return true;
+    })
+    .sort((a, b) => new Date(a.Schedules.day) - new Date(b.Schedules.day));  // Ordenar por fecha
+
   return (
     <>
       <Spinner loading={loading} />
@@ -95,38 +137,63 @@ const EditShiffs = () => {
         <h2 className="titulo-section">Eliminar turnos</h2>
       </div>
       <div>
-        <>
-          <div className="tableContainer">
-            <table className="Table">
-              <thead>
-                <tr>
-                  <th>Doctor</th>
-                  <th>Paciente</th>
-                  <th>Telefono Paciente</th>
-                  <th>Fecha Turno</th>
-                  <th>Horario Turno</th>
-                  <th>Eliminar</th>
-                </tr>
-              </thead>
-              <tbody>
-                {shiffs.map((shiff) => (
-                  <tr key={shiff.id}>
-                    <td>{shiff.Schedules.doctorFullName}</td>
-                    <td>{shiff.patient.fullName}</td>
-                    <td>{shiff.patient.phone}</td>
-                    <td>{shiff.Schedules.day}</td>
-                    <td>{shiff.Schedules.start_Time}</td>
-                    <td>
-                    <button className="delete-button" onClick={() => handleDelete(doctor.id)}>
-                          <FontAwesomeIcon icon={faTrash} /> 
-                        </button>
-                    </td>
-                  </tr>
+        {!loading && (
+          <div>
+            <div className="search-bar">
+              <label className="search" htmlFor="selectDoctor">Doctor:</label>
+              <select
+                id="selectDoctor"
+                value={selectedDoctor}
+                onChange={handleDoctorChange}
+              >
+                <option value="">Todos</option>
+                {doctors.map((doctor) => (
+                  <option key={doctor.id} value={doctor.fullName}>
+                    {doctor.fullName}
+                  </option>
                 ))}
-              </tbody>
-            </table>
+              </select>
+
+              <label className="search" htmlFor="selectDay">Día:</label>
+              <input
+                type="date"
+                id="selectDay"
+                value={selectedDay}
+                onChange={handleDayChange}
+              />
+            </div>
+            <div className="tableContainer">
+              <table className="Table">
+                <thead>
+                  <tr>
+                    <th>Doctor</th>
+                    <th>Paciente</th>
+                    <th>Telefono Paciente</th>
+                    <th>Fecha Turno</th>
+                    <th>Horario Turno</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredShiffs.map((shiff) => (
+                    <tr key={shiff.id}>
+                      <td>{shiff.Schedules.fullName || "N/A"}</td>
+                      <td>{shiff.patient.fullName}</td>
+                      <td>{shiff.patient.phone}</td>
+                      <td>{formatDate(shiff.Schedules.day)}</td>
+                      <td>{shiff.Schedules.start_Time}</td>
+                      <td>
+                        <button className="delete-button" onClick={() => handleDelete(shiff.id)}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </>
+        )}
       </div>
     </>
   );
