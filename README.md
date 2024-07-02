@@ -68,3 +68,90 @@ USER_DB_PASSWORD=
 PORT=
 DB_NAME=
 
+Base de Datos
+Entidades Principales
+Admin
+Representa a los administradores de la aplicación.
+
+Coverage
+Representa las coberturas médicas disponibles.
+
+Person
+Clase base que contiene atributos comunes a las entidades Doctor y Patient.
+
+Doctor
+Hereda de Person y representa a los profesionales médicos registrados en la aplicación.
+
+Patient
+Hereda de Person y representa a los pacientes registrados en la aplicación.
+
+Schedule
+Representa los horarios de consulta programados para los doctores.
+
+Shiff
+Representa los turnos asignados a los pacientes en horarios específicos.
+
+Speciality
+Representa las especialidades médicas disponibles.
+
+Estructura del Proyecto
+Backend (NestJS)
+
+src/
+|-- controllers/
+|-- services/
+|-- models/
+
+Frontend (React)
+plaintext
+Copiar código
+src/
+|-- components/
+|   |-- AboutUs/
+|   |-- Contact/
+|   |-- Home/
+|   |-- Navbar/
+|   |-- Professionals/
+|   |-- Services/
+|-- pages/
+|-- App.jsx
+|-- main.jsx
+Componentes
+AboutUs
+Descripción del equipo y misión de SaludNet.
+
+Contact
+Formulario de contacto para que los usuarios puedan enviar mensajes.
+
+Home
+Página principal con introducción y funcionalidades destacadas.
+
+
+Professionals
+Muestra la lista de profesionales médicos disponibles y sus detalles.
+
+
+
+Scripts en package.json
+json
+Copiar código
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+API Documentation
+
+
+Testing
+
+npm run test
+npm run test:e2e
+npm run test:cov
+Referencias
+Node.js
+NestJS
+React
+SQL
+
+Creadores: Marina Erasun, Ignacio Molina, Manuel Severo, Karina D'Espósito
