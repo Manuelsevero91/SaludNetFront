@@ -135,8 +135,8 @@ table tr.deleted-doctor {
   justify-content: center;
   align-items: center;
   background-color: rgba(44, 99, 103, 0.6);
-  height: 50%;
-  width: 30%;
+  height: 40%;
+  width: 40%;
   position: absolute;
   top: 35%;
   left: 50%;

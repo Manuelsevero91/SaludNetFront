@@ -60,7 +60,7 @@ function App() {
             <Route path="/ObrasSociales" element={<Coverage />} />
             <Route path="/VerTurnos" element={<VerTurnos />} />
             <Route path="/EliminarAgenda" element={<DeleteSchedule />} />
-            <Route path="/EliminarUnaAgenda" element={<DeleteOneSchedule />} />
+            {/* <Route path="/EliminarUnaAgenda" element={<DeleteOneSchedule />} /> */}
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />

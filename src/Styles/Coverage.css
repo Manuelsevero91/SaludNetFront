@@ -61,3 +61,8 @@
     transform: translate(-50%, -25%);
   }
 }
+.coverageColumn{
+  display: flex;
+flex-direction: column;
+  width: auto;
+}

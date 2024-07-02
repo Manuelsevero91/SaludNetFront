@@ -111,7 +111,7 @@ const Admin = () => {
         />
       </div>
 
-      <Footer />
+   
     </>
   );
 };

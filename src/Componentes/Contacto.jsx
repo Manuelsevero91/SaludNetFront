@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const Contacto = () => {
