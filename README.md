@@ -197,24 +197,33 @@ src/
 |-- pages/
 |-- ...
 Componentes
-Contacto.jsx
-Coverage.jsx
-CreateSchedule.jsx
-CreateSpeciality.jsx
-DeleteOneSchedule.jsx
-DeleteSchedule.jsx
-EditShifts.jsx
+Contacto.jsx datos del lugar
+Coverage.jsx agrega obras sociales
+CreateSchedule.jsx crea los turnos disponibles para un doctor
+CreateSpeciality.jsx crea la especialidad del doctor
+DeleteOneSchedule.jsx elimina un turno disponible
+DeleteSchedule.jsx elimina un turno disponible
+EditShifts.jsx elimina turnos reservados
 Footer.jsx
 FormPatient.jsx
-FormProfesionals.jsx
-ListProfesionals.jsx
-Marketing.jsx
+FormProfesionals.jsx Crea un doctor
+ListProfesionals.jsx edita datos del doctor
+Marketing.jsx diseño
 NavBar.jsx
 SpanContinue.jsx
 Spinner.jsx
 UserContext.jsx
-VerTurnos.jsx
+VerTurnos.jsx listado de turnos reservados por día y doctor
 
+Pages
 
+Admin.jsx
+Home.jsx
+Login.jsx
+NotFound.jsx
+Novedades.jsx
+Profesionales.jsx
+SobreNosotros.jsx
+Turnos.jsx
 
 
