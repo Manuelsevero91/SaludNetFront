@@ -26,7 +26,9 @@ const EditShiffs = () => {
           patientRes.json(),
           doctorRes.json(),
         ]);
-
+        console.log('Shiff Data:', shiffData);
+        console.log('Patient Data:', patientData);
+        console.log('Doctor Data:', doctorData);
         const combinedData = shiffData.data.map((shiff) => {
           const patient = patientData.data.find(
             (p) => p.id === shiff.Patient.id
@@ -39,6 +41,7 @@ const EditShiffs = () => {
             patient: patient,
             doctor: doctor,
           };
+          
         });
 
         setShiffs(combinedData);
@@ -119,7 +122,7 @@ const EditShiffs = () => {
 
   const filteredShiffs = shiffs
     .filter((shiff) => {
-      if (selectedDoctor && selectedDoctor !== '' && shiff.Schedules.fullName !== selectedDoctor) {
+      if (selectedDoctor && selectedDoctor !== '' && shiff.doctor.fullName !== selectedDoctor) {
         return false;
       }
       if (selectedDay && selectedDay !== '' && new Date(shiff.Schedules.day).toISOString().slice(0, 10) !== selectedDay) {
@@ -177,7 +180,7 @@ const EditShiffs = () => {
                 <tbody>
                   {filteredShiffs.map((shiff) => (
                     <tr key={shiff.id}>
-                      <td>{shiff.Schedules.fullName || "N/A"}</td>
+                      <td>{shiff.doctor?.fullName || "N/A"}</td>
                       <td>{shiff.patient.fullName}</td>
                       <td>{shiff.patient.phone}</td>
                       <td>{formatDate(shiff.Schedules.day)}</td>

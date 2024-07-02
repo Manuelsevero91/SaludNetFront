@@ -1,41 +1,80 @@
-.createForm-Schedule{
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    backdrop-filter: blur(15px);
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 30.5rem;
-    width: 60rem;
-    border-radius: 10px;
- 
-}
-.btnCreateSchedule{
-  font-size: 1.5rem; 
-  cursor: pointer;
-  color: white; 
-  text-shadow: 5px 5px 5px rgb(5, 5, 8);
-width: 50rem;
-text-align: center;
-background-color: transparent;
+.createForm-Schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
   backdrop-filter: blur(15px);
-  background-color: rgba(64,224,208);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+}
+
+.btnCreateSchedule {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  width: 50rem;
+  text-align: center;
+  background-color: rgba(64, 224, 208);
   border-radius: 10px;
   padding-top: .5rem;
 }
+
 .selected {
   background-color: #90ee90 !important;
 }
-.inputContainerSchedule{
+
+.inputContainerSchedule {
   display: flex;
   flex-direction: row;
-  justify-content:left;
+  justify-content: left;
   align-items: center;
 }
-.inputSchedule{
-width: 1rem;
-padding-left: 4rem;
+
+.inputSchedule {
+  width: 1rem;
+
+}
+
+@media (max-width: 768px) {
+  .btnCreateSchedule {
+      width: 80%;
+      font-size: 1rem;
+      height: auto;
+  }
+
+  .inputContainerSchedule {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .inputSchedule {
+      width: 80%;
+ 
+    
+}
 
 
+@media (max-width: 320px) {
+  .btnCreateSchedule {
+      width: 100%;
+      font-size: 1rem;
+  }
+
+  .inputContainerSchedule {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .inputSchedule {
+      width: 100%;
+    
+    
+  }
+}
 }
