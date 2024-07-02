@@ -1,0 +1,15 @@
+.form-overlay {
+  position: relative;
+  margin: 0;
+  width: 100vw;
+  height:83vh; 
+  background-image: url("../assets/Consultorio.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+

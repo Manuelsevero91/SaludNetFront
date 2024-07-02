@@ -1,0 +1,81 @@
+.edit-button,
+.delete-button,
+.add-button {
+  color: white;
+  padding: 0.5rem;
+  font-size: medium;
+  border-radius: 8px;
+  padding: 1rem;
+  width: auto;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  border: hidden;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.edit-button {
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: small;
+    margin: 0.25rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    padding: 0.25rem;
+    font-size: x-small;
+    margin: 0.1rem;
+  }
+}
+
+.delete-button {
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: small;
+    margin: 0.25rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    padding: 0.25rem;
+    font-size: x-small;
+    margin: 0.1rem;
+  }
+}
+
+.add-button {
+  @media screen and (max-width: 768px) {
+    padding: 0.5rem;
+    font-size: small;
+    margin: 0.25rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    padding: 0.25rem;
+    font-size: x-small;
+    margin: 0.1rem;
+  }
+}
+
+.edit-button {
+  background-color: #5ba848;
+}
+.delete-button {
+  background-color: #d8763d;
+}
+
+.add-button {
+  background-color: rgb(149, 26, 231);
+
+}
+
+.remove-coverage-button{
+  background-color: #d8763d;color: white;
+  padding: 0.2rem;
+  font-size: smaller;
+  border-radius: 8px;
+  padding: 0.3rem;
+  width: auto;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  border: hidden;
+  cursor: pointer;
+  margin: .2rem;
+}

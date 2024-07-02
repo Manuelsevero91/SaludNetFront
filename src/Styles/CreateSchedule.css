@@ -1,0 +1,85 @@
+.createDeleteForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .createDeleteForm {
+    width: 80%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .createDeleteForm {
+    width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+
+.selected {
+  background-color: #90ee90 !important;
+}
+
+.inputContainerSchedule {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 25rem;
+ gap: 1rem;
+  margin: 1rem;
+}
+
+.inputSchedule {
+  width: 15rem;
+}
+
+@media (max-width: 768px) {
+  .btnCreateSchedule {
+    width: 80%;
+    font-size: 1rem;
+    height: auto;
+  }
+
+  .inputContainerSchedule {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: .5rem;
+  
+  }
+
+  .inputSchedule {
+    width: 80%;
+    padding: .5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .btnCreateSchedule {
+    width: 100%;
+    font-size: rem;
+  }
+
+  .inputContainerSchedule {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .inputSchedule {
+    width: 80%;
+  }
+}

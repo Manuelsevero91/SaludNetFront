@@ -1,0 +1,49 @@
+.options {
+   position: absolute;
+   display: flex; 
+   flex-direction: column;
+   flex-wrap: nowrap;
+   gap: 1rem;
+   align-content: center;
+   justify-content:center; 
+   align-items: center;
+   top: calc(10% + 1px);
+   left: calc(4% + 1px);
+   width: 90%;
+   height: 70%;
+   background-color: transparent;
+   backdrop-filter: blur(15px);
+   background-color: rgba(0, 0, 0, 0.2);
+   border-radius: 30px;
+   padding: 0.5rem;
+   box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
+   z-index: 1;
+   text-shadow: 5px 5px 5px rgb(3, 3, 3);
+ }
+ 
+ @media screen and (max-width: 768px) {
+   .options {
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 80%;    
+     height: auto;
+     gap: .5rem;
+     top: 2rem;
+     left: calc(6.5% + 1px);
+   }
+ }
+ 
+ @media screen and (max-width: 320px) {
+   .options {
+     flex-direction: column;
+     width: 95%;    
+     height: auto;
+     padding-bottom: 1rem;
+     margin: 0;
+     left: 0;
+     gap: 0.1rem;
+     top: .7rem;
+   }
+ }
+ 

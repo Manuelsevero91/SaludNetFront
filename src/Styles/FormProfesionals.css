@@ -1,0 +1,20 @@
+.createForm-Profesionals{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 30rem;
+  width: 30rem;
+  border-radius: 10px;
+
+}
+
+.list{
+  height: 100%;
+  overflow-x: hidden;
+}
+
+
