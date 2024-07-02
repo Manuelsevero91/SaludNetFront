@@ -11,6 +11,21 @@
   border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+  .createDeleteForm {
+    width: 80%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .createDeleteForm {
+    width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+
 .selected {
   background-color: #90ee90 !important;
 }
@@ -18,12 +33,15 @@
 .inputContainerSchedule {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
+  width: 25rem;
+ gap: 1rem;
+  margin: 1rem;
 }
 
 .inputSchedule {
-  width: 1rem;
+  width: 15rem;
 }
 
 @media (max-width: 768px) {
@@ -37,26 +55,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
+    padding: .5rem;
+  
   }
 
   .inputSchedule {
     width: 80%;
+    padding: .5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .btnCreateSchedule {
+    width: 100%;
+    font-size: rem;
   }
 
-  @media (max-width: 320px) {
-    .btnCreateSchedule {
-      width: 100%;
-      font-size: 1rem;
-    }
+  .inputContainerSchedule {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    .inputContainerSchedule {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  }
 
-    .inputSchedule {
-      width: 100%;
-    }
+  .inputSchedule {
+    width: 80%;
   }
 }
