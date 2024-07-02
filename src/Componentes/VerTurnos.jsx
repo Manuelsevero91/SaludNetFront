@@ -22,7 +22,7 @@ const ShowShiffs = () => {
         // Ordenar los turnos por día
         const sortedShiffs = result.data.sort((a, b) => new Date(a.Schedules.day) - new Date(b.Schedules.day));
         setShiffs(sortedShiffs);
-        console.log(sortedShiffs)
+        
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -89,7 +89,7 @@ const ShowShiffs = () => {
     if (selectedDay && selectedDay !== '' && new Date(shiff.Schedules.day).toISOString().slice(0, 10) !== selectedDay) {
       return false;
     }
-    console.log(shiff.Schedules)
+    
     return true;
    
   });
@@ -147,8 +147,7 @@ const ShowShiffs = () => {
                       <td>{formatDate(shiff.Schedules?.day) || 'N/A'}</td>
                       <td>{shiff.Schedules?.start_Time || 'N/A'}</td>
                       <td>{shiff.Schedules.fullName || 'N/A'}</td>
-                      <td>{shiff.Patient?.fullName || 'N/A'}</td>
-                      
+                      <td>{shiff.Patient?.fullName || 'N/A'}</td> 
                     </tr>
                   ))}
                 </tbody>
