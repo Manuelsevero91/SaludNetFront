@@ -13,11 +13,11 @@ const ListProfesionals = () => {
   const [showModal, setShowModal] = useState(false);
   const [showCoverageModal, setShowCoverageModal] = useState(false);
   const [editData, setEditData] = useState({
-    id: "",
+    id: 0,
     fullName: "",
     mail: "",
     phone: "",
-    speciality: { id: "", name: "" },
+    speciality: { id: 0, name: "" },
     license: "",
     coverages: [],
   });
@@ -25,7 +25,7 @@ const ListProfesionals = () => {
   const [searchName, setSearchName] = useState("");
   const [searchSpeciality, setSearchSpeciality] = useState("");
   const [coverages, setCoverages] = useState([]);
-  const [selectedCoverage, setSelectedCoverage] = useState([]);
+  const [selectedCoverage, setSelectedCoverage] = useState("");
   const [actualDoctorId, setActualDoctorId] = useState(null);
   
   useEffect(() => {
@@ -34,9 +34,7 @@ const ListProfesionals = () => {
         const listDoctors = await fetch("http://localhost:3000/doctors");
         const response = await listDoctors.json();
         setDoctors(response.data);
-      
-          setLoading(false);
-             
+        setLoading(false); 
       } catch (error) {
         Swal.fire({
           text: "No se pudo obtener la lista de profesionales",
@@ -83,6 +81,7 @@ const ListProfesionals = () => {
     fetchSpecialities();
     fetchCoverage();
   }, []);  
+
   const openModal = (doctor) => {
     setEditData(doctor);
     setShowModal(true);
@@ -90,27 +89,24 @@ const ListProfesionals = () => {
   const closeModal = () => {
     setShowModal(false);
     setEditData({
-      id: "",
+      id: 0,
       fullName: "",
       mail: "",
       phone: "",
-      speciality: { id: "", name: "" },
+      speciality: { id: 0, name: "" },
       license: "",
       coverages: [],
     });
-    window.location.reload();
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "speciality") {
       const selectedSpeciality = specialities.find(
-        (speciality) => speciality.id === value
+        (speciality) => speciality.id === parseInt(value)
       );
       setEditData((prevData) => ({
         ...prevData,
-        speciality: selectedSpeciality
-          ? { id: selectedSpeciality.id, name: selectedSpeciality.name }
-          : { id: "", name: "" },
+        speciality: selectedSpeciality || { id: 0, name: "" },
       }));
     } else {
       setEditData((prevData) => ({
@@ -119,38 +115,54 @@ const ListProfesionals = () => {
       }));
     }
     };
-  const handleSave = async (e) => {
-    e.preventDefault();
-    const { id, fullName, mail, phone, speciality, license } = editData;
-    const updateDoctor = {
-      fullName,
-      mail,
-      phone,
-      speciality: { id: speciality.id, name: speciality.name },
-      license,
-    };
-    try {
-      const response = await fetch(`http://localhost:3000/doctors/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updateDoctor),
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      setDoctors(doctors.map((doc) => (doc.id === id ? data.data : doc)));
-     
-      closeModal();
+    const handleSave = async (e) => {
+      e.preventDefault();
+      const { id, fullName, mail, phone, speciality, license } = editData;
+      const updateDoctor = {
+        id, 
+        fullName,
+        mail,
+        phone,
+        speciality: { id: speciality.id, name: speciality.name },
+        license,
+      };
+    
+      try {
+        const response = await fetch(`http://localhost:3000/doctors/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateDoctor),
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+    
+        // Actualiza la lista de doctores solo si la solicitud PUT fue exitosa
+        setDoctors(doctors.map((doc) => (doc.id === id ? data.data : doc)));
+    
+        Swal.fire({
+          text: "El profesional ha sido actualizado con éxito",
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+            closeModal();}})
+       
       } catch (error) {
-      Swal.fire({
-        text: "El profesional no pudo ser actualizado",
-        icon: "warning",
-      });
-    }
-  };
+        console.error("Error al actualizar el profesional:", error);
+    
+        Swal.fire({
+          text: "El profesional no pudo ser actualizado",
+          icon: "error",
+        });
+      }
+    };
+    
   const handleDelete = async (id) => {
     const result = await Swal.fire({    
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
@@ -205,7 +217,7 @@ const handleAddCoverage = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ doctorId: actualDoctorId, coverageId: selectedCoverage }),
+      body: JSON.stringify({ doctorId: actualDoctorId, coverageId: [selectedCoverage] }),
     });
     if (!response.ok) {
       throw new Error(`Error agregando obras sociales: ${response.status}`);
@@ -214,11 +226,12 @@ const handleAddCoverage = async () => {
     setDoctors(doctors.map((doc) => (doc.id === actualDoctorId ? data.data : doc)));
     closeCoverageModal();
   } catch (error) {
-   Swal.fire(
-        "Error!",
-        "Hubo un error al intentar agregar obras sociales",
-        "error"
-      );
+    console.error(error);
+    Swal.fire(
+      "Error!",
+      "Hubo un error al intentar agregar obras sociales",
+      "error"
+    );
   }
 };
 const handleRemoveCoverage = async (coverageIdToRemove) => {
@@ -246,14 +259,7 @@ const handleRemoveCoverage = async (coverageIdToRemove) => {
 };
 
 const handleCoverageChange = (e) => {
-const { value, checked } = e.target;
-const coverageId = Number(value);
-
-if (checked) {
-  setSelectedCoverage([...selectedCoverage, coverageId]);
-} else {
-  handleRemoveCoverage(coverageId);
-}
+  setSelectedCoverage(e.target.value);
 };
 
 if (loading) {
@@ -273,7 +279,6 @@ const filteredDoctors = doctors.filter((doctor) => {
 
   return (
     <>
-  
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: editar/eliminar</h2>
@@ -295,7 +300,7 @@ const filteredDoctors = doctors.filter((doctor) => {
         >
           <option value="">Todas</option>
           {specialities.map((speciality) => (
-            <option key={speciality.id} value={speciality.name}>
+            <option key={speciality.id} value={speciality.id}>
               {speciality.name}
             </option>
           ))}
@@ -313,6 +318,7 @@ const filteredDoctors = doctors.filter((doctor) => {
                 <th>Teléfono</th>
                 <th>Especialidad</th>
                 <th>Licencia</th>
+                <th>Coberturas</th>
                 <th></th>
                 <th>Acciones</th>
               </tr>
@@ -414,35 +420,22 @@ const filteredDoctors = doctors.filter((doctor) => {
 
   <h2>Agregar obras sociales al profesional</h2>
   <form className="createForm" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
+  <select id="coverageSelect" value={selectedCoverage} onChange={handleCoverageChange}>
+  <option value="">Seleccionar cobertura</option>
     {coverages.map((coverage) => (
-      <div  key={coverage.id}>
-       <div className="checkCoverages">
-
-        <label>
-          <input
-            type="checkbox"
-            value={coverage.id}
-            checked={selectedCoverage.includes(coverage.id)}
-            onChange={handleCoverageChange}
-          />
-          {coverage.coverages}
-        </label>
-      </div>
-
-      </div>
-    ))}
-     <div className="btn-container">
-
+       <option key={coverage.id} value={coverage.id}>
+       {coverage.coverages}
+     </option>
+   ))}
+ </select>
+ <div className="btn-container">
     <button className="btn" type="submit">
       Guardar
     </button>
     <button className="btn" type="button" onClick={closeCoverageModal}>
       Cancelar
     </button>
-
-    </div>
-
-
+  </div>
   </form>
 </Modal>
    </div>
