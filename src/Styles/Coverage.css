@@ -5,11 +5,9 @@
 
 .tableContainerCoverage {
   width: 50%;
-  display: flex;
   justify-content: center;
-  align-items: flex-start;
+align-content: center;
   height: auto;
-  overflow-y: auto;
 }
 .formCoverageProf {
   display: flex;
@@ -39,7 +37,7 @@
   position: absolute;
   top: 35%;
   left: 50%;
-  transform: translate(-50%, -20%);
+  transform: translate(-50%, -50%);
   border-radius: 20px;
   padding: 2rem;
 }
