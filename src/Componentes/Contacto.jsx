@@ -16,8 +16,10 @@ const Contacto = () => {
       <div className="container">
         <div className="information-container">       
            <h2>INFORMACIÓN DE SALUD NET</h2> 
-           <p>sljvnsafvn</p> 
-           <p>sljvnsafvn</p> 
+           <p>saludnetbenitojuarez@gmail.com</p> 
+           <p>Tel: 02292-451751  Cel:2281457000</p> 
+           <p>#saludnetbj &nbsp; &nbsp; &nbsp; &nbsp;facebook.com/saludnet.bj</p>            
+           <p>Cayetano Zibecchi 74, Benito Juárez, Buenos Aires, Argentina</p> 
            <div className="social-icons-information">
         <a href="https://www.facebook.com/" className="social-icon">
           <FontAwesomeIcon icon={faFacebook} />

@@ -22,9 +22,7 @@ function FormProfesionals() {
             "Error al obtener las especialidades: " + response.status
           );
         }
-
         const responseData = await response.json();
-
         setSpecialities(responseData.data);
       } catch (error) {
         Swal.fire({
@@ -33,7 +31,6 @@ function FormProfesionals() {
         });
       }
     };
-
     fetchSpecialities();
   }, []);
 
@@ -60,10 +57,9 @@ function FormProfesionals() {
       });
 
       if (response.ok) {
-
         Swal.fire({
           html: "<span class='custom-swal-title'>El profesional ha sido agregado con éxito,</span>",
-          icon: "success"
+          icon: "success",
         });
 
         setError("");
@@ -89,7 +85,6 @@ function FormProfesionals() {
         icon: "error",
       });
 
-       
       setSuccess("");
     }
   };
@@ -103,7 +98,6 @@ function FormProfesionals() {
       <NavBar showLinks={true} />
       <div className="barra-superior">
         <h2 className="titulo-section">Administrar Profesionales: registrar</h2>
-       
       </div>
       <div className="formContainer">
         <form className="createForm" onSubmit={handleSubmit}>
