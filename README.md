@@ -185,20 +185,35 @@ findOneSpeciality - Encontrar una especialidad por ID
 updateSpeciality - Actualizar una especialidad por ID
 deleteSpeciality - Eliminar una especialidad por ID
 
+Testing
+npm run test
+npm run test:e2e
+npm run test:cov
+
 Frontend (React)
 Estructura del Proyecto
 src/
 |-- components/
 |-- pages/
 |-- ...
-
-Testing
-npm run test
-npm run test:e2e
-npm run test:cov
-
-
-
+Componentes
+Contacto.jsx
+Coverage.jsx
+CreateSchedule.jsx
+CreateSpeciality.jsx
+DeleteOneSchedule.jsx
+DeleteSchedule.jsx
+EditShifts.jsx
+Footer.jsx
+FormPatient.jsx
+FormProfesionals.jsx
+ListProfesionals.jsx
+Marketing.jsx
+NavBar.jsx
+SpanContinue.jsx
+Spinner.jsx
+UserContext.jsx
+VerTurnos.jsx
 
 
 
