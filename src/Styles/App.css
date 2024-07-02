@@ -46,7 +46,7 @@ label,th {
 }
 input,
 select {
-  width: 20rem;
+  width: auto;
   min-width: 14rem;
   padding: .7rem;
   border-radius: 10px;

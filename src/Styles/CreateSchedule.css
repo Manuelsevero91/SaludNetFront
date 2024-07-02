@@ -1,4 +1,4 @@
-.createForm-Schedule {
+.createDeleteForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,18 +9,6 @@
   height: auto;
   width: auto;
   border-radius: 10px;
-}
-
-.btnCreateSchedule {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: white;
-  text-shadow: 5px 5px 5px rgb(5, 5, 8);
-  width: 50rem;
-  text-align: center;
-  background-color: rgba(64, 224, 208);
-  border-radius: 10px;
-  padding-top: .5rem;
 }
 
 .selected {
@@ -36,45 +24,39 @@
 
 .inputSchedule {
   width: 1rem;
-
 }
 
 @media (max-width: 768px) {
   .btnCreateSchedule {
-      width: 80%;
-      font-size: 1rem;
-      height: auto;
+    width: 80%;
+    font-size: 1rem;
+    height: auto;
   }
 
   .inputContainerSchedule {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .inputSchedule {
-      width: 80%;
- 
-    
-}
+    width: 80%;
+  }
 
-
-@media (max-width: 320px) {
-  .btnCreateSchedule {
+  @media (max-width: 320px) {
+    .btnCreateSchedule {
       width: 100%;
       font-size: 1rem;
-  }
+    }
 
-  .inputContainerSchedule {
+    .inputContainerSchedule {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-  }
+    }
 
-  .inputSchedule {
+    .inputSchedule {
       width: 100%;
-    
-    
+    }
   }
-}
 }

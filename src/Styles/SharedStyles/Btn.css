@@ -20,3 +20,14 @@
   align-items: center;
   justify-content: space-evenly;
 }
+.btnCreateDelete{
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  text-shadow: 5px 5px 5px rgb(5, 5, 8);
+  width: 50rem;
+  text-align: center;
+  background-color: rgba(64, 224, 208);
+  border-radius: 10px;
+  padding-top: .5rem;
+}

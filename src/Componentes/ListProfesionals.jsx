@@ -411,9 +411,9 @@ const filteredDoctors = doctors.filter((doctor) => {
         </form>
       </Modal>
       <Modal className="formContainerModal" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
-
+<div className="addCoverageProf">
   <h2>Agregar obras sociales al profesional</h2>
-  <form className="createForm" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
+  <form className="formCoverageProf" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
     {coverages.map((coverage) => (
       <div  key={coverage.id}>
        <div className="checkCoverages">
@@ -428,22 +428,18 @@ const filteredDoctors = doctors.filter((doctor) => {
           {coverage.coverages}
         </label>
       </div>
-
       </div>
     ))}
-     <div className="btn-container">
-
-    <button className="btn" type="submit">
+     <div className="btn-containerCoverage">
+    <button className="btnCreateDelete" type="submit">
       Guardar
     </button>
-    <button className="btn" type="button" onClick={closeCoverageModal}>
+    <button className="btnCreateDelete" type="button" onClick={closeCoverageModal}>
       Cancelar
     </button>
-
     </div>
-
-
   </form>
+  </div>
 </Modal>
    </div>
 </>
