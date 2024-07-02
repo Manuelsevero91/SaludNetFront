@@ -1,17 +1,30 @@
+.checkCoverages {
+  display: flex;
+  align-items: center;
+}
 
-  .checkCoverages{
-    display: block;
+.tableContainerCoverage {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+  overflow-y: auto;
+}
+.formCoverageProf {
+  display: flex;
   flex-direction: column;
-  
-  }
-  
- 
-  
-  .tableContainerCoverage {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: auto;
-    overflow-y: auto;
-  }
+  padding-bottom: 2rem;
+}
+.addCoverageProf {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.btn-containerCoverage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 50%;
+  gap: 1.5rem;
+}

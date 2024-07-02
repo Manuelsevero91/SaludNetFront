@@ -1,20 +1,23 @@
 .options {
     position: absolute;
     display: flex; 
-    justify-content:space-between; 
+ flex-wrap: nowrap;
+ align-content: center;
+    justify-content:space-evenly; 
     align-items: center;
-    top: calc(5% + 5px);
-    width:80%;
-    height: 50%;
+    top: calc(10% + 15px);
+    left:calc(4% + 10px);
+    width:90%;
+    height: 70%;
     background-color: transparent;
     backdrop-filter: blur(15px);
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
-    padding:.2rem;
+    border-radius: 30px;
+   padding: .5rem;
     box-shadow: 0 4px 8vw rgba(48, 44, 44, 0.978);
     z-index: 1;
     text-shadow: 5px 5px 5px rgb(3, 3, 3);
-    margin-left: 3vw;
+  
     @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
