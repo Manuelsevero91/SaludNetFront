@@ -207,7 +207,7 @@ const CreateSchedule = () => {
         interval: interval.toString(),
       };
 
-      console.log("Sending scheduleData:", scheduleData);
+   
 
       try {
         const response = await fetch('http://localhost:3000/schedules', {
@@ -232,14 +232,14 @@ const CreateSchedule = () => {
       const responses = await Promise.all(requests);
       const successfulResponses = responses.filter((res) => res.status === 201);
       if (successfulResponses.length > 0) {
-        setSuccess(`Se han creado ${successfulResponses.length} horarios exitosamente`);
+     
         Swal.fire({
           icon: 'success',
           html: '<span>Éxito</span>',
           text: `Se han creado ${successfulResponses.length} horarios exitosamente`,
         });
       } else {
-        setError("No se pudo crear ningún horario");
+      
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
@@ -247,7 +247,7 @@ const CreateSchedule = () => {
         });
       }
     } catch (err) {
-      setError("Hubo un error al crear los horarios");
+      
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
