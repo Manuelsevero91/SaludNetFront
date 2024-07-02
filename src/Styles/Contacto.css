@@ -6,13 +6,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 31.35rem;    
+    height: 31.45rem;  
+    min-height:31.45rem;
   }
   .information-container{  
     display: flex;
     flex-direction: column;
-    height: 17rem;
-    width: 30rem;    
+    height: auto;
+    width: auto;  
+    padding: 1rem;  
     align-items: center;
     justify-content: center;
   background-color: transparent;

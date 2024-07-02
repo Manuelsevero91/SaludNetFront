@@ -104,7 +104,7 @@ const DeleteOneSchedule = () => {
             </div>
           </div>
           <button className="btn" type="submit">
-            Eliminar Agenda
+            Eliminar turno
           </button>
         </form>
       </div>

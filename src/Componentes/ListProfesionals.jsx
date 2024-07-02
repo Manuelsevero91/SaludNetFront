@@ -358,7 +358,7 @@ const filteredDoctors = doctors.filter((doctor) => {
       </div>
       )}
       <Modal className="formContainerModal" isOpen={showModal} onRequestClose={closeModal} >      
-       <form className="createForm-Profesionals" onSubmit={handleSave}>
+       <form className="formModal" onSubmit={handleSave}>
           <label htmlFor="fullName">Nombre y Apellido</label>
           <input
             type="text"
@@ -410,7 +410,7 @@ const filteredDoctors = doctors.filter((doctor) => {
           </div>
         </form>
       </Modal>
-      <Modal className="formContainerModal" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
+      <Modal className="formContainerModalCoverage" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
 <div className="addCoverageProf">
   <h2>Agregar obras sociales al profesional</h2>
   <form className="formCoverageProf" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>

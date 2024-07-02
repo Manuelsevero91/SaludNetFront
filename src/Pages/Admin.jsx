@@ -91,10 +91,8 @@ const Admin = () => {
           options={[
             {
               label: "Eliminar turnos reservados",
-              //acá hay que poner la ruta de shiff,
               link: "/EliminarTurnos",
             },
-            // { label: "Enviar confirmación", link: "/enviar confirmacion" },
             {
               label: "Reservar turno",
               link: "/Turnos",
@@ -108,8 +106,7 @@ const Admin = () => {
             {
               label: "Listado de turnos por profesional",
               link: "/VerTurnos",
-            }
-            
+            },
           ]}
         />
       </div>

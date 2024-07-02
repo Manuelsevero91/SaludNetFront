@@ -85,6 +85,9 @@ const CreateSchedule = () => {
           icon: 'success',
           html: '<span>Se creó la agenda con éxito</span>',
           text: `Se han creado ${successfulResponses.length} horarios exitosamente`,
+        })
+        .then(() => {
+          window.location.reload(); 
         });
       } else {
       
