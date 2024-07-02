@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Spinner from "../Componentes/Spinner";
 import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
+import logoSN from '../assets/logosaludnet.png';
 
 const Turnos = () => {
   const [patientData, setPatientData] = useState({
@@ -186,7 +187,14 @@ const Turnos = () => {
         throw new Error(await shiffResponse.text());
       }
 
-      Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
+      Swal.fire({
+        imageUrl: logoSN,
+        imageHeight: 250,
+        imageWidth: 250,
+        html: `<p>Ud a reservado turno con éxito</p> `,
+        timer: 3000,
+      })
+      .then(
         () => {
           window.location.reload();
         }
