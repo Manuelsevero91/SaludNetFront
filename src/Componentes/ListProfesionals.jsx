@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import NavBar from '../Componentes/NavBar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSort, faPenToSquare, faTrash, faSearch , faEdit, faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faXmark , faPlus} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Spinner from "../Componentes/Spinner";
 
@@ -142,7 +142,7 @@ const ListProfesionals = () => {
     
         const data = await response.json();
     
-        // Actualiza la lista de doctores solo si la solicitud PUT fue exitosa
+       
         setDoctors(doctors.map((doc) => (doc.id === id ? data.data : doc)));
     
         Swal.fire({
@@ -234,7 +234,7 @@ const handleAddCoverage = async () => {
     );
   }
 };
-const handleRemoveCoverage = async (coverageIdToRemove) => {
+const handleRemoveCoverage = async (actualDoctorId, coverageIdToRemove) => {
   try {
     const response = await fetch(`http://localhost:3000/doctors/remove/coverage`, {
       method: "DELETE",
@@ -333,7 +333,17 @@ const filteredDoctors = doctors.filter((doctor) => {
                   <td>{doctor.license}</td>
                   <td>
                     {doctor.coverages && doctor.coverages.length > 0 ? (
-                      doctor.coverages.map((coverage) => coverage.coverages).join(", ")
+                      doctor.coverages.map((coverage) => (
+                        <div key={coverage.id}>
+                          {coverage.coverages}
+                          <button
+                            className="remove-coverage-button"
+                            onClick={() => handleRemoveCoverage(doctor.id, coverage.id)}
+                          >
+                           <FontAwesomeIcon icon={faXmark} />
+                          </button>
+                        </div>
+                      ))
                     ) : (
                       "Sin coberturas"
                     )}
