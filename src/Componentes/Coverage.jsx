@@ -103,14 +103,20 @@ function ListCoverage() {
       const data = await response.json();
       setCoverages((prevCoverages) =>
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
+    
       );
       closeModal();
       Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); 
+      
     } catch (error) {
       Swal.fire({
         text: "La obra social no pudo ser actualizada",
         icon: "warning",
       });
+      
     }
   };
 
