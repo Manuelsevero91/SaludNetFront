@@ -1,4 +1,4 @@
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./Styles/App.css";
 import "./Styles/Home.css";
 import "./Styles/Form.css";
@@ -67,9 +67,9 @@ function App() {
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
 
-        
 
-       
+
+
         </Routes>
       </UserProvider>
 

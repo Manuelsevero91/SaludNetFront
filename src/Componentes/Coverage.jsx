@@ -14,7 +14,7 @@ function ListCoverage() {
     coverages: "",
   });
   const [newCoverage, setNewCoverage] = useState("");
-  
+
   useEffect(() => {
     const fetchCoverage = async () => {
       try {
@@ -103,20 +103,20 @@ function ListCoverage() {
       const data = await response.json();
       setCoverages((prevCoverages) =>
         prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
-    
+
       );
       closeModal();
       Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" });
       setTimeout(() => {
         window.location.reload();
-      }, 1000); 
-      
+      }, 1000);
+
     } catch (error) {
       Swal.fire({
         text: "La obra social no pudo ser actualizada",
         icon: "warning",
       });
-      
+
     }
   };
 
@@ -135,12 +135,12 @@ function ListCoverage() {
         const response = await fetch(`http://localhost:3000/coverage/${id}`, {
           method: "DELETE",
         });
-  
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || "Algo salió mal");
         }
-  
+
         setCoverages((prevCoverages) =>
           prevCoverages.filter((cov) => cov.id !== id)
         );
@@ -178,40 +178,40 @@ function ListCoverage() {
             </button>
           </div>
           <div className="tableContainer">
-          <div className="tableContainerCoverage">
-            <table>
-              <thead>
-                <tr>
-                  <th>Obra social</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {coverages.map((coverage) => (
-                  <tr key={coverage.id}>
-                    <td>{coverage.coverages}</td>
-                    <td>
-                      <button
-                        className="edit-button"
-                        onClick={() => openModal(coverage)}
-                      >
-                        <FontAwesomeIcon icon={faEdit} />Editar
-                      
-                      </button>
-
-                      <button
-                        className="delete-button"
-                        onClick={() => handleDelete(coverage.id)}
-                      >
-                         <FontAwesomeIcon icon={faTrash} />Eliminar
-                        
-                      </button>
-                    </td>
+            <div className="tableContainerCoverage">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Obra social</th>
+                    <th>Acciones</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {coverages.map((coverage) => (
+                    <tr key={coverage.id}>
+                      <td>{coverage.coverages}</td>
+                      <td>
+                        <button
+                          className="edit-button"
+                          onClick={() => openModal(coverage)}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />Editar
+
+                        </button>
+
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDelete(coverage.id)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} />Eliminar
+
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           <Modal
             className="formContainerModal"
@@ -219,7 +219,7 @@ function ListCoverage() {
             onRequestClose={closeModal}
             contentLabel="Editar obra social"
           >
-             <h3>Editar Obra Social</h3>
+            <h3>Editar Obra Social</h3>
             <form onSubmit={handleEditCoverage}>
               <input
                 type="text"
@@ -227,7 +227,7 @@ function ListCoverage() {
                 value={editData.coverages}
                 onChange={handleChange}
               />
-              <button className="edit-button"  type="submit">Guardar cambios</button>
+              <button className="edit-button" type="submit">Guardar cambios</button>
               <button className="delete-button" type="button" onClick={closeModal}>
                 Cancelar
               </button>

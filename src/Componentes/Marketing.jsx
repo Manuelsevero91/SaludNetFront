@@ -11,7 +11,7 @@ const Marketing = () => {
           </div>
         </Link>
       </div>
-      
+
       <div className="box" style={{ backgroundImage: `url(https://www.shutterstock.com/image-illustration/top-view-medical-stethoscope-icon-600nw-2075382679.jpg)` }}>
         <Link to="/novedades">
           <div className="title-wrapper">
@@ -19,7 +19,7 @@ const Marketing = () => {
           </div>
         </Link>
       </div>
-      
+
       <div className="box" style={{ backgroundImage: `url(https://bancosdeimagenes.com/wp-content/uploads/2019/03/Getty-Medical-Category-768x443-1.jpg)` }}>
         <Link to="/turnos">
           <div className="title-wrapper">
@@ -27,7 +27,7 @@ const Marketing = () => {
           </div>
         </Link>
       </div>
-      
+
       <div className="box" style={{ backgroundImage: `url(https://img.freepik.com/fotos-premium/diversidad-atencion-medica-manos-medicos-asociacion-trabajo-equipo-exito-medicina-apoyo-motivacion-trabajadores-medicos-gesto-mano-mision-ayuda-solidaria-objetivos-colaboracion_590464-153584.jpg)` }}>
         <Link to="/sobre-nosotros">
           <div className="title-wrapper">

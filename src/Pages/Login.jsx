@@ -49,32 +49,32 @@ function Login({ isLoggedIn }) {
 
   return (
     <>
-     <NavBar showLinks={false} />
-     <div className="barra-superior">
+      <NavBar showLinks={false} />
+      <div className="barra-superior">
         <h2 className="titulo-section">Inicio de Sesión</h2>
       </div>
       <div className='formContainer'>
-        <form className= 'createForm' onSubmit={handleSubmit}>
-        <div className="input-container">         
-          <label >Usuario</label>
-          <input className='inputInicio'
-           type="text"
-           name="nombre" 
-           placeholder="Introduzca su nombre" />           
+        <form className='createForm' onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label >Usuario</label>
+            <input className='inputInicio'
+              type="text"
+              name="nombre"
+              placeholder="Introduzca su nombre" />
           </div>
-          <div className="input-container">   
-          <label > Contraseña</label>
-          <input className='inputInicio'
-          type="password" 
-          name="password" 
-          placeholder="Introduzca su contraseña" />  
-          </div>       
+          <div className="input-container">
+            <label > Contraseña</label>
+            <input className='inputInicio'
+              type="password"
+              name="password"
+              placeholder="Introduzca su contraseña" />
+          </div>
           <button className="btn" type="submit">Enviar</button>
         </form>
         {isLoggedIn && <p>Usuario autenticado</p>}
       </div>
     </>
-     );
-    }
+  );
+}
 
 export default Login;

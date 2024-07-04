@@ -194,12 +194,12 @@ const Turnos = () => {
         html: `<p>Ud a reservado turno con éxito</p> `,
         timer: 3000,
       })
-      .then(
-        () => {
-          window.location.reload();
-        }
+        .then(
+          () => {
+            window.location.reload();
+          }
 
-      );
+        );
     } catch (error) {
       if (error.message.includes("El paciente con DNI")) {
         const errorMessage = JSON.parse(error.message);

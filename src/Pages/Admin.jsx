@@ -28,7 +28,7 @@ const Admin = () => {
         style={{ backgroundImage: `url(${imageSrc})` }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        // onClick={onClick}
+      // onClick={onClick}
       >
         <div className="title-wrapper" onClick={handleTitleClick}>
           <h2 style={{ display: isOptionsVisible ? "none" : "block" }}>
@@ -111,7 +111,7 @@ const Admin = () => {
         />
       </div>
 
-   
+
     </>
   );
 };

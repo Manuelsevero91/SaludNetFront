@@ -55,7 +55,7 @@ const CreateSchedule = () => {
         interval: interval.toString(),
       };
 
-   
+
 
       try {
         const response = await fetch('http://localhost:3000/schedules', {
@@ -80,17 +80,17 @@ const CreateSchedule = () => {
       const responses = await Promise.all(requests);
       const successfulResponses = responses.filter((res) => res.status === 201);
       if (successfulResponses.length > 0) {
-     
+
         Swal.fire({
           icon: 'success',
           html: '<span>Se creó la agenda con éxito</span>',
           text: `Se han creado ${successfulResponses.length} horarios exitosamente`,
         })
-        .then(() => {
-          window.location.reload(); 
-        });
+          .then(() => {
+            window.location.reload();
+          });
       } else {
-      
+
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
@@ -98,7 +98,7 @@ const CreateSchedule = () => {
         });
       }
     } catch (err) {
-      
+
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
@@ -159,7 +159,7 @@ const CreateSchedule = () => {
           <button className="btnCreateDelete" type="submit">
             Crear Agenda
           </button>
-          
+
         </form>
       </div>
     </>
