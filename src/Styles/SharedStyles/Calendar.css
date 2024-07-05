@@ -9,7 +9,7 @@
   background-color: turquoise !important;
   border-radius: 10px; 
  
-  margin: .5rem;/* Ajuste automático de altura */
+  margin: .5rem;
 }
 
 .react-calendar__tile--active {
