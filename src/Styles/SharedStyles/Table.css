@@ -1,10 +1,10 @@
 .tableContainer {
   background-color: rgba(44, 99, 103, 0.8);
   display: flex;
-  flex-direction:column;
-    align-items:center;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
-  width:100% ;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -33,8 +33,8 @@ table {
     width: 100%;
     height: auto;
     margin-top: 0.5rem;
-    margin-left: .5rem;
-  margin-right: .5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     @media screen and (max-width: 320px) {
       width: 100%;
       height: auto;
@@ -102,7 +102,7 @@ table td {
   }
 
   table th {
-    display: none; /* Oculta los elementos <th> para pantallas pequeñas */
+    display: none; 
   }
 
   table td {
@@ -137,7 +137,7 @@ table tr.deleted-doctor {
   justify-content: center;
   align-items: center;
   background-color: rgba(44, 99, 103, 0.6);
- height: auto !important;
+  height: auto !important;
   width: 40%;
   position: absolute;
   top: 35%;
@@ -150,7 +150,7 @@ table tr.deleted-doctor {
   .formContainerModal {
     width: 60%;
     height: 100%;
-    top:12rem;
+    top: 12rem;
   }
 }
 
