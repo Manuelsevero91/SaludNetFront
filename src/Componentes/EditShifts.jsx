@@ -73,7 +73,11 @@ const EditShiffs = () => {
           setShiffs((prevShiff) =>
             prevShiff.filter((shiff) => shiff.id !== id)
           );
-          Swal.fire("El Turno ha sido eliminado", "success");
+          Swal.fire({
+            icon: 'success',
+            html: '<span>Se ha eliminado el turno con éxito</span>',
+            
+          })
         }
       } catch {
         Swal.fire(

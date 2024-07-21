@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
 
 const CreateSchedule = () => {
-  const [currentDoctorId, setCurrentDoctorId] = useState("");
+  const [currentLicense, setCurrentLicense] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [interval, setInterval] = useState(30);
@@ -15,7 +15,7 @@ const CreateSchedule = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleDoctorIdChange = (e) => setCurrentDoctorId(e.target.value);
+  const handleLicenseChange = (e) => setCurrentLicense(e.target.value);
   const handleStartTimeChange = (e) => setStartTime(e.target.value);
   const handleEndTimeChange = (e) => setEndTime(e.target.value);
   const handleIntervalChange = (e) => setInterval(e.target.value);
@@ -29,12 +29,24 @@ const CreateSchedule = () => {
     );
   };
 
+  const getDoctorIdByLicense = async (license) => {
+    try {
+      const response = await fetch(`http://localhost:3000/doctors/license/${license}`);
+      if (!response.ok) {
+        throw new Error('Doctor no encontrado');
+      }
+      const doctor = await response.json();
+      return doctor.id;
+    } catch (error) {
+      throw new Error('Error al buscar el doctor');
+    }
+  };
+
   const handleCreateSchedule = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    // Verificar si las fechas seleccionadas son válidas
     const today = new Date().toDateString();
     if (selectedDates.some(date => new Date(date) < new Date(today))) {
       Swal.fire({
@@ -45,42 +57,40 @@ const CreateSchedule = () => {
       return;
     }
 
-    const requests = selectedDates.map(async (date) => {
-      const scheduleData = {
-        day: new Date(date).toISOString().split("T")[0],
-        idDoctor: currentDoctorId,
-        start_Time: startTime,
-        end_Time: endTime,
-        available,
-        interval: interval.toString(),
-      };
-
-   
-
-      try {
-        const response = await fetch('http://localhost:3000/schedules', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(scheduleData),
-        });
-
-        if (response.ok) {
-          return response;
-        } else {
-          throw new Error('Error al crear el horario');
-        }
-      } catch (error) {
-        throw new Error('Error de red al crear el horario');
-      }
-    });
-
     try {
+      const doctorId = await getDoctorIdByLicense(currentLicense);
+      const requests = selectedDates.map(async (date) => {
+        const scheduleData = {
+          day: new Date(date).toISOString().split("T")[0],
+          idDoctor: doctorId,
+          start_Time: startTime,
+          end_Time: endTime,
+          available,
+          interval: interval.toString(),
+        };
+
+        try {
+          const response = await fetch('http://localhost:3000/schedules', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(scheduleData),
+          });
+
+          if (response.ok) {
+            return response;
+          } else {
+            throw new Error('Error al crear el horario');
+          }
+        } catch (error) {
+          throw new Error('Error de red al crear el horario');
+        }
+      });
+
       const responses = await Promise.all(requests);
       const successfulResponses = responses.filter((res) => res.status === 201);
       if (successfulResponses.length > 0) {
-     
         Swal.fire({
           icon: 'success',
           html: '<span>Se creó la agenda con éxito</span>',
@@ -90,7 +100,6 @@ const CreateSchedule = () => {
           window.location.reload(); 
         });
       } else {
-      
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
@@ -98,7 +107,6 @@ const CreateSchedule = () => {
         });
       }
     } catch (err) {
-      
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
@@ -120,9 +128,9 @@ const CreateSchedule = () => {
               <input
                 className="inputSchedule"
                 type="text"
-                value={currentDoctorId}
-                onChange={handleDoctorIdChange}
-                placeholder="Doctor Id"
+                value={currentLicense}
+                onChange={handleLicenseChange}
+                placeholder="Número de Licencia"
               />
               <label>Hora de Inicio:</label>
               <input
@@ -159,7 +167,6 @@ const CreateSchedule = () => {
           <button className="btnCreateDelete" type="submit">
             Crear Agenda
           </button>
-          
         </form>
       </div>
     </>
@@ -167,3 +174,6 @@ const CreateSchedule = () => {
 };
 
 export default CreateSchedule;
+
+
+

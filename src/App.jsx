@@ -37,9 +37,11 @@ import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
 import Coverage from "./Componentes/Coverage";
 import VerTurnos from "./Componentes/VerTurnos";
-
+import Speciality from "./Componentes/Speciality";
 import DeleteSchedule from "./Componentes/DeleteSchedule";
 import DeleteOneSchedule from "./Componentes/DeleteOneSchedule";
+import CoverageAndApecialities from "./Componentes/CoverageAndSpecialities";
+
 function App() {
 
   return (
@@ -60,7 +62,9 @@ function App() {
             <Route path="/ObrasSociales" element={<Coverage />} />
             <Route path="/VerTurnos" element={<VerTurnos />} />
             <Route path="/EliminarAgenda" element={<DeleteSchedule />} />
+            <Route path="/Especialidades" element={<Speciality />} />
             {/* <Route path="/EliminarUnaAgenda" element={<DeleteOneSchedule />} /> */}
+            <Route path="/CoberturaYEspecialidades" element={<CoverageAndApecialities />} />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
