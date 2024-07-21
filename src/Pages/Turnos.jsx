@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Spinner from "../Componentes/Spinner";
 import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Turnos = () => {
   const [patientData, setPatientData] = useState({
@@ -18,6 +19,16 @@ const Turnos = () => {
   const [schedules, setSchedules] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
+  const [captchaValid, setCaptchaValid] = useState(null);
+
+  const captcha = useRef(null);
+
+  //se crea onChange por la siguiente ventaja.
+  // Permite la validación en tiempo real mientras el usuario interactúa con el reCAPTCHA. y validamos en handleSubmit que haya pasado la validadcion
+  const onChange = () => {
+    const value = captcha.current.getValue();
+    setCaptchaValid(Boolean(value)); // de ésta manera optengo un valor true/false sin la necesidad de involucrar un condicional.
+  };
 
   // Función para obtener la lista de doctores
   const fetchDoctors = async () => {
@@ -82,7 +93,6 @@ const Turnos = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let isValid = true;
-
     switch (name) {
       case "phone":
         isValid = /^[1-9]\d{0,9}$/.test(value);
@@ -120,7 +130,10 @@ const Turnos = () => {
   // Función para enviar la reserva del turno
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!captchaValid) {
+      Swal.fire({ text: "Por favor completa el reCAPTCHA", icon: "error" });
+      return;
+    }
     if (patientData.dni.length < 7 || patientData.dni.length > 8) {
       Swal.fire({ text: "El DNI debe tener 7 u 8 dígitos", icon: "error" });
       return;
@@ -190,7 +203,6 @@ const Turnos = () => {
         () => {
           window.location.reload();
         }
-
       );
     } catch (error) {
       if (error.message.includes("El paciente con DNI")) {
@@ -298,7 +310,13 @@ const Turnos = () => {
               </option>
             ))}
           </select>
-
+          <div className="recaptcha">
+            <ReCAPTCHA
+              ref={captcha}
+              sitekey="6Ld7vxQqAAAAAIiI-ur0kUTV-RSXzdI55lTr09Wi"
+              onChange={onChange}
+            />
+          </div>
           <button className="btn" type="submit">
             Reservar Turno
           </button>
