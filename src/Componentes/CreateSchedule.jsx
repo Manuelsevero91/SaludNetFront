@@ -94,7 +94,7 @@ const CreateSchedule = () => {
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
-          text: "No se pudo crear ningún horario",
+          text: "No se pudo crear ningún horario. Verifique estar logueado.",
         });
       }
     } catch (err) {
@@ -102,7 +102,7 @@ const CreateSchedule = () => {
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
-        text: "Hubo un error al crear los horarios",
+        text: "Hubo un error al crear los horarios. Verifique estar logueado.",
       });
     }
   };

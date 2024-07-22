@@ -37,7 +37,7 @@ const ListProfesionals = () => {
         setLoading(false); 
       } catch (error) {
         Swal.fire({
-          text: "No se pudo obtener la lista de profesionales",
+          text: "No se pudo obtener la lista de profesionales. Verifique estar logueado.",
           icon: "error",
         })
         setLoading(false);
@@ -157,7 +157,7 @@ const ListProfesionals = () => {
         console.error("Error al actualizar el profesional:", error);
     
         Swal.fire({
-          text: "El profesional no pudo ser actualizado",
+          text: "El profesional no pudo ser actualizado. Verifique estar logueado.",
           icon: "error",
         });
       }
@@ -188,7 +188,7 @@ const ListProfesionals = () => {
     } catch {
       Swal.fire(
         "Error!",
-        "Hubo un error al intentar eliminar al profesional",
+        "Hubo un error al intentar eliminar al profesional. Verifique estar logueado.",
         "error"
       );
     }
@@ -229,7 +229,7 @@ const handleAddCoverage = async () => {
     console.error(error);
     Swal.fire(
       "Error!",
-      "Hubo un error al intentar agregar obras sociales",
+      "Hubo un error al intentar agregar obras sociales. Verifique estar logueado.",
       "error"
     );
   }
@@ -252,7 +252,7 @@ const handleRemoveCoverage = async (actualDoctorId, coverageIdToRemove) => {
   } catch (error) {
     Swal.fire(
       "Error!",
-      "Hubo un error al intentar eliminar obras sociales",
+      "Hubo un error al intentar eliminar obras sociales. Verifique estar logueado.",
       "error"
     );
   }

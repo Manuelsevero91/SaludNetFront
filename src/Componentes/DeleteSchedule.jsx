@@ -66,7 +66,7 @@ const DeleteSchedule = () => {
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
-          text: "No se pudo eliminar ningún horario",
+          text: "No se pudo eliminar ningún horario. Verifique estar logueado.",
         });
       }
     } catch (err) {
@@ -74,7 +74,7 @@ const DeleteSchedule = () => {
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
-        text: "Hubo un error al eliminar los horarios",
+        text: "Hubo un error al eliminar los horarios. Verifique estar logueado.",
       });
     }
   };

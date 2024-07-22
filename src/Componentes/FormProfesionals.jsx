@@ -74,7 +74,7 @@ function FormProfesionals() {
         const errorData = await response.json();
 
         Swal.fire({
-          text: "Error en el registro del profesional",
+          text: "Error en el registro del profesional. Verifique si esta logueado.",
           icon: "error",
         });
         setSuccess("");

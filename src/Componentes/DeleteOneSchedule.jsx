@@ -52,14 +52,14 @@ const DeleteOneSchedule = () => {
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
-          text: responseData.message || "No se pudo eliminar el horario",
+          text: responseData.message || "No se pudo eliminar el horario. Verifique estar logueado.",
         });
       }
     } catch (err) {
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
-        text: "Hubo un error al eliminar el horario",
+        text: "Hubo un error al eliminar el horario. Verifique estar logueado.",
       });
     }
   };

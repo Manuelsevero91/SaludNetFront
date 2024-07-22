@@ -25,7 +25,7 @@ function ListCoverage() {
       } catch (error) {
         Swal.fire(
           "Error!",
-          "Hubo un error al traer la lista de obras sociales",
+          "Hubo un error al traer la lista de obras sociales. Verifique estar logueado.",
           "error"
         );
         setLoading(false);
@@ -58,7 +58,7 @@ function ListCoverage() {
     } catch (error) {
       Swal.fire(
         "Error!",
-        "Hubo un error al intentar agregar la obra social",
+        "Hubo un error al intentar agregar la obra social.Verifique estar logueado.",
         "error"
       );
     }
@@ -113,7 +113,7 @@ function ListCoverage() {
       
     } catch (error) {
       Swal.fire({
-        text: "La obra social no pudo ser actualizada",
+        text: "La obra social no pudo ser actualizada.Verifique estar logueado.",
         icon: "warning",
       });
       

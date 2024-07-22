@@ -43,7 +43,7 @@ const EditShiffs = () => {
       } catch (error) {
         setLoading(false);
         Swal.fire({
-          text: "No se pudo traer la lista de turnos",
+          text: "No se pudo traer la lista de turnos. Verifique estar logueado.",
           icon: "warning",
         });
       }
@@ -78,7 +78,7 @@ const EditShiffs = () => {
       } catch {
         Swal.fire(
           "Error!",
-          "Hubo un error al intentar eliminar el turno",
+          "Hubo un error al intentar eliminar el turno. Verifique estar logueado.",
           "error"
         );
       }
