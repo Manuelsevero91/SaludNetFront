@@ -40,6 +40,7 @@
   width: auto;
   border-radius: 10px;
   padding: 2rem;
+ 
 }
 @media (max-width: 768px) {
   .createForm {
@@ -54,3 +55,35 @@
   }
 }
 
+.recaptcha{
+  position: relative;
+}
+
+.createFormTurnos{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.inputContainerTurnos{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.opcionesTurno{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+gap: 1.3rem;
+}

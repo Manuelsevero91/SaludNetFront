@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Spinner from "../Componentes/Spinner";
 import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
 import logoSN from '../assets/logosaludnet.png';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Turnos = () => {
   const [patientData, setPatientData] = useState({
@@ -19,6 +20,17 @@ const Turnos = () => {
   const [schedules, setSchedules] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [captchaValid, setCaptchaValid] = useState(false);
+
+  const captcha = useRef(null);
+
+  //se crea onChange por la siguiente ventaja.
+  // Permite la validación en tiempo real mientras el usuario interactúa con el reCAPTCHA. y validamos en handleSubmit que haya pasado la validadcion
+  const onChange = () => {
+    const value = captcha.current.getValue();
+    setCaptchaValid(Boolean(value)); // de ésta manera optengo un valor true/false sin la necesidad de involucrar un condicional.
+  };
 
   // Función para obtener la lista de doctores
   const fetchDoctors = async () => {
@@ -79,7 +91,6 @@ const Turnos = () => {
   };
 
   // Función para manejar cambios en los inputs del paciente
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     let isValid = true;
@@ -118,9 +129,20 @@ const Turnos = () => {
     setScheduleId(e.target.value);
   };
 
+  // Función para manejar la solicitud de reserva del turno
+  const handleReservaClick = (e) => {
+    e.preventDefault();
+    setShowCaptcha(true); // Muestra el CAPTCHA cuando se hace clic en "Reservar turno"
+  };
+
   // Función para enviar la reserva del turno
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaValid) {
+      Swal.fire({ text: "Por favor, completa el CAPTCHA.", icon: "error" });
+      return;
+    }
 
     if (patientData.dni.length < 7 || patientData.dni.length > 8) {
       Swal.fire({ text: "El DNI debe tener 7 u 8 dígitos", icon: "error" });
@@ -193,13 +215,9 @@ const Turnos = () => {
         imageWidth: 250,
         html: `<p>Ud a reservado turno con éxito</p> `,
         timer: 3000,
-      })
-      .then(
-        () => {
-          window.location.reload();
-        }
-
-      );
+      }).then(() => {
+        window.location.reload();
+      });
     } catch (error) {
       if (error.message.includes("El paciente con DNI")) {
         const errorMessage = JSON.parse(error.message);
@@ -240,7 +258,9 @@ const Turnos = () => {
       <Spinner loading={loadingDoctors} />
 
       <div className="formContainer">
-        <form className="createForm" onSubmit={handleSubmit}>
+        <form className="createFormTurnos" onSubmit={handleSubmit}>
+        <div className="inputContainerTurnos">
+         
           <input
             type="text"
             name="fullName"
@@ -289,11 +309,13 @@ const Turnos = () => {
             placeholder="FECHA DE NACIMIENTO (AAAA-MM-DD)"
             required
           />
+          </div>
+          <div className="opcionesTurno">
           <select onChange={handleDoctorChange} required>
             <option value="">Seleccione un doctor</option>
             {doctors.map((doctor) => (
               <option key={doctor.id} value={doctor.id}>
-                {doctor.fullName} - {doctor.speciality.name}
+                {doctor.fullName} - {doctor.speciality?.name}
               </option>
             ))}
           </select>
@@ -306,10 +328,29 @@ const Turnos = () => {
               </option>
             ))}
           </select>
-
-          <button className="btn" type="submit">
-            Reservar Turno
-          </button>
+          
+          {/* Botón para mostrar el CAPTCHA */}
+          {!showCaptcha ? (
+            <button className="btn" onClick={handleReservaClick}>
+              Reservar Turno
+            </button>
+          ) : (
+            <>
+              <div className="recaptcha">
+                <ReCAPTCHA
+                  ref={captcha}
+                  sitekey="6Ld7vxQqAAAAAIiI-ur0kUTV-RSXzdI55lTr09Wi"
+                  onChange={onChange}
+                />
+              </div>
+              <button className="btn" type="submit" disabled={!captchaValid}>
+                Confirmar Reserva
+              </button>
+              
+            </>
+          
+          )}
+          </div>
         </form>
       </div>
     </>
