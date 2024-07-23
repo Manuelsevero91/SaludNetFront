@@ -32,14 +32,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: left;
+  justify-content:center;
   background-color: transparent;
   backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.2);
   height: auto;
   width: auto;
   border-radius: 10px;
-  padding: .5rem;
+  padding: 2rem;
+ 
 }
 @media (max-width: 768px) {
   .createForm {
@@ -54,22 +55,35 @@
   }
 }
 
-.recaptcha {
-  margin-top: 1rem;
+.recaptcha{
+  position: relative;
+}
+
+.createFormTurnos{
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  background-color: transparent;
+  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.2);
+  height: auto;
+  width: auto;
+  border-radius: 10px;
+  padding: 2rem;
+  gap: 2rem;
 }
 
-@media (max-width: 768px) {
-  .recaptcha {
-    width: 50%; 
-    padding: 1rem; 
-  }
-}
-@media (max-width: 320px) {
-  .recaptcha {
-    width: 80%;
-    padding: 0.5rem; 
-  }
+.inputContainerTurnos{
+  display: flex;
+  flex-direction: column;
 }
 
+
+.opcionesTurno{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+gap: 1.3rem;
+}
