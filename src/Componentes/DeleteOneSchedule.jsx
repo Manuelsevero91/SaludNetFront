@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
+import { getToken } from "../Auth/tokenUtils";
+
 
 const DeleteOneSchedule = () => {
   const [currentDoctorId, setCurrentDoctorId] = useState("");
@@ -15,6 +17,16 @@ const DeleteOneSchedule = () => {
 
   const handleDeleteSchedule = async (e) => {
     e.preventDefault();
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
 
     const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
     const endpoint = `http://localhost:3000/schedules/${currentDoctorId}/${formattedDate}/${startTime}`;
@@ -24,6 +36,7 @@ const DeleteOneSchedule = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ deletionReason }),
       });
@@ -37,7 +50,7 @@ const DeleteOneSchedule = () => {
             html: <span>La agenda ya estaba borrada</span>,
             text: "La agenda ya estaba borrada",
           }).then(() => {
-            window.location.reload(); // Recargar la página
+            window.location.reload();
           });
         } else {
           Swal.fire({
@@ -45,7 +58,7 @@ const DeleteOneSchedule = () => {
             html: '<span>Se eliminó la agenda con éxito</span>',
             text: "Se ha eliminado el horario exitosamente",
           }).then(() => {
-            window.location.reload(); // Recargar la página
+            window.location.reload();
           });
         }
       } else {

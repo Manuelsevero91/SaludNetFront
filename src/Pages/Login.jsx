@@ -6,6 +6,7 @@ import { useAuth } from '../Componentes/UserContext';
 import NavBar from '../Componentes/NavBar';
 import NotFoundImage from '../assets/not-found.jpg';
 import "../Styles/SharedStyles/Btn.css";
+import { setToken } from '../Auth/tokenUtils';
 
 function Login({ isLoggedIn }) {
   const { handleLogin } = useAuth();
@@ -15,10 +16,12 @@ function Login({ isLoggedIn }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const enteredUsername = e.target.username.value;
     const enteredEmail = e.target.email.value;
     const enteredPassword = e.target.password.value;
 
     const formData = {
+      username: enteredUsername,
       email: enteredEmail,
       password: enteredPassword
     };
@@ -38,6 +41,9 @@ function Login({ isLoggedIn }) {
       }
 
       const data = await response.json();
+      const token = data.access_token;
+
+    setToken(token);
 
       Swal.fire({
         imageUrl: logoSN,
@@ -50,15 +56,16 @@ function Login({ isLoggedIn }) {
       handleLogin(enteredEmail);
       navigate('/admin');
     } catch (error) {
-      setError(true);
-      Swal.fire({
-        imageUrl: logoSN,
-        imageHeight: 250,
-        imageWidth: 250,
-        html: `<p>${error.message}HOLAAAAA</p>`,
-        timer: 3000,
-      });
-    }
+        setError(true);
+        console.error('Error de autenticación:', error);
+        Swal.fire({
+          imageUrl: logoSN,
+          imageHeight: 250,
+          imageWidth: 250,
+          html: `<p>Error: ${error.message || 'Error desconocido'}</p>`,
+          timer: 3000,
+        });
+      }
 
     e.target.reset();
   };

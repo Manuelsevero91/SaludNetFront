@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Componentes/NavBar";
 import Swal from "sweetalert2";
+import { getToken } from "../Auth/tokenUtils";
 
 function FormProfesionals() {
   const [form, setForm] = useState({
@@ -14,8 +15,22 @@ function FormProfesionals() {
 
   useEffect(() => {
     const fetchSpecialities = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const response = await fetch("http://localhost:3000/speciality");
+        const response = await fetch("http://localhost:3000/speciality", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
 
         if (!response.ok) {
           throw new Error(
@@ -47,11 +62,23 @@ function FormProfesionals() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+
     try {
       const response = await fetch("http://localhost:3000/doctors", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(form),
       });

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getToken } from "../Auth/tokenUtils";
 
 const EditShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
@@ -13,6 +14,16 @@ const EditShiffs = () => {
   const [doctors, setDoctors] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
         const [shiffRes, patientRes, doctorRes] = await Promise.all([
           fetch("http://localhost:3000/shiff"),
@@ -65,6 +76,9 @@ const EditShiffs = () => {
       try {
         const response = await fetch(`http://localhost:3000/shiff/${id}`, {
           method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
         if (!response.ok) {
           throw new Error(`Error Deleting shiff: ${response.status}`);

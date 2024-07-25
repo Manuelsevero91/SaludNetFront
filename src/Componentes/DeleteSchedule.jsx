@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
+import { getToken } from "../Auth/tokenUtils";
 
 const DeleteSchedule = () => {
   const [currentDoctorId, setCurrentDoctorId] = useState("");
@@ -28,6 +29,17 @@ const DeleteSchedule = () => {
     setError("");
     setSuccess("");
 
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+
     const requests = selectedDates.map(async (date) => {
       const formattedDate = new Date(date).toISOString().split("T")[0];
       const endpoint = `http://localhost:3000/schedules/${currentDoctorId}/${formattedDate}`;
@@ -37,6 +49,7 @@ const DeleteSchedule = () => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({ deletionReason }),
         });

@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
+import { getToken } from "../Auth/tokenUtils";
 
 const CreateSchedule = () => {
   const [currentDoctorId, setCurrentDoctorId] = useState("");
@@ -34,6 +35,17 @@ const CreateSchedule = () => {
     setError("");
     setSuccess("");
 
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+
     // Verificar si las fechas seleccionadas son válidas
     const today = new Date().toDateString();
     if (selectedDates.some(date => new Date(date) < new Date(today))) {
@@ -62,6 +74,7 @@ const CreateSchedule = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify(scheduleData),
         });
