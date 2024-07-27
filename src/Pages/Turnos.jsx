@@ -178,7 +178,7 @@ const Turnos = () => {
   };
 
   // Función para enviar la reserva del turno
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (!captchaValid) {
       Swal.fire({ text: "Por favor completa el reCAPTCHA", icon: "error" });
       setSubmitting(false);
@@ -197,6 +197,7 @@ const Turnos = () => {
         if (patientDataResponse.data) {
           // Si el paciente ya está registrado, obtén su ID
           patientId = patientDataResponse.data.id;
+          
         }
       } else if (patientResponse.status === 404) {
         // Si el paciente no existe, crear uno nuevo
@@ -207,10 +208,18 @@ const Turnos = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(values),
+            body: JSON.stringify({
+              fullName: values.fullName,
+              dni: values.dni,
+              mail: values.mail,
+              phone: values.phone,
+              address: values.address,
+              birthday: values.birthday,
+            }),
           }
+          
         );
-
+      
         if (newPatientResponse.ok) {
           const newPatientData = await newPatientResponse.json();
           patientId = newPatientData.data.id;
@@ -241,7 +250,11 @@ const Turnos = () => {
 
       Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
         () => {
-          window.location.reload();
+          resetForm(); // Reiniciar el formulario
+          setDoctorId(null);
+          setScheduleId(null);
+          captcha.current.reset();
+        setCaptchaValid(false);
         }
       );
     } catch (error) {
@@ -257,8 +270,6 @@ const Turnos = () => {
         Swal.fire({
           text: error.message || "Hubo un error al reservar el turno",
           icon: "error",
-        }).then(() => {
-          window.location.reload();
         });
       }
     }
@@ -297,139 +308,161 @@ const Turnos = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, touched, errors, setFieldValue, setFieldError }) => (
+        {({ isSubmitting, touched, errors,values, setFieldValue, setFieldError }) => (
           <div className="formContainer">
             <Form className="createFormTurnos">
-            <div className="inputContainerTurnos">
-              <Field
-                type="text"
-                name="fullName"
-                className={
-                  touched.fullName && errors.fullName ? "input-error" : ""
-                }
-                placeholder="NOMBRE Y APELLIDO"
-                onChange={(e) =>
-                  handleInputChange(e, setFieldValue, setFieldError)
-                }
-              />
-              <ErrorMessage name="fullName" component="div" className="error" />
+              <div className="inputContainerTurnos">
+                <Field
+                  type="text"
+                  name="fullName"
+                  className={
+                    touched.fullName && errors.fullName ? "input-error" : ""
+                  }
+                  placeholder="NOMBRE Y APELLIDO"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage
+                  name="fullName"
+                  component="div"
+                  className="error"
+                />
 
-              <Field
-                type="text"
-                name="dni"
-                className={touched.dni && errors.dni ? "input-error" : ""}
-                placeholder="DNI (sin puntos)"
-                onChange={(e) =>
-                  handleInputChange(e, setFieldValue, setFieldError)
-                }
-              />
-              <ErrorMessage name="dni" component="div" className="error" />
+                <Field
+                  type="text"
+                  name="dni"
+                  
+                  className={touched.dni && errors.dni ? "input-error" : ""}
+                  placeholder="DNI (sin puntos)"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage name="dni" component="div" className="error" />
 
-              <Field
-                type="email"
-                name="mail"
-                className={touched.mail && errors.mail ? "input-error" : ""}
-                placeholder="MAIL"
-                onChange={(e) => setFieldValue("mail", e.target.value)}
-              />
-              <ErrorMessage name="mail" component="div" className="error" />
+                <Field
+                  type="email"
+                  name="mail"
+                
+                  className={touched.mail && errors.mail ? "input-error" : ""}
+                  placeholder="MAIL"
+                  onChange={(e) => setFieldValue("mail", e.target.value)}
+                />
+                <ErrorMessage name="mail" component="div" className="error" />
 
-              <Field
-                type="text"
-                name="phone"
-                className={touched.phone && errors.phone ? "input-error" : ""}
-                placeholder="CELULAR (Sin el '0' ni '-')"
-                onChange={(e) =>
-                  handleInputChange(e, setFieldValue, setFieldError)
-                }
-              />
-              <ErrorMessage name="phone" component="div" className="error" />
+                <Field
+                  type="text"
+                  name="phone"
+                 
+                  className={touched.phone && errors.phone ? "input-error" : ""}
+                  placeholder="CELULAR (Sin el '0' ni '-')"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage name="phone" component="div" className="error" />
 
-              <Field
-                type="text"
-                name="address"
-                className={
-                  touched.address && errors.address ? "input-error" : ""
-                }
-                placeholder="DOMICILIO"
-                onChange={(e) =>
-                  handleInputChange(e, setFieldValue, setFieldError)
-                }
-              />
-              <ErrorMessage name="address" component="div" className="error" />
+                <Field
+                  type="text"
+                  name="address"
+                 
+                  className={
+                    touched.address && errors.address ? "input-error" : ""
+                  }
+                  placeholder="DOMICILIO"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="error"
+                />
 
-              <Field
-                type="text"
-                name="birthday"
-                className={
-                  touched.birthday && errors.birthday ? "input-error" : ""
-                }
-                placeholder="FECHA DE NACIMIENTO(AAAA-MM-DD)"
-                onChange={(e) => setFieldValue("birthday", e.target.value)}
-              />
-              <ErrorMessage name="birthday" component="div" className="error" />
-              </div>
-              <Field
-                as="select"
-                name="doctorId"
-                onChange={(e) => {
-                  handleDoctorChange(e);
-                  setFieldValue("doctorId", e.target.value);
-                }}
-                className={
-                  touched.doctorId && errors.doctorId ? "input-error" : ""
-                }
-                required
-              >
-                <option value="">SELECCIONAR PROFESIONAL</option>
-                {doctors.map((doctor) => (
-                  <option key={doctor.id} value={doctor.id}>
-                    {doctor.fullName} - {doctor.speciality.name}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage name="doctorId" component="div" className="error" />
-              <Field
-                as="select"
-                name="scheduleId"
-                onChange={(e) => {
-                  handleScheduleChange(e);
-                  setFieldValue("scheduleId", e.target.value);
-                }}
-                className={
-                  touched.scheduleId && errors.scheduleId ? "input-error" : ""
-                }
-                required
-              >
-                <option value="">SELECCIONAR HORARIO</option>
-                {schedules.map((schedule) => (
-                  <option key={schedule.idSchedule} value={schedule.idSchedule}>
-                    {schedule.day}: {schedule.start_Time}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage
-                name="scheduleId"
-                component="div"
-                className="error"
-              />
-
-              <div className="recaptcha">
-                <ReCAPTCHA
-                  ref={captcha}
-                  sitekey="6Ld7vxQqAAAAAIiI-ur0kUTV-RSXzdI55lTr09Wi"
-                  onChange={onChange}
-                  className="captcha"
+                <Field
+                  type="text"
+                  name="birthday"
+                 
+                  className={
+                    touched.birthday && errors.birthday ? "input-error" : ""
+                  }
+                  placeholder="FECHA DE NACIMIENTO(AAAA-MM-DD)"
+                  onChange={(e) => setFieldValue("birthday", e.target.value)}
+                />
+                <ErrorMessage
+                  name="birthday"
+                  component="div"
+                  className="error"
                 />
               </div>
+              <div className="opcionesTurno">
+                <Field
+                  as="select"
+                  name="doctorId"
+                  onChange={(e) => {
+                    handleDoctorChange(e);
+                    setFieldValue("doctorId", e.target.value);
+                  }}
+                  className={
+                    touched.doctorId && errors.doctorId ? "input-error" : ""
+                  }
+                  required
+                >
+                  <option value="">SELECCIONAR PROFESIONAL</option>
+                  {doctors.map((doctor) => (
+                    <option key={doctor.id} value={doctor.id}>
+                      {doctor.fullName} - {doctor.speciality.name}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage
+                  name="doctorId"
+                  component="div"
+                  className="error"
+                />
+                <Field
+                  as="select"
+                  name="scheduleId"
+                  onChange={(e) => {
+                    handleScheduleChange(e);
+                    setFieldValue("scheduleId", e.target.value);
+                  }}
+                  className={
+                    touched.scheduleId && errors.scheduleId ? "input-error" : ""
+                  }
+                  required
+                >
+                  <option value="">SELECCIONAR HORARIO</option>
+                  {schedules.map((schedule) => (
+                    <option
+                      key={schedule.idSchedule}
+                      value={schedule.idSchedule}
+                    >
+                      {schedule.day}: {schedule.start_Time}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage
+                  name="scheduleId"
+                  component="div"
+                  className="error"
+                />
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn"
-              >
-                {isSubmitting ? "Enviando..." : "Reservar Turno"}
-              </button>
+                <div className="recaptcha">
+                  <ReCAPTCHA
+                    ref={captcha}
+                    sitekey="6Ld7vxQqAAAAAIiI-ur0kUTV-RSXzdI55lTr09Wi"
+                    onChange={onChange}
+                    className="captcha"
+                  />
+                </div>
+
+                <button type="submit" disabled={isSubmitting} className="btn">
+                  {isSubmitting ? "Enviando..." : "Reservar Turno"}
+                </button>
+              </div>
             </Form>
           </div>
         )}
