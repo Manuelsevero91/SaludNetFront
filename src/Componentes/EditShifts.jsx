@@ -14,7 +14,7 @@ const EditShiffs = () => {
   const [doctors, setDoctors] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const token = getToken();
+    const token = getToken();
     
   if (!token) {
     Swal.fire({
@@ -26,9 +26,21 @@ const EditShiffs = () => {
   }
       try {
         const [shiffRes, patientRes, doctorRes] = await Promise.all([
-          fetch("http://localhost:3000/shiff"),
-          fetch("http://localhost:3000/patients"),
-          fetch("http://localhost:3000/doctors"),
+          fetch("http://localhost:3000/shiff", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
+          fetch("http://localhost:3000/patients", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
+          fetch("http://localhost:3000/doctors", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
         ]);
         const [shiffData, patientData, doctorData] = await Promise.all([
           shiffRes.json(),
@@ -62,6 +74,16 @@ const EditShiffs = () => {
     fetchData();
   }, []);
   const handleDelete = async (id) => {
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     const result = await Swal.fire({
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       text: "No podrás revertir esto",
