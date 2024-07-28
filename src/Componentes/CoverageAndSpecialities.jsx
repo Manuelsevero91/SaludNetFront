@@ -24,10 +24,23 @@ function ListData() {
           fetch("http://localhost:3000/coverage"),
           fetch("http://localhost:3000/speciality"),
         ]);
+
+        if (!coverageResponse.ok || !specialityResponse.ok) {
+          throw new Error("Network response was not ok");
+        }
+
         const coverageData = await coverageResponse.json();
         const specialityData = await specialityResponse.json();
-        setCoverages(coverageData.data);
-        setSpecialities(specialityData.data);
+
+        console.log("Coverage Data:", coverageData);
+        console.log("Speciality Data:", specialityData);
+
+        if (Array.isArray(coverageData.data) && Array.isArray(specialityData.data)) {
+          setCoverages(coverageData.data);
+          setSpecialities(specialityData.data);
+        } else {
+          throw new Error("Data format is incorrect");
+        }
         setLoading(false);
       } catch (error) {
         Swal.fire(
@@ -145,9 +158,6 @@ function ListData() {
         } actualizada con éxito`,
         icon: "success",
       });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     } catch (error) {
       Swal.fire({
         text: `${
@@ -256,25 +266,29 @@ function ListData() {
               </tr>
             </thead>
             <tbody>
-              {coverages.map((coverage) => (
-                <tr key={coverage.id}>
-                  <td>{coverage.coverages}</td>
-                  <td>
-                    <button
-                      className="edit-button"
-                      onClick={() => openModal(coverage)}
-                    >
-                      <FontAwesomeIcon icon={faEdit} /> Editar
-                    </button>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDelete(coverage.id, "coverage")}
-                    >
-                      <FontAwesomeIcon icon={faTrash} /> Eliminar
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {Array.isArray(coverages) ? (
+                coverages.map((coverage) => (
+                  <tr key={coverage.id}>
+                    <td>{coverage.name}</td>
+                    <td>
+                      <button
+                        className="edit-button"
+                        onClick={() => openModal(coverage)}
+                      >
+                        <FontAwesomeIcon icon={faEdit} /> Editar
+                      </button>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(coverage.id, "coverage")}
+                      >
+                        <FontAwesomeIcon icon={faTrash} /> Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr><td colSpan="2">No data available</td></tr>
+              )}
             </tbody>
           </table>
 
@@ -286,29 +300,33 @@ function ListData() {
               </tr>
             </thead>
             <tbody>
-              {specialities.map((speciality) => (
-                <tr key={speciality.id}>
-                  <td>{speciality.name}</td>
-                  <td>
-                    <button
-                      className="edit-button"
-                      onClick={() => openModal(speciality)}
-                    >
-                      <FontAwesomeIcon icon={faEdit} /> Editar
-                    </button>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDelete(speciality.id, "speciality")}
-                    >
-                      <FontAwesomeIcon icon={faTrash} /> Eliminar
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {Array.isArray(specialities) ? (
+                specialities.map((speciality) => (
+                  <tr key={speciality.id}>
+                    <td>{speciality.name}</td>
+                    <td>
+                      <button
+                        className="edit-button"
+                        onClick={() => openModal(speciality)}
+                      >
+                        <FontAwesomeIcon icon={faEdit} /> Editar
+                      </button>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(speciality.id, "speciality")}
+                      >
+                        <FontAwesomeIcon icon={faTrash} /> Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr><td colSpan="2">No data available</td></tr>
+              )}
             </tbody>
           </table>
         </div>
-     
+
         <Modal
           className="formContainerModal"
           isOpen={showModal}
@@ -328,12 +346,12 @@ function ListData() {
               />
             </div>
             <div className="btn-container">
-            <button className="btn" type="submit">
-              Guardar
-            </button>
-            <button className="btn" onClick={closeModal}>
-              Cancelar
-            </button>
+              <button className="btn" type="submit">
+                Guardar
+              </button>
+              <button className="btn" type="button" onClick={closeModal}>
+                Cancelar
+              </button>
             </div>
           </form>
         </Modal>
