@@ -6,75 +6,115 @@ import { useAuth } from '../Componentes/UserContext';
 import NavBar from '../Componentes/NavBar';
 import NotFoundImage from '../assets/not-found.jpg';
 import "../Styles/SharedStyles/Btn.css";
+import { setToken } from '../Auth/tokenUtils';
 
 function Login({ isLoggedIn }) {
   const { handleLogin } = useAuth();
   const navigate = useNavigate();
-
   const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const enteredUsername = e.target.nombre.value;
+    const enteredUsername = e.target.username.value;
+    const enteredEmail = e.target.email.value;
     const enteredPassword = e.target.password.value;
 
-    // Simulación de usuario y contraseña
-    const simulatedUsername = 'admin';
-    const simulatedPassword = 'admin123';
+    const formData = {
+      username: enteredUsername,
+      email: enteredEmail,
+      password: enteredPassword
+    };
 
-    if (enteredUsername === simulatedUsername && enteredPassword === simulatedPassword) {
+    try {
+      const response = await fetch('http://localhost:3000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      const data = await response.json();
+      const token = data.access_token;
+
+    setToken(token);
+
       Swal.fire({
         imageUrl: logoSN,
         imageHeight: 250,
         imageWidth: 250,
-        html: `<p>Bienvenido <b>${enteredUsername}</b> a nuestro sitio.</p> `,
+        html: `<p>Bienvenido <b>${enteredUsername}</b> a nuestro sitio.</p>`,
         timer: 3000,
       });
-      handleLogin(enteredUsername);
+
+      handleLogin(enteredEmail);
       navigate('/admin');
-    } else {
-      setError(true);
-      Swal.fire({
-        imageUrl: logoSN,
-        imageHeight: 250,
-        imageWidth: 250,
-        html: `<p>El <b>usuario</b> o la <b>contraseña</b> ingresados son incorrectos, por favor inténtelo de nuevo.</p> `,
-        timer: 3000,
-      });
-    }
+    } catch (error) {
+        setError(true);
+        console.error('Error de autenticación:', error);
+        Swal.fire({
+          imageUrl: logoSN,
+          imageHeight: 250,
+          imageWidth: 250,
+          html: `<p>Error: ${error.message || 'Error desconocido'}</p>`,
+          timer: 3000,
+        });
+      }
 
     e.target.reset();
   };
 
   return (
     <>
-     <NavBar showLinks={false} />
-     <div className="barra-superior">
+      <NavBar showLinks={false} />
+      <div className="barra-superior">
         <h2 className="titulo-section">Inicio de Sesión</h2>
       </div>
-      <div className='formContainer'>
-        <form className= 'createForm' onSubmit={handleSubmit}>
-        <div className="input-container">         
-          <label >Usuario</label>
-          <input className='inputInicio'
-           type="text"
-           name="nombre" 
-           placeholder="Introduzca su nombre" />           
+
+      <div className='formContainerInicio'>
+        <form className='createFormInicio' onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label>Usuario</label>
+            <input
+              className='inputInicio'
+              type="text"
+              name="username"
+              minLength={6}
+              placeholder="Introduzca su nombre"
+              required
+            />
           </div>
-          <div className="input-container">   
-          <label > Contraseña</label>
-          <input className='inputInicio'
-          type="password" 
-          name="password" 
-          placeholder="Introduzca su contraseña" />  
-          </div>       
+          <div className="input-container">
+            <label>Mail</label>
+            <input
+              className='inputInicio'
+              type="email"
+              name="email"
+              placeholder="Introduzca su mail"
+            />
+          </div>
+          <div className="input-container">
+            <label> Contraseña</label>
+            <input
+              className='inputInicio'
+              type="password"
+              name="password"
+              placeholder="Introduzca su contraseña"
+            />
+
+          </div>
           <button className="btn" type="submit">Enviar</button>
         </form>
         {isLoggedIn && <p>Usuario autenticado</p>}
       </div>
     </>
-     );
-    }
+  );
+}
 
 export default Login;

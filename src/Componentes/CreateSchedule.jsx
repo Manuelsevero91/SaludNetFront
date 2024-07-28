@@ -3,6 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
+import { getToken } from "../Auth/tokenUtils";
 
 const CreateSchedule = () => {
   const [currentLicense, setCurrentLicense] = useState("");
@@ -47,6 +48,20 @@ const CreateSchedule = () => {
     setError("");
     setSuccess("");
 
+
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+
+    // Verificar si las fechas seleccionadas son válidas
+
     const today = new Date().toDateString();
     if (selectedDates.some(date => new Date(date) < new Date(today))) {
       Swal.fire({
@@ -56,6 +71,17 @@ const CreateSchedule = () => {
       });
       return;
     }
+ 
+
+      try {
+        const response = await fetch('http://localhost:3000/schedules', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(scheduleData),
+        });
 
     try {
       const doctorId = await getDoctorIdByLicense(currentLicense);
@@ -68,15 +94,7 @@ const CreateSchedule = () => {
           available,
           interval: interval.toString(),
         };
-
-        try {
-          const response = await fetch('http://localhost:3000/schedules', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(scheduleData),
-          });
+     
 
           if (response.ok) {
             return response;
@@ -103,14 +121,14 @@ const CreateSchedule = () => {
         Swal.fire({
           icon: 'error',
           html: '<span>Error</span>',
-          text: "No se pudo crear ningún horario",
+          text: "No se pudo crear ningún horario. Verifique estar logueado.",
         });
       }
     } catch (err) {
       Swal.fire({
         icon: 'error',
         html: '<span>Error</span>',
-        text: "Hubo un error al crear los horarios",
+        text: "Hubo un error al crear los horarios. Verifique estar logueado.",
       });
     }
   };
