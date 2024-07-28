@@ -55,6 +55,8 @@
 import { Link, useLocation } from "react-router-dom";
 import logoSN from "../assets/logosaludnet.png";
 import { useAuth } from "./UserContext";
+import { removeToken } from "../Auth/tokenUtils";
+import Swal from "sweetalert2";
 
 const NavBar = ({ showLinks = true }) => {
   const { isLoggedIn, username, handleLogout } = useAuth();
@@ -62,6 +64,15 @@ const NavBar = ({ showLinks = true }) => {
 
   const handleLogoutClick = () => {
     handleLogout();
+    removeToken();
+
+    Swal.fire({
+      imageUrl: logoSN,
+      imageHeight: 250,
+      imageWidth: 250,
+      html: `<p>Usted <b>${username}</b> ha cerrado sesion.</p>`,
+      timer: 3000,
+    });
   };
 
   return (
@@ -85,9 +96,6 @@ const NavBar = ({ showLinks = true }) => {
             <>
               {isLoggedIn ? (
                 <>
-                  {/* <li id="NombreUser">
-                    {"Hola"} {username || "Nombre de usuario"}
-                  </li> */}
                   <li>
                     <Link to="/" onClick={handleLogoutClick}>
                       Cerrar sesión

@@ -55,6 +55,7 @@
   }
 }
 
+
 .recaptcha{
   position: relative;
 }
@@ -87,3 +88,4 @@
   align-items: center;
 gap: 1.3rem;
 }
+

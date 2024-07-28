@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getToken } from "../Auth/tokenUtils";
 
 const EditShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
@@ -13,11 +14,33 @@ const EditShiffs = () => {
   const [doctors, setDoctors] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
         const [shiffRes, patientRes, doctorRes] = await Promise.all([
-          fetch("http://localhost:3000/shiff"),
-          fetch("http://localhost:3000/patients"),
-          fetch("http://localhost:3000/doctors"),
+          fetch("http://localhost:3000/shiff", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
+          fetch("http://localhost:3000/patients", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
+          fetch("http://localhost:3000/doctors", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
         ]);
         const [shiffData, patientData, doctorData] = await Promise.all([
           shiffRes.json(),
@@ -43,7 +66,7 @@ const EditShiffs = () => {
       } catch (error) {
         setLoading(false);
         Swal.fire({
-          text: "No se pudo traer la lista de turnos",
+          text: "No se pudo traer la lista de turnos. Verifique estar logueado.",
           icon: "warning",
         });
       }
@@ -51,6 +74,16 @@ const EditShiffs = () => {
     fetchData();
   }, []);
   const handleDelete = async (id) => {
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     const result = await Swal.fire({
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       text: "No podrás revertir esto",
@@ -65,6 +98,9 @@ const EditShiffs = () => {
       try {
         const response = await fetch(`http://localhost:3000/shiff/${id}`, {
           method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
         if (!response.ok) {
           throw new Error(`Error Deleting shiff: ${response.status}`);
@@ -82,7 +118,7 @@ const EditShiffs = () => {
       } catch {
         Swal.fire(
           "Error!",
-          "Hubo un error al intentar eliminar el turno",
+          "Hubo un error al intentar eliminar el turno. Verifique estar logueado.",
           "error"
         );
       }

@@ -2,16 +2,33 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../Componentes/Spinner';
 import Swal from 'sweetalert2';
 import NavBar from '../Componentes/NavBar';
+import { getToken } from "../Auth/tokenUtils";
+
 const ShowShiffs = () => {
   const [shiffs, setShiffs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDay, setSelectedDay] = useState('');
+  
   useEffect(() => {
     const fetchShiffs = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const response = await fetch('http://localhost:3000/shiff');
+        const response = await fetch('http://localhost:3000/shiff', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
         if (!response.ok) {
           throw new Error(`Error fetching shiffs: ${response.status}`);
         }
@@ -26,8 +43,22 @@ const ShowShiffs = () => {
       }
     };
     const fetchDoctors = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const response = await fetch('http://localhost:3000/doctors');
+        const response = await fetch('http://localhost:3000/doctors', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
         if (!response.ok) {
           throw new Error(`Error fetching doctors: ${response.status}`);
         }

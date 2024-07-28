@@ -2,28 +2,62 @@ import React, { useState, useEffect, useRef } from "react";
 import Spinner from "../Componentes/Spinner";
 import Swal from "sweetalert2";
 import NavBar from "../Componentes/NavBar";
-import logoSN from '../assets/logosaludnet.png';
+
 import ReCAPTCHA from "react-google-recaptcha";
+import { ErrorMessage, Field, Formik, Form } from "formik";
+import * as Yup from "yup";
 
+import logoSN from '../assets/logosaludnet.png';
+
+
+
+//Conseguir una fecha válida para cuando se carga la fecha de nacimiento.
+const isValidDate = (dateString) => {
+  const regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+  if (!regex.test(dateString)) return false;
+
+  const [year, month, day] = dateString.split("-").map(Number);
+  const date = new Date(year, month - 1, day);
+  return date && date.getMonth() + 1 === month && date.getDate() === day;
+};
 const Turnos = () => {
-  const [patientData, setPatientData] = useState({
-    fullName: "",
-    dni: "",
-    mail: "",
-    phone: "",
-    address: "",
-    birthday: "",
-  });
-
   const [doctorId, setDoctorId] = useState(null);
   const [scheduleId, setScheduleId] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [doctors, setDoctors] = useState([]);
   const [loadingDoctors, setLoadingDoctors] = useState(true);
-  const [showCaptcha, setShowCaptcha] = useState(false);
-  const [captchaValid, setCaptchaValid] = useState(false);
 
+  const [captchaValid, setCaptchaValid] = useState(null);
   const captcha = useRef(null);
+
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string()
+      .matches(
+        /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+        "El nombre solo puede contener letras y espacios"
+      )
+      .max(25, "El nombre no puede tener más de 25 caracteres")
+      .required("Por favor ingresa un nombre"),
+    dni: Yup.string()
+      .matches(/^\d{7,8}$/, "El DNI debe tener 7 u 8 dígitos")
+      .required("Por favor ingresa un DNI"),
+    mail: Yup.string()
+      .email("El correo no es válido")
+      .required("Por favor ingresa un correo electrónico"),
+    phone: Yup.string()
+      .matches(/^[1-9]\d{9}$/, "El teléfono debe tener 10 dígitos")
+      .required("Por favor ingresa un teléfono"),
+    address: Yup.string()
+      .max(25, "La dirección no puede tener más de 25 caracteres")
+      .required("Por favor ingresa una dirección"),
+    birthday: Yup.string()
+      .required("Por favor ingresa una fecha de nacimiento")
+      .test("isValidDate", "La fecha no es válida", (value) =>
+        isValidDate(value)
+      ),
+    doctorId: Yup.string().required("Por favor selecciona un doctor"),
+    scheduleId: Yup.string().required("Por favor selecciona un horario"),
+  });
 
   //se crea onChange por la siguiente ventaja.
   // Permite la validación en tiempo real mientras el usuario interactúa con el reCAPTCHA. y validamos en handleSubmit que haya pasado la validadcion
@@ -73,9 +107,9 @@ const Turnos = () => {
         } else {
           const sortedSchedules = data.data.sort((a, b) => {
             if (a.day !== b.day) {
-              return new Date(a.day) - new Date(b.day); // Ordenamos por fecha
+              return new Date(a.day) - new Date(b.day);
             }
-            return a.start_Time.localeCompare(b.start_Time); // Si el día es el mismo, ordenamos por hora de inicio
+            return a.start_Time.localeCompare(b.start_Time);
           });
           setSchedules(sortedSchedules);
         }
@@ -91,31 +125,54 @@ const Turnos = () => {
   };
 
   // Función para manejar cambios en los inputs del paciente
-  const handleInputChange = (e) => {
+
+
+  const handleInputChange = (e, setFieldValue, setFieldError) => {
+
     const { name, value } = e.target;
+
     let isValid = true;
+    let errorMessage = "";
 
     switch (name) {
       case "phone":
-        isValid = /^[1-9]\d{0,9}$/.test(value);
+        if (!/^[1-9]\d{0,9}$/.test(value)) {
+          isValid = false;
+          errorMessage = "El teléfono debe tener 10 dígitos";
+        }
         break;
       case "dni":
-        isValid = /^\d{0,8}$/.test(value);
+        if (!/^\d{0,8}$/.test(value)) {
+          isValid = false;
+          errorMessage = "El DNI debe tener entre 7 y 8 dígitos";
+        }
         break;
       case "fullName":
-        isValid = value.length <= 25;
+        if (value.length > 25) {
+          isValid = false;
+          errorMessage = "El nombre no puede tener más de 25 caracteres";
+        }
         break;
       case "address":
-        isValid = value.length <= 25;
+        if (value.length > 25) {
+          isValid = false;
+          errorMessage = "La dirección no puede tener más de 25 caracteres";
+        }
         break;
       default:
         break;
     }
-    if (isValid || value === "") {
-      setPatientData({
-        ...patientData,
-        [name]: value,
+
+    if (!isValid) {
+      Swal.fire({
+        text: errorMessage,
+        icon: "error",
       });
+    }
+
+    setFieldValue(name, value);
+    if (!isValid) {
+      setFieldError(name, errorMessage);
     }
   };
 
@@ -136,13 +193,12 @@ const Turnos = () => {
   };
 
   // Función para enviar la reserva del turno
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     if (!captchaValid) {
-      Swal.fire({ text: "Por favor, completa el CAPTCHA.", icon: "error" });
-      return;
-    }
+      Swal.fire({ text: "Por favor completa el reCAPTCHA", icon: "error" });
+      setSubmitting(false);
+
 
     if (patientData.dni.length < 7 || patientData.dni.length > 8) {
       Swal.fire({ text: "El DNI debe tener 7 u 8 dígitos", icon: "error" });
@@ -151,15 +207,15 @@ const Turnos = () => {
 
     if (patientData.phone.length !== 10) {
       Swal.fire({ text: "El teléfono debe tener 10 dígitos", icon: "error" });
+
       return;
     }
-
     try {
       let patientId;
 
       // Buscar paciente por DNI
       const patientResponse = await fetch(
-        `http://localhost:3000/patients/by-dni/${patientData.dni}`
+        `http://localhost:3000/patients/by-dni/${values.dni}`
       );
 
       if (patientResponse.ok) {
@@ -167,6 +223,7 @@ const Turnos = () => {
         if (patientDataResponse.data) {
           // Si el paciente ya está registrado, obtén su ID
           patientId = patientDataResponse.data.id;
+          
         }
       } else if (patientResponse.status === 404) {
         // Si el paciente no existe, crear uno nuevo
@@ -177,10 +234,18 @@ const Turnos = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(patientData),
+            body: JSON.stringify({
+              fullName: values.fullName,
+              dni: values.dni,
+              mail: values.mail,
+              phone: values.phone,
+              address: values.address,
+              birthday: values.birthday,
+            }),
           }
+          
         );
-
+      
         if (newPatientResponse.ok) {
           const newPatientData = await newPatientResponse.json();
           patientId = newPatientData.data.id;
@@ -209,20 +274,22 @@ const Turnos = () => {
         throw new Error(await shiffResponse.text());
       }
 
-      Swal.fire({
-        imageUrl: logoSN,
-        imageHeight: 250,
-        imageWidth: 250,
-        html: `<p>Ud a reservado turno con éxito</p> `,
-        timer: 3000,
-      }).then(() => {
-        window.location.reload();
-      });
+
+      Swal.fire({ text: "Turno reservado con éxito", icon: "success" }).then(
+        () => {
+          resetForm(); // Reiniciar el formulario
+          setDoctorId(null);
+          setScheduleId(null);
+          captcha.current.reset();
+        setCaptchaValid(false);
+        }
+      );
+
     } catch (error) {
       if (error.message.includes("El paciente con DNI")) {
         const errorMessage = JSON.parse(error.message);
         Swal.fire({
-          text: `${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
+          text: ` ${errorMessage.message}. Ante cualquier duda, por favor llame al teléfono "2281325016".`,
           icon: "error",
           timer: 8000,
           timerProgressBar: true,
@@ -231,11 +298,10 @@ const Turnos = () => {
         Swal.fire({
           text: error.message || "Hubo un error al reservar el turno",
           icon: "error",
-        }).then(() => {
-          window.location.reload();
         });
       }
     }
+    setSubmitting(false);
   };
 
   // Efecto para cargar la lista de doctores al montar el componente
@@ -256,59 +322,182 @@ const Turnos = () => {
       </div>
 
       <Spinner loading={loadingDoctors} />
+      <Formik
+        initialValues={{
+          fullName: "",
+          dni: "",
+          mail: "",
+          phone: "",
+          address: "",
+          birthday: "",
+          doctorId: "",
+          scheduleId: "",
+        }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, touched, errors,values, setFieldValue, setFieldError }) => (
+          <div className="formContainer">
+            <Form className="createFormTurnos">
+              <div className="inputContainerTurnos">
+                <Field
+                  type="text"
+                  name="fullName"
+                  className={
+                    touched.fullName && errors.fullName ? "input-error" : ""
+                  }
+                  placeholder="NOMBRE Y APELLIDO"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage
+                  name="fullName"
+                  component="div"
+                  className="error"
+                />
 
-      <div className="formContainer">
-        <form className="createFormTurnos" onSubmit={handleSubmit}>
-        <div className="inputContainerTurnos">
-         
-          <input
-            type="text"
-            name="fullName"
-            value={patientData.fullName}
-            onChange={handleInputChange}
-            placeholder="NOMBRE Y APELLIDO"
-            required
-          />
-          <input
-            type="text"
-            name="dni"
-            value={patientData.dni}
-            onChange={handleInputChange}
-            placeholder="DNI (sin puntos)"
-            required
-          />
-          <input
-            type="email"
-            name="mail"
-            value={patientData.mail}
-            onChange={handleInputChange}
-            placeholder="MAIL"
-            required
-          />
-          <input
-            type="text"
-            name="phone"
-            value={patientData.phone}
-            onChange={handleInputChange}
-            placeholder="CELULAR (Sin el '0' ni '-')"
-            required
-          />
-          <input
-            type="text"
-            name="address"
-            value={patientData.address}
-            onChange={handleInputChange}
-            placeholder="DOMICILIO"
-            required
-          />
-          <input
-            type="text"
-            name="birthday"
-            value={patientData.birthday}
-            onChange={handleInputChange}
-            placeholder="FECHA DE NACIMIENTO (AAAA-MM-DD)"
-            required
-          />
+
+                <Field
+                  type="text"
+                  name="dni"
+                  
+                  className={touched.dni && errors.dni ? "input-error" : ""}
+                  placeholder="DNI (sin puntos)"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage name="dni" component="div" className="error" />
+
+                <Field
+                  type="email"
+                  name="mail"
+                
+                  className={touched.mail && errors.mail ? "input-error" : ""}
+                  placeholder="MAIL"
+                  onChange={(e) => setFieldValue("mail", e.target.value)}
+                />
+                <ErrorMessage name="mail" component="div" className="error" />
+
+                <Field
+                  type="text"
+                  name="phone"
+                 
+                  className={touched.phone && errors.phone ? "input-error" : ""}
+                  placeholder="CELULAR (Sin el '0' ni '-')"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage name="phone" component="div" className="error" />
+
+                <Field
+                  type="text"
+                  name="address"
+                 
+                  className={
+                    touched.address && errors.address ? "input-error" : ""
+                  }
+                  placeholder="DOMICILIO"
+                  onChange={(e) =>
+                    handleInputChange(e, setFieldValue, setFieldError)
+                  }
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="error"
+                />
+
+                <Field
+                  type="text"
+                  name="birthday"
+                 
+                  className={
+                    touched.birthday && errors.birthday ? "input-error" : ""
+                  }
+                  placeholder="FECHA DE NACIMIENTO(AAAA-MM-DD)"
+                  onChange={(e) => setFieldValue("birthday", e.target.value)}
+                />
+                <ErrorMessage
+                  name="birthday"
+                  component="div"
+                  className="error"
+                />
+              </div>
+              <div className="opcionesTurno">
+                <Field
+                  as="select"
+                  name="doctorId"
+                  onChange={(e) => {
+                    handleDoctorChange(e);
+                    setFieldValue("doctorId", e.target.value);
+                  }}
+                  className={
+                    touched.doctorId && errors.doctorId ? "input-error" : ""
+                  }
+                  required
+                >
+                  <option value="">SELECCIONAR PROFESIONAL</option>
+                  {doctors.map((doctor) => (
+                    <option key={doctor.id} value={doctor.id}>
+                      {doctor.fullName} - {doctor.speciality.name}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage
+                  name="doctorId"
+                  component="div"
+                  className="error"
+                />
+                <Field
+                  as="select"
+                  name="scheduleId"
+                  onChange={(e) => {
+                    handleScheduleChange(e);
+                    setFieldValue("scheduleId", e.target.value);
+                  }}
+                  className={
+                    touched.scheduleId && errors.scheduleId ? "input-error" : ""
+                  }
+                  required
+                >
+                  <option value="">SELECCIONAR HORARIO</option>
+                  {schedules.map((schedule) => (
+                    <option
+                      key={schedule.idSchedule}
+                      value={schedule.idSchedule}
+                    >
+                      {schedule.day}: {schedule.start_Time}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage
+                  name="scheduleId"
+                  component="div"
+                  className="error"
+                />
+
+                <div className="recaptcha">
+                  <ReCAPTCHA
+                    ref={captcha}
+                    sitekey="6Ld7vxQqAAAAAIiI-ur0kUTV-RSXzdI55lTr09Wi"
+                    onChange={onChange}
+                    className="captcha"
+                  />
+                </div>
+
+                <button type="submit" disabled={isSubmitting} className="btn">
+                  {isSubmitting ? "Enviando..." : "Reservar Turno"}
+                </button>
+              </div>
+            </Form>
+          </div>
+        )}
+      </Formik>
+
+      
           </div>
           <div className="opcionesTurno">
           <select onChange={handleDoctorChange} required>
@@ -352,7 +541,7 @@ const Turnos = () => {
           )}
           </div>
         </form>
-      </div>
+
     </>
   );
 };

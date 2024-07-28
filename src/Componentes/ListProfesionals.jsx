@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash, faXmark , faPlus} from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Spinner from "../Componentes/Spinner";
+import { getToken } from "../Auth/tokenUtils";
 
 
 const ListProfesionals = () => {
@@ -30,22 +31,50 @@ const ListProfesionals = () => {
   
   useEffect(() => {
     const fetchDoctors = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const listDoctors = await fetch("http://localhost:3000/doctors");
+        const listDoctors = await fetch("http://localhost:3000/doctors", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
         const response = await listDoctors.json();
         setDoctors(response.data);
         setLoading(false); 
       } catch (error) {
         Swal.fire({
-          text: "No se pudo obtener la lista de profesionales",
+          text: "No se pudo obtener la lista de profesionales. Verifique estar logueado.",
           icon: "error",
         })
         setLoading(false);
       }
     };
     const fetchSpecialities = async () => {
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const response = await fetch("http://localhost:3000/speciality");
+        const response = await fetch("http://localhost:3000/speciality", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
         if (!response.ok) {
           throw new Error(
             `Error al obtener las especialidades: ${response.status}`
@@ -61,8 +90,22 @@ const ListProfesionals = () => {
       }
     };
       const fetchCoverage = async () => {
+        const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
         try {
-          const response = await fetch("http://localhost:3000/coverage");
+          const response = await fetch("http://localhost:3000/coverage", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          });
           if (!response.ok) {
             throw new Error(
               `Error al obtener las coberturas: ${response.status}`
@@ -126,12 +169,24 @@ const ListProfesionals = () => {
         speciality: { id: speciality.id, name: speciality.name },
         license,
       };
+
+      const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     
       try {
         const response = await fetch(`http://localhost:3000/doctors/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify(updateDoctor),
         });
@@ -157,13 +212,23 @@ const ListProfesionals = () => {
         console.error("Error al actualizar el profesional:", error);
     
         Swal.fire({
-          text: "El profesional no pudo ser actualizado",
+          text: "El profesional no pudo ser actualizado. Verifique estar logueado.",
           icon: "error",
         });
       }
     };
     
   const handleDelete = async (id) => {
+    const token = getToken();
+    
+    if (!token) {
+      Swal.fire({
+        icon: 'error',
+        html: '<span>Error</span>',
+        text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+      });
+      return;
+    }
     const result = await Swal.fire({    
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       icon: "warning",
@@ -177,6 +242,9 @@ const ListProfesionals = () => {
     try {
       const response = await fetch(`http://localhost:3000/doctors/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
       });
       if (!response.ok) {
         throw new Error(`Error eliminando al profesional: ${response.status}`);
@@ -188,7 +256,7 @@ const ListProfesionals = () => {
     } catch {
       Swal.fire(
         "Error!",
-        "Hubo un error al intentar eliminar al profesional",
+        "Hubo un error al intentar eliminar al profesional. Verifique estar logueado.",
         "error"
       );
     }
@@ -211,11 +279,22 @@ const closeCoverageModal = () => {
 };
 
 const handleAddCoverage = async () => {
+  const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
   try {
     const response = await fetch(`http://localhost:3000/doctors/addCoverage`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ doctorId: actualDoctorId, coverageId: [selectedCoverage] }),
     });
@@ -229,17 +308,28 @@ const handleAddCoverage = async () => {
     console.error(error);
     Swal.fire(
       "Error!",
-      "Hubo un error al intentar agregar obras sociales",
+      "Hubo un error al intentar agregar obras sociales. Verifique estar logueado.",
       "error"
     );
   }
 };
 const handleRemoveCoverage = async (actualDoctorId, coverageIdToRemove) => {
+  const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
   try {
     const response = await fetch(`http://localhost:3000/doctors/remove/coverage`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ doctorId: actualDoctorId, coverageId: [coverageIdToRemove] }),
     });
@@ -252,7 +342,7 @@ const handleRemoveCoverage = async (actualDoctorId, coverageIdToRemove) => {
   } catch (error) {
     Swal.fire(
       "Error!",
-      "Hubo un error al intentar eliminar obras sociales",
+      "Hubo un error al intentar eliminar obras sociales. Verifique estar logueado.",
       "error"
     );
   }
