@@ -76,6 +76,7 @@ function Login({ isLoggedIn }) {
       <div className="barra-superior">
         <h2 className="titulo-section">Inicio de Sesión</h2>
       </div>
+
       <div className='formContainerInicio'>
         <form className='createFormInicio' onSubmit={handleSubmit}>
           <div className="input-container">
@@ -106,6 +107,7 @@ function Login({ isLoggedIn }) {
               name="password"
               placeholder="Introduzca su contraseña"
             />
+
           </div>
           <button className="btn" type="submit">Enviar</button>
         </form>

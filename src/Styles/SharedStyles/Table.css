@@ -1,9 +1,15 @@
 .tableContainer {
   background-color: rgba(44, 99, 103, 0.8);
   display: flex;
-    align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+  padding: 40px;
+  margin: 0;
   height: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  overflow-x: auto;
 }
 
 @media (max-width: 768px) {
@@ -21,18 +27,16 @@
 }
 
 table {
-  width: 80%;
+  width: 70%;
   border-collapse: collapse;
   box-shadow: 5px 5px 5px rgb(5, 5, 8);
-  margin-top: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  height: 80%;
   @media screen and (max-width: 768px) {
     width: 100%;
     height: auto;
     margin-top: 0.5rem;
-    margin-left: .5rem;
-  margin-right: .5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     @media screen and (max-width: 320px) {
       width: 100%;
       height: auto;
@@ -43,16 +47,6 @@ table {
   }
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 table th,
 table td {
   padding: 0.5rem;
@@ -60,7 +54,8 @@ table td {
   justify-content: center;
   color: white;
   font-size: 1.1rem;
-  width: max-content;
+  width: min-content;
+  height: auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -100,7 +95,7 @@ table td {
   }
 
   table th {
-    display: none; /* Oculta los elementos <th> para pantallas pequeñas */
+    display: none;
   }
 
   table td {
@@ -135,8 +130,8 @@ table tr.deleted-doctor {
   justify-content: center;
   align-items: center;
   background-color: rgba(44, 99, 103, 0.6);
-  height: 50%;
-  width: 30%;
+  height: auto !important;
+  width: 40%;
   position: absolute;
   top: 35%;
   left: 50%;
@@ -148,7 +143,7 @@ table tr.deleted-doctor {
   .formContainerModal {
     width: 60%;
     height: 100%;
-    top:12rem;
+    top: 12rem;
   }
 }
 

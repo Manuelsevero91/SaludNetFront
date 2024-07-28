@@ -51,7 +51,7 @@ const Profesionals = () => {
 
   const filteredDoctors = doctors.filter((doctor) => {
     const fullNameMatch = doctor.fullName.toLowerCase().includes(searchName.toLowerCase());
-    const specialityMatch = doctor.speciality.name.toLowerCase().includes(searchSpeciality.toLowerCase());
+    const specialityMatch = doctor.speciality?.name.toLowerCase().includes(searchSpeciality.toLowerCase());
     return fullNameMatch && specialityMatch;
   });
 

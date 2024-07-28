@@ -228,7 +228,7 @@ function ListCoverage() {
             </button>
           </div>
           <div className="tableContainer">
-          <div className="tableContainerCoverage">
+          {/* <div className="tableContainerCoverage"> */}
             <table>
               <thead>
                 <tr>
@@ -284,7 +284,7 @@ function ListCoverage() {
             </form>
           </Modal>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

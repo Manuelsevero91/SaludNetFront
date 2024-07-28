@@ -9,7 +9,7 @@
    align-items: center;
    top: calc(10% + 1px);
    left: calc(4% + 1px);
-   width: 90%;
+   width: 90% ;
    height: 70%;
    background-color: transparent;
    backdrop-filter: blur(15px);

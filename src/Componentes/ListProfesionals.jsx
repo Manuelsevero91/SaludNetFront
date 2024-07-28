@@ -360,7 +360,7 @@ const filteredDoctors = doctors.filter((doctor) => {
   if (!doctor || !doctor.fullName) return false;
   const fullNameLower = doctor.fullName.toLowerCase();
   const searchNameLower = searchName.toLowerCase();
-  const doctorSpecialityId = doctor.speciality.id.toString(); 
+  const doctorSpecialityId = doctor.speciality?.id.toString(); 
   return (
     fullNameLower.includes(searchNameLower) &&
     (searchSpeciality === "" || doctorSpecialityId === searchSpeciality)
@@ -408,8 +408,7 @@ const filteredDoctors = doctors.filter((doctor) => {
                 <th>Teléfono</th>
                 <th>Especialidad</th>
                 <th>Licencia</th>
-                <th>Coberturas</th>
-                <th></th>
+                <th>Coberturas</th>               
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -419,9 +418,9 @@ const filteredDoctors = doctors.filter((doctor) => {
                   <td>{doctor.fullName}</td>
                   <td>{doctor.mail}</td>
                   <td>{doctor.phone}</td>
-                  <td>{doctor.speciality.name}</td>
+                  <td>{doctor.speciality?.name}</td>
                   <td>{doctor.license}</td>
-                  <td>
+                  <td className="coverageColumn">
                     {doctor.coverages && doctor.coverages.length > 0 ? (
                       doctor.coverages.map((coverage) => (
                         <div key={coverage.id}>

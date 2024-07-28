@@ -3,14 +3,6 @@
   align-items: center;
 }
 
-.tableContainerCoverage {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: auto;
-  overflow-y: auto;
-}
 .formCoverageProf {
   display: flex;
   flex-direction: column;
@@ -39,7 +31,7 @@
   position: absolute;
   top: 35%;
   left: 50%;
-  transform: translate(-50%, -20%);
+  transform: translate(-50%, -50%);
   border-radius: 20px;
   padding: 2rem;
 }
@@ -60,4 +52,9 @@
     top: 50%;
     transform: translate(-50%, -25%);
   }
+}
+.coverageColumn{
+  display: flex;
+flex-direction: column;
+  width: auto;
 }

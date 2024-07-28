@@ -1,19 +1,22 @@
+
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Swal from 'sweetalert2';
 import { getToken } from "../Auth/tokenUtils";
 
 
-const DeleteOneSchedule = () => {
-  const [currentDoctorId, setCurrentDoctorId] = useState("");
-  const [deletionReason, setDeletionReason] = useState("error administrativo");
-  const [selectedDate, setSelectedDate] = useState("");
-  const [startTime, setStartTime] = useState("");
 
-  const handleDoctorIdChange = (e) => setCurrentDoctorId(e.target.value);
-  const handleReasonChange = (e) => setDeletionReason(e.target.value);
-  const handleDateChange = (e) => setSelectedDate(e.target.value);
-  const handleStartTimeChange = (e) => setStartTime(e.target.value);
+const DeleteOneSchedule = () => {
+//   const [currentDoctorId, setCurrentDoctorId] = useState("");
+//   const [deletionReason, setDeletionReason] = useState("error administrativo");
+//   const [selectedDate, setSelectedDate] = useState("");
+//   const [startTime, setStartTime] = useState("");
+
+//   const handleDoctorIdChange = (e) => setCurrentDoctorId(e.target.value);
+//   const handleReasonChange = (e) => setDeletionReason(e.target.value);
+//   const handleDateChange = (e) => setSelectedDate(e.target.value);
+//   const handleStartTimeChange = (e) => setStartTime(e.target.value);
+
 
   const handleDeleteSchedule = async (e) => {
     e.preventDefault();
@@ -28,8 +31,10 @@ const DeleteOneSchedule = () => {
     return;
   }
 
-    const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
-    const endpoint = `http://localhost:3000/schedules/${currentDoctorId}/${formattedDate}/${startTime}`;
+
+//     const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
+//     const endpoint = `http://localhost:3000/schedules/${currentDoctorId}/${formattedDate}/${startTime}`;
+
 
     try {
       const response = await fetch(endpoint, {
@@ -41,7 +46,8 @@ const DeleteOneSchedule = () => {
         body: JSON.stringify({ deletionReason }),
       });
 
-      const responseData = await response.json();
+//       const responseData = await response.json();
+
 
       if (response.ok) {
         if (responseData.message.includes("ya se encuentra eliminada")) {
@@ -77,52 +83,52 @@ const DeleteOneSchedule = () => {
     }
   };
 
-  return (
-    <>
-      <NavBar showLinks={true} />
-      <div className="barra-superior">
-        <h2 className="titulo-section">Administrar agenda: Eliminar</h2>
-      </div>
-      <div className="formContainer">
-        <form className="createDeleteForm" onSubmit={handleDeleteSchedule}>
-          <div className="inputContainerSchedule">
-            <div className="input-container">
-              <input
-                className="inputSchedule"
-                type="text"
-                value={currentDoctorId}
-                onChange={handleDoctorIdChange}
-                placeholder="Doctor Id"
-              />
-              <label>Razón de eliminación:</label>
-              <select value={deletionReason} onChange={handleReasonChange}>
-                <option value="error administrativo">Error administrativo</option>
-                <option value="cancelación del doctor">Cancelación del doctor</option>
-                <option value="otro">Otro</option>
-              </select>
-              <label>Fecha:</label>
-              <input
-                className="inputSchedule"
-                type="date"
-                value={selectedDate}
-                onChange={handleDateChange}
-              />
-              <label>Hora de Inicio:</label>
-              <input
-                className="inputSchedule"
-                type="time"
-                value={startTime}
-                onChange={handleStartTimeChange}
-              />
-            </div>
-          </div>
-          <button className="btn" type="submit">
-            Eliminar turno
-          </button>
-        </form>
-      </div>
-    </>
-  );
+//   return (
+//     <>
+//       <NavBar showLinks={true} />
+//       <div className="barra-superior">
+//         <h2 className="titulo-section">Administrar agenda: Eliminar</h2>
+//       </div>
+//       <div className="formContainer">
+//         <form className="createDeleteForm" onSubmit={handleDeleteSchedule}>
+//           <div className="inputContainerSchedule">
+//             <div className="input-container">
+//               <input
+//                 className="inputSchedule"
+//                 type="text"
+//                 value={currentDoctorId}
+//                 onChange={handleDoctorIdChange}
+//                 placeholder="Doctor Id"
+//               />
+//               <label>Razón de eliminación:</label>
+//               <select value={deletionReason} onChange={handleReasonChange}>
+//                 <option value="error administrativo">Error administrativo</option>
+//                 <option value="cancelación del doctor">Cancelación del doctor</option>
+//                 <option value="otro">Otro</option>
+//               </select>
+//               <label>Fecha:</label>
+//               <input
+//                 className="inputSchedule"
+//                 type="date"
+//                 value={selectedDate}
+//                 onChange={handleDateChange}
+//               />
+//               <label>Hora de Inicio:</label>
+//               <input
+//                 className="inputSchedule"
+//                 type="time"
+//                 value={startTime}
+//                 onChange={handleStartTimeChange}
+//               />
+//             </div>
+//           </div>
+//           <button className="btn" type="submit">
+//             Eliminar turno
+//           </button>
+//         </form>
+//       </div>
+//     </>
+//   );
 };
 
 export default DeleteOneSchedule;
