@@ -495,10 +495,8 @@ const Turnos = () => {
             </Form>
           </div>
         )}
-      </Formik>
-
-      
-          </div>
+      </Formik>     
+         
           <div className="opcionesTurno">
           <select onChange={handleDoctorChange} required>
             <option value="">Seleccione un doctor</option>
@@ -540,10 +538,9 @@ const Turnos = () => {
           
           )}
           </div>
-        </form>
-
+       
     </>
   );
 };
-
+}
 export default Turnos;

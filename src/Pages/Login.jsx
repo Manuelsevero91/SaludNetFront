@@ -77,8 +77,8 @@ function Login({ isLoggedIn }) {
         <h2 className="titulo-section">Inicio de Sesión</h2>
       </div>
 
-      <div className='formContainerInicio'>
-        <form className='createFormInicio' onSubmit={handleSubmit}>
+      <div className='formContainer'>
+        <form className='createForm' onSubmit={handleSubmit}>
           <div className="input-container">
             <label>Usuario</label>
             <input

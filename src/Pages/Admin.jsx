@@ -62,7 +62,7 @@ const Admin = () => {
               label: "Editar Profesional",
               link: "/EditarProfesional",
             },
-            { label: "Obras Sociales", link: "/ObrasSociales" },
+            { label: "Obras Sociales y Especialidades", link: "/CoberturaYEspecialidades" },
           ]}
         />
 

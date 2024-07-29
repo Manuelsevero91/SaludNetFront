@@ -73,38 +73,39 @@ const CreateSchedule = () => {
     }
  
 
-      try {
-        const response = await fetch('http://localhost:3000/schedules', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(scheduleData),
-        });
-
-    try {
-      const doctorId = await getDoctorIdByLicense(currentLicense);
-      const requests = selectedDates.map(async (date) => {
-        const scheduleData = {
-          day: new Date(date).toISOString().split("T")[0],
-          idDoctor: doctorId,
-          start_Time: startTime,
-          end_Time: endTime,
-          available,
-          interval: interval.toString(),
-        };
      
 
-          if (response.ok) {
-            return response;
-          } else {
-            throw new Error('Error al crear el horario');
-          }
-        } catch (error) {
-          throw new Error('Error de red al crear el horario');
-        }
-      });
+        try {
+          const doctorId = await getDoctorIdByLicense(currentLicense);
+          const requests = selectedDates.map(async (date) => {
+            const scheduleData = {
+              day: new Date(date).toISOString().split("T")[0],
+              idDoctor: doctorId,
+              start_Time: startTime,
+              end_Time: endTime,
+              available,
+              interval: interval.toString(),
+            };
+            try {
+              const response = await fetch('http://localhost:3000/schedules', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(scheduleData),
+              });
+    
+              if (response.ok) {
+                return response;
+              } else {
+                throw new Error('Error al crear el horario');
+              };
+            } catch (error) {
+              throw new Error('Error de red al crear el horario');
+            }
+          });
+    
 
       const responses = await Promise.all(requests);
       const successfulResponses = responses.filter((res) => res.status === 201);
@@ -189,7 +190,7 @@ const CreateSchedule = () => {
       </div>
     </>
   );
-};
+}
 
 export default CreateSchedule;
 
