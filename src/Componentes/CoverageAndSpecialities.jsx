@@ -52,8 +52,6 @@ function ListData() {
         }
         const coverageData = await coverageResponse.json();
         const specialityData = await specialityResponse.json();
-        console.log("Coverage Data:", coverageData);
-        console.log("Speciality Data:", specialityData);
         if (Array.isArray(coverageData.data) && Array.isArray(specialityData.data)) {
           setCoverages(coverageData.data);
           setSpecialities(specialityData.data);
@@ -134,7 +132,7 @@ function ListData() {
       );
     }
   };
-  
+
   const openModalSpe = (data) => {
     setEditSpeciality(data || { id: 0, name: "" });
     setShowModalSpe(true);
