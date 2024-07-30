@@ -5,20 +5,27 @@ import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
 import { getToken } from "../Auth/tokenUtils";
+
 function ListData() {
   const [coverages, setCoverages] = useState([]);
   const [specialities, setSpecialities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [editData, setEditData] = useState({
+  const [showModalSpe, setShowModalSpe] = useState(false);
+  const [showModalCove, setShowModalCove] = useState(false);
+  const [editSpeciality, setEditSpeciality] = useState({
     id: 0,
     name: "",
   });
+  const [editCoverage, setEditCoverage] = useState({
+    id: 0,
+    coverages: "",
+  });
   const [newCoverage, setNewCoverage] = useState("");
   const [newSpeciality, setNewSpeciality] = useState("");
+  
   useEffect(() => {
     const fetchData = async () => {
-      const token = getToken();
+    const token = getToken();
   if (!token) {
     Swal.fire({
       icon: 'error',
@@ -65,6 +72,7 @@ function ListData() {
     };
     fetchData();
   }, []);
+
   const handleInputChange = (e, type) => {
     if (type === "coverage") {
       setNewCoverage(e.target.value);
@@ -73,21 +81,34 @@ function ListData() {
     }
   };
   const handleAddData = async (type) => {
+    const token = getToken();
+    
+    if (!token) {
+      Swal.fire({
+        icon: 'error',
+        html: '<span>Error</span>',
+        text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+      });
+      return;
+    }
+    
     try {
       const response = await fetch(`http://localhost:3000/${type}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-           'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
-          name: type === "coverage" ? newCoverage : newSpeciality,
+          [type === "coverage" ? "coverages" : "name"]: type === "coverage" ? newCoverage : newSpeciality,
         }),
       });
+      
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Algo salió mal");
       }
+      
       const data = await response.json();
       if (type === "coverage") {
         setCoverages([...coverages, data.data]);
@@ -96,6 +117,7 @@ function ListData() {
         setSpecialities([...specialities, data.data]);
         setNewSpeciality("");
       }
+      
       Swal.fire({
         text: `${
           type === "coverage" ? "Obra social" : "Especialidad"
@@ -112,70 +134,151 @@ function ListData() {
       );
     }
   };
-  const openModal = (data) => {
-    setEditData(data || { id: 0, name: "" });
-    setShowModal(true);
+  
+  const openModalSpe = (data) => {
+    setEditSpeciality(data || { id: 0, name: "" });
+    setShowModalSpe(true);
   };
-  const closeModal = () => {
-    setShowModal(false);
-    setEditData({
+  const closeModalSpe = () => {
+    setShowModalSpe(false);
+    setEditSpeciality({
       id: 0,
       name: "",
     });
   };
-  const handleChange = (e) => {
-    setEditData({
-      ...editData,
+
+  const openModalCove = (data) => {
+    setEditCoverage(data || { id: 0, coverages: "" });
+    setShowModalCove(true);
+  };
+  const closeModalCove = () => {
+    setShowModalCove(false);
+    setEditCoverage({
+      id: 0,
+      coverages: "",
+    });
+  };
+
+  const handleChangeSpe = (e) => {
+    setEditSpeciality({
+      ...editSpeciality,
       [e.target.name]: e.target.value,
     });
   };
-  const handleEditData = async (event) => {
+
+  const handleChangeCove = (e) => {
+    setEditCoverage({
+      ...editCoverage,
+      [e.target.name]: e.target.value,
+    });
+  };
+ 
+  const handleEditCoverage = async (event) => {
     event.preventDefault();
-    const { id, coverages } = editData;
-    const updateData = { coverages};
-    const type = coverages.some((cov) => cov.id === id)
-      ? "coverage"
-      : "speciality";
+    const { id, coverages } = editCoverage;
+    const updateCov = { coverages };
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     try {
-      const response = await fetch(`http://localhost:3000/${type}/${id}`, {
+      const response = await fetch(`http://localhost:3000/coverage/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-           'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(updateData),
+        body: JSON.stringify(updateCov),
       });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Algo salió mal");
       }
       const data = await response.json();
-      if (type === "coverage") {
-        setCoverages((prevCoverages) =>
-          prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
-        );
-      } else {
-        setSpecialities((prevSpecialities) =>
-          prevSpecialities.map((spec) => (spec.id === id ? data.data : spec))
-        );
-      }
-      closeModal();
-      Swal.fire({
-        text: `${
-          type === "coverage" ? "Obra social" : "Especialidad"
-        } actualizada con éxito`,
-        icon: "success",
-      });
+      setCoverages((prevCoverages) =>
+        prevCoverages.map((cov) => (cov.id === id ? data.data : cov))
+    
+      );
+      closeModalCove();
+      Swal.fire({ text: "Obra social actualizada con éxito", icon: "success" });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); 
+      
     } catch (error) {
       Swal.fire({
-        text: `${
-          type === "coverage" ? "La obra social" : "La especialidad"
-        } no pudo ser actualizada`,
+        text: "La obra social no pudo ser actualizada.Verifique estar logueado.",
         icon: "warning",
       });
+      
     }
   };
+
+  const handleEditSpeciality = async (event) => {
+    event.preventDefault();
+    const { id, name } = editSpeciality;
+    const updateSpe = { name };
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+    try {
+      const response = await fetch(`http://localhost:3000/speciality/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updateSpe),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Algo salió mal");
+      }
+      const data = await response.json();
+      setSpecialities((prevSpecialities) =>
+        prevSpecialities.map((spe) => (spe.id === id ? data.data : spe))
+    
+      );
+      closeModalSpe();
+      Swal.fire({ text: "Especialidad actualizada con éxito", icon: "success" });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); 
+      
+    } catch (error) {
+      Swal.fire({
+        text: "La especialidad no pudo ser actualizada. Verifique estar logueado.",
+        icon: "warning",
+      });
+      
+    }
+  };
+
+
   const handleDelete = async (id, type) => {
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     const result = await Swal.fire({
       html: `<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>`,
       icon: "warning",
@@ -279,7 +382,7 @@ function ListData() {
                     <td>
                       <button
                         className="edit-button"
-                        onClick={() => openModal(coverage)}
+                        onClick={() => openModalCove(coverage)}
                       >
                         <FontAwesomeIcon icon={faEdit} /> Editar
                       </button>
@@ -313,7 +416,7 @@ function ListData() {
                     <td>
                       <button
                         className="edit-button"
-                        onClick={() => openModal(speciality)}
+                        onClick={() => openModalSpe(speciality)}
                       >
                         <FontAwesomeIcon icon={faEdit} /> Editar
                       </button>
@@ -335,27 +438,56 @@ function ListData() {
 
         <Modal
           className="formContainerModal"
-          isOpen={showModal}
-          onRequestClose={closeModal}
+          isOpen={showModalCove}
+          onRequestClose={closeModalCove}
           contentLabel="Editar Datos"
         >
           <h2>Editar Datos</h2>
-          <form onSubmit={handleEditData}>
+          <form onSubmit={handleEditCoverage}>
             <div className="form-group">
               <label htmlFor="name">Nombre</label>
               <input
                 type="text"
                 id="name"
-                name="name"
-                value={editData.name}
-                onChange={handleChange}
+                name="coverages"
+                value={editCoverage.coverages}
+                onChange={handleChangeCove}
               />
             </div>
             <div className="btn-container">
               <button className="btn" type="submit">
                 Guardar
               </button>
-              <button className="btn" type="button" onClick={closeModal}>
+              <button className="btn" type="button" onClick={closeModalCove}>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </Modal>
+
+        <Modal
+          className="formContainerModal"
+          isOpen={showModalSpe}
+          onRequestClose={closeModalSpe}
+          contentLabel="Editar Datos"
+        >
+          <h2>Editar Datos</h2>
+          <form onSubmit={handleEditSpeciality}>
+            <div className="form-group">
+              <label htmlFor="name">Nombre</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={editSpeciality.name}
+                onChange={handleChangeSpe}
+              />
+            </div>
+            <div className="btn-container">
+              <button className="btn" type="submit">
+                Guardar
+              </button>
+              <button className="btn" type="button" onClick={closeModalSpe}>
                 Cancelar
               </button>
             </div>
