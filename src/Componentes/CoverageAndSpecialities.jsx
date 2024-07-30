@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
-
+import { getToken } from "../Auth/tokenUtils";
 function ListData() {
   const [coverages, setCoverages] = useState([]);
   const [specialities, setSpecialities] = useState([]);
@@ -16,25 +16,37 @@ function ListData() {
   });
   const [newCoverage, setNewCoverage] = useState("");
   const [newSpeciality, setNewSpeciality] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
+      const token = getToken();
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
         const [coverageResponse, specialityResponse] = await Promise.all([
-          fetch("http://localhost:3000/coverage"),
-          fetch("http://localhost:3000/speciality"),
+          fetch("http://localhost:3000/coverage", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
+          fetch("http://localhost:3000/speciality", {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          }),
         ]);
-
         if (!coverageResponse.ok || !specialityResponse.ok) {
           throw new Error("Network response was not ok");
         }
-
         const coverageData = await coverageResponse.json();
         const specialityData = await specialityResponse.json();
-
         console.log("Coverage Data:", coverageData);
         console.log("Speciality Data:", specialityData);
-
         if (Array.isArray(coverageData.data) && Array.isArray(specialityData.data)) {
           setCoverages(coverageData.data);
           setSpecialities(specialityData.data);
@@ -53,7 +65,6 @@ function ListData() {
     };
     fetchData();
   }, []);
-
   const handleInputChange = (e, type) => {
     if (type === "coverage") {
       setNewCoverage(e.target.value);
@@ -61,13 +72,13 @@ function ListData() {
       setNewSpeciality(e.target.value);
     }
   };
-
   const handleAddData = async (type) => {
     try {
       const response = await fetch(`http://localhost:3000/${type}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           name: type === "coverage" ? newCoverage : newSpeciality,
@@ -101,12 +112,10 @@ function ListData() {
       );
     }
   };
-
   const openModal = (data) => {
     setEditData(data || { id: 0, name: "" });
     setShowModal(true);
   };
-
   const closeModal = () => {
     setShowModal(false);
     setEditData({
@@ -114,18 +123,16 @@ function ListData() {
       name: "",
     });
   };
-
   const handleChange = (e) => {
     setEditData({
       ...editData,
       [e.target.name]: e.target.value,
     });
   };
-
   const handleEditData = async (event) => {
     event.preventDefault();
-    const { id, name } = editData;
-    const updateData = { name };
+    const { id, coverages } = editData;
+    const updateData = { coverages};
     const type = coverages.some((cov) => cov.id === id)
       ? "coverage"
       : "speciality";
@@ -134,6 +141,7 @@ function ListData() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updateData),
       });
@@ -167,13 +175,12 @@ function ListData() {
       });
     }
   };
-
   const handleDelete = async (id, type) => {
     const result = await Swal.fire({
       html: `<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#3085D6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Sí, deseo eliminarlo",
       cancelButtonText: "Cancelar",
@@ -182,13 +189,14 @@ function ListData() {
       try {
         const response = await fetch(`http://localhost:3000/${type}/${id}`, {
           method: "DELETE",
+          headers: {
+             'Authorization': `Bearer ${token}`
+          },
         });
-
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || "Algo salió mal");
         }
-
         if (type === "coverage") {
           setCoverages((prevCoverages) =>
             prevCoverages.filter((cov) => cov.id !== id)
@@ -212,11 +220,9 @@ function ListData() {
       }
     }
   };
-
   if (loading) {
     return <div>Loading...</div>;
   }
-
   return (
     <>
       <NavBar showLinks={true} />
@@ -269,7 +275,7 @@ function ListData() {
               {Array.isArray(coverages) ? (
                 coverages.map((coverage) => (
                   <tr key={coverage.id}>
-                    <td>{coverage.name}</td>
+                    <td>{coverage.coverages}</td>
                     <td>
                       <button
                         className="edit-button"
