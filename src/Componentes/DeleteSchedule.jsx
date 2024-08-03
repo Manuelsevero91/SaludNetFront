@@ -107,7 +107,7 @@ const DeleteSchedule = () => {
                 type="text"
                 value={currentDoctorId}
                 onChange={handleDoctorIdChange}
-                placeholder="Doctor Id"
+                placeholder="Matrícula"
               />
               <label>Razón de eliminación:</label>
               <select value={deletionReason} onChange={handleReasonChange}>

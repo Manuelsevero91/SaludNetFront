@@ -78,10 +78,10 @@ const Admin = () => {
               label: "Eliminar turnos disponibles",
               link: "/EliminarAgenda",
             },
-            {
-              label: "Eliminar un turno disponible",
-              link: "/EliminarUnaAgenda",
-            },
+            // {
+            //   label: "Eliminar un turno disponible",
+            //   link: "/EliminarUnaAgenda",
+            // },
           ]}
         />
 
