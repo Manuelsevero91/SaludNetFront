@@ -165,7 +165,7 @@ const CreateSchedule = () => {
                 type="text"
                 value={currentLicense}
                 onChange={handleLicenseChange}
-                placeholder="Número de Licencia"
+                placeholder="Número de Matrícula"
               />
               <label>Hora de Inicio:</label>
               <input
