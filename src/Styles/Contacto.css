@@ -1,26 +1,26 @@
 .container {
-    background-image: url("../assets/Consultorio.jpg");
-    background-size:cover;
-   background-position: center center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 31.45rem;  
-    min-height:31.45rem;
-  }
-  .information-container{  
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    width: auto;  
-    padding: 1rem;  
-    align-items: center;
-    justify-content: center;
+  background-image: url("../assets/Consultorio.jpg");
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 31.45rem;
+  min-height: 31.45rem;
+}
+.information-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   backdrop-filter: blur(15px);
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius:10px ;
+  border-radius: 10px;
   padding-top: 2.5rem;
   @media screen and (max-width: 768px) {
     width: 80%;
@@ -29,22 +29,21 @@
     @media screen and (max-width: 320px) {
       width: 80%;
       height: auto;
-  
     }
   }
-  }
-  .social-icons-information{
-    display: flex;
-    flex-direction: row;
-   
-    @media screen and (max-width: 768px) {
+}
+.social-icons-information {
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    height: auto;
+    margin-bottom: 2rem;
+    @media screen and (max-width: 320px) {
       width: 80%;
       height: auto;
-      margin-bottom:2rem;
-      @media screen and (max-width: 320px) {
-        width: 80%;
-        height: auto;     
-        margin-bottom:2rem;
-      }
+      margin-bottom: 2rem;
     }
   }
+}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Modal from "react-modal";
+import { getToken } from "../Auth/tokenUtils";
 
 function ListCoverage() {
   const [coverages, setCoverages] = useState([]);
@@ -17,15 +18,29 @@ function ListCoverage() {
 
   useEffect(() => {
     const fetchCoverage = async () => {
+      const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
       try {
-        const listCoverage = await fetch("http://localhost:3000/coverage");
+        const listCoverage = await fetch("http://localhost:3000/coverage", {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+        });
         const result = await listCoverage.json();
         setCoverages(result.data);
         setLoading(false);
       } catch (error) {
         Swal.fire(
           "Error!",
-          "Hubo un error al traer la lista de obras sociales",
+          "Hubo un error al traer la lista de obras sociales. Verifique estar logueado.",
           "error"
         );
         setLoading(false);
@@ -39,11 +54,22 @@ function ListCoverage() {
   };
 
   const handleAddCoverage = async () => {
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     try {
       const response = await fetch("http://localhost:3000/coverage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ coverages: newCoverage }),
       });
@@ -58,7 +84,7 @@ function ListCoverage() {
     } catch (error) {
       Swal.fire(
         "Error!",
-        "Hubo un error al intentar agregar la obra social",
+        "Hubo un error al intentar agregar la obra social.Verifique estar logueado.",
         "error"
       );
     }
@@ -88,11 +114,22 @@ function ListCoverage() {
     event.preventDefault();
     const { id, coverages } = editData;
     const updateCov = { coverages };
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     try {
       const response = await fetch(`http://localhost:3000/coverage/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updateCov),
       });
@@ -113,7 +150,7 @@ function ListCoverage() {
 
     } catch (error) {
       Swal.fire({
-        text: "La obra social no pudo ser actualizada",
+        text: "La obra social no pudo ser actualizada.Verifique estar logueado.",
         icon: "warning",
       });
 
@@ -121,6 +158,16 @@ function ListCoverage() {
   };
 
   const handleDelete = async (id) => {
+    const token = getToken();
+  
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
     const result = await Swal.fire({
       html: "<span class='custom-swal-title'>¿Está seguro de eliminar el registro?</span>",
       icon: "warning",
@@ -134,6 +181,9 @@ function ListCoverage() {
       try {
         const response = await fetch(`http://localhost:3000/coverage/${id}`, {
           method: "DELETE",
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
         });
 
         if (!response.ok) {
@@ -178,12 +228,44 @@ function ListCoverage() {
             </button>
           </div>
           <div className="tableContainer">
+<<<<<<< HEAD
             <div className="tableContainerCoverage">
               <table>
                 <thead>
                   <tr>
                     <th>Obra social</th>
                     <th>Acciones</th>
+=======
+          {/* <div className="tableContainerCoverage"> */}
+            <table>
+              <thead>
+                <tr>
+                  <th>Obra social</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {coverages.map((coverage) => (
+                  <tr key={coverage.id}>
+                    <td>{coverage.coverages}</td>
+                    <td>
+                      <button
+                        className="edit-button"
+                        onClick={() => openModal(coverage)}
+                      >
+                        <FontAwesomeIcon icon={faEdit} />Editar
+                      
+                      </button>
+
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(coverage.id)}
+                      >
+                         <FontAwesomeIcon icon={faTrash} />Eliminar
+                        
+                      </button>
+                    </td>
+>>>>>>> d505c55c9a8f5ed28d7a61c9bc70144b772d0a5e
                   </tr>
                 </thead>
                 <tbody>
@@ -234,7 +316,7 @@ function ListCoverage() {
             </form>
           </Modal>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

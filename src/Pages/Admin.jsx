@@ -62,7 +62,7 @@ const Admin = () => {
               label: "Editar Profesional",
               link: "/EditarProfesional",
             },
-            { label: "Obras Sociales", link: "/ObrasSociales" },
+            { label: "Obras Sociales y Especialidades", link: "/CoberturaYEspecialidades" },
           ]}
         />
 
@@ -78,10 +78,10 @@ const Admin = () => {
               label: "Eliminar turnos disponibles",
               link: "/EliminarAgenda",
             },
-            {
-              label: "Eliminar un turno disponible",
-              link: "/EliminarUnaAgenda",
-            },
+            // {
+            //   label: "Eliminar un turno disponible",
+            //   link: "/EliminarUnaAgenda",
+            // },
           ]}
         />
 

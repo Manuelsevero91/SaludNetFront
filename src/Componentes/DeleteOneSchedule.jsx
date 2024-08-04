@@ -1,8 +1,10 @@
-//Este componente se incluirá en la próxima versión de nuestra aplicación
 
-// import React, { useState } from "react";
-// import NavBar from "./NavBar";
-// import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import NavBar from "./NavBar";
+import Swal from 'sweetalert2';
+import { getToken } from "../Auth/tokenUtils";
+
+
 
 const DeleteOneSchedule = () => {
 //   const [currentDoctorId, setCurrentDoctorId] = useState("");
@@ -15,56 +17,71 @@ const DeleteOneSchedule = () => {
 //   const handleDateChange = (e) => setSelectedDate(e.target.value);
 //   const handleStartTimeChange = (e) => setStartTime(e.target.value);
 
-//   const handleDeleteSchedule = async (e) => {
-//     e.preventDefault();
+
+  const handleDeleteSchedule = async (e) => {
+    e.preventDefault();
+    const token = getToken();
+    
+  if (!token) {
+    Swal.fire({
+      icon: 'error',
+      html: '<span>Error</span>',
+      text: "No se encontró el token de autenticación. Por favor, inicie sesión.",
+    });
+    return;
+  }
+
 
 //     const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
 //     const endpoint = `http://localhost:3000/schedules/${currentDoctorId}/${formattedDate}/${startTime}`;
 
-//     try {
-//       const response = await fetch(endpoint, {
-//         method: 'DELETE',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ deletionReason }),
-//       });
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ deletionReason }),
+      });
 
 //       const responseData = await response.json();
 
-//       if (response.ok) {
-//         if (responseData.message.includes("ya se encuentra eliminada")) {
-//           Swal.fire({
-//             icon: 'warning',
-//             html: <span>La agenda ya estaba borrada</span>,
-//             text: "La agenda ya estaba borrada",
-//           }).then(() => {
-//             window.location.reload(); // Recargar la página
-//           });
-//         } else {
-//           Swal.fire({
-//             icon: 'success',
-//             html: '<span>Se eliminó la agenda con éxito</span>',
-//             text: "Se ha eliminado el horario exitosamente",
-//           }).then(() => {
-//             window.location.reload(); // Recargar la página
-//           });
-//         }
-//       } else {
-//         Swal.fire({
-//           icon: 'error',
-//           html: '<span>Error</span>',
-//           text: responseData.message || "No se pudo eliminar el horario",
-//         });
-//       }
-//     } catch (err) {
-//       Swal.fire({
-//         icon: 'error',
-//         html: '<span>Error</span>',
-//         text: "Hubo un error al eliminar el horario",
-//       });
-//     }
-//   };
+
+      if (response.ok) {
+        if (responseData.message.includes("ya se encuentra eliminada")) {
+          Swal.fire({
+            icon: 'warning',
+            html: <span>La agenda ya estaba borrada</span>,
+            text: "La agenda ya estaba borrada",
+          }).then(() => {
+            window.location.reload();
+          });
+        } else {
+          Swal.fire({
+            icon: 'success',
+            html: '<span>Se eliminó la agenda con éxito</span>',
+            text: "Se ha eliminado el horario exitosamente",
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          html: '<span>Error</span>',
+          text: responseData.message || "No se pudo eliminar el horario. Verifique estar logueado.",
+        });
+      }
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        html: '<span>Error</span>',
+        text: "Hubo un error al eliminar el horario. Verifique estar logueado.",
+      });
+    }
+  };
 
 //   return (
 //     <>
