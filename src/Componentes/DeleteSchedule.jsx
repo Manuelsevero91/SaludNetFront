@@ -302,9 +302,11 @@ const DeleteSchedule = () => {
               <input
                 className="inputSchedule"
                 type="text"
+
                 value={currentLicense}
                 onChange={handleLicenseChange}
                 placeholder="Número de Matrícula"
+
               />
               <label>Razón de eliminación:</label>
               <select value={deletionReason} onChange={handleReasonChange}>
