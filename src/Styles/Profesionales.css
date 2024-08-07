@@ -16,13 +16,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   overflow: hidden;
   width: 12rem;
-  height:14rem;
+  height:15rem;
   margin-top: .8rem;
-  padding: .5rem;
-  
+  padding: .5rem;  
 }
+
 .card-image{
-  height: 9rem;
+  height: 8rem;
   width:auto;
   border-radius: 10px;
   margin-top: .5rem;

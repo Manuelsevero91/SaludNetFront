@@ -9,12 +9,12 @@ const Profesionals = () => {
   const [searchSpeciality, setSearchSpeciality] = useState("");
 
   const doctorImages = [
-    "https://images.pexels.com/photos/5452255/pexels-photo-5452255.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/263337/pexels-photo-263337.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3279197/pexels-photo-3279197.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/4769130/pexels-photo-4769130.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=600"
+    "https://media.istockphoto.com/id/1201439096/es/foto/profesional-m%C3%A9dico-masculino-conf%C3%ADa-en-el-estudio.jpg?s=612x612&w=0&k=20&c=VRMhRHSSKG23cV4t486AsV0ukHRdfscNbaREOy96of4=",
+    "https://media.istockphoto.com/id/1468678629/es/foto/retrato-atenci%C3%B3n-m%C3%A9dica-y-tableta-con-una-mujer-m%C3%A9dico-trabajando-en-un-hospital-para.jpg?s=612x612&w=0&k=20&c=baFmbRhro7mVQ5if_d6uTixa7i6vQg0MSc83YsLp9X0=",
+    "https://media.istockphoto.com/id/1486172842/es/foto/retrato-de-enfermero-en-su-oficina.jpg?s=612x612&w=0&k=20&c=9joSTJvZYCAjCx5MPjd21XH2p2pRmfi35jtQXonNJtM=",
+    "https://media.istockphoto.com/id/1397680558/es/foto/doctora-vestida-con-uniforme-y-de-pie.jpg?s=612x612&w=0&k=20&c=_ACOtpa6FxC2BNIygYE7sT28GSvtXVGcisuPWLRFup0=",
+    "https://media.istockphoto.com/id/1326546995/es/foto/profesional-de-la-salud-sonriendo-en-el-trabajo.jpg?s=612x612&w=0&k=20&c=y0anuMJaFRbxWLmOppyK4BW2N-IqRAaZ7fvlRN4zfBE=",
+    "https://media.istockphoto.com/id/1021562784/es/foto/sonriente-m%C3%A9dico-de-confianza.jpg?s=612x612&w=0&k=20&c=jIk92h0AFpM-QIu7hnKVJK0Q2ZSbV-tgQMXC2LncXI4="
   ];
 
   useEffect(() => {
