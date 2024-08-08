@@ -32,7 +32,7 @@ const CreateSchedule = () => {
 
   const getDoctorIdByLicense = async (license) => {
     const token = getToken();
-  
+
   if (!token) {
     Swal.fire({
       icon: 'error',
@@ -42,14 +42,13 @@ const CreateSchedule = () => {
     return;
   }
     try {
-      const response = await fetch(
-        `http://localhost:3000/doctors/license/${license}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Agrega el token de autenticación aquí
-          },
-        }
-      );
+
+      const response = await fetch(`http://localhost:3000/doctors/license/${license}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+      });
+
       if (!response.ok) {
         throw new Error("Doctor no encontrado");
       }
