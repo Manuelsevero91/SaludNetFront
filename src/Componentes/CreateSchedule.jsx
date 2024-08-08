@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import NavBar from "./NavBar";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { getToken } from "../Auth/tokenUtils";
 
 const CreateSchedule = () => {
@@ -32,6 +32,7 @@ const CreateSchedule = () => {
 
   const getDoctorIdByLicense = async (license) => {
     const token = getToken();
+
   if (!token) {
     Swal.fire({
       icon: 'error',
@@ -41,18 +42,20 @@ const CreateSchedule = () => {
     return;
   }
     try {
+
       const response = await fetch(`http://localhost:3000/doctors/license/${license}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
       });
+
       if (!response.ok) {
-        throw new Error('Doctor no encontrado');
+        throw new Error("Doctor no encontrado");
       }
       const doctor = await response.json();
       return doctor.id;
     } catch (error) {
-      throw new Error('Error al buscar el doctor');
+      throw new Error("Error al buscar el doctor");
     }
   };
 
@@ -124,24 +127,23 @@ const CreateSchedule = () => {
       const successfulResponses = responses.filter((res) => res.status === 201);
       if (successfulResponses.length > 0) {
         Swal.fire({
-          icon: 'success',
-          html: '<span>Se creó la agenda con éxito</span>',
+          icon: "success",
+          html: "<span>Se creó la agenda con éxito</span>",
           text: `Se han creado ${successfulResponses.length} horarios exitosamente`,
-        })
-        .then(() => {
-          window.location.reload(); 
+        }).then(() => {
+          window.location.reload();
         });
       } else {
         Swal.fire({
-          icon: 'error',
-          html: '<span>Error</span>',
+          icon: "error",
+          html: "<span>Error</span>",
           text: "No se pudo crear ningún horario. Verifique estar logueado.",
         });
       }
     } catch (err) {
       Swal.fire({
-        icon: 'error',
-        html: '<span>Error</span>',
+        icon: "error",
+        html: "<span>Error</span>",
         text: "Hubo un error al crear los horarios. Verifique estar logueado.",
       });
     }
@@ -162,7 +164,10 @@ const CreateSchedule = () => {
                 type="text"
                 value={currentLicense}
                 onChange={handleLicenseChange}
-                placeholder="Número de Licencia"
+
+                placeholder="Número de Matrícula"
+
+
               />
               <label>Hora de Inicio:</label>
               <input
@@ -191,7 +196,9 @@ const CreateSchedule = () => {
                 onClickDay={handleDatesChange}
                 tileDisabled={({ date }) => date < new Date()}
                 tileClassName={({ date }) =>
-                  selectedDates.includes(date.toDateString()) ? "selected" : null
+                  selectedDates.includes(date.toDateString())
+                    ? "selected"
+                    : null
                 }
               />
             </label>
@@ -203,9 +210,6 @@ const CreateSchedule = () => {
       </div>
     </>
   );
-}
+};
 
 export default CreateSchedule;
-
-
-

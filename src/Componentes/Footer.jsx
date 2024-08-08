@@ -15,9 +15,9 @@ const Footer = () => {
         <a href="https://www.instagram.com/" className="social-icon">
           <FontAwesomeIcon icon={faInstagram} />
         </a>
-     
+
       </div>
-      
+
       <img src={saludnetqr} alt="QR Salud Net" className="qr" />
 
       <p className="footer-text">© 2024 Salud Net. Todos los derechos reservados.</p>

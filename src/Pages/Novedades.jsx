@@ -23,7 +23,7 @@ const Novedades = () => {
     {
       imageSrc: "https://bancosdeimagenes.com/wp-content/uploads/2019/03/Getty-Medical-Category-768x443-1.jpg",
       title: "Ofrecemos una gran variedad de especialidades para brindar un cuidado integral que se base en la prevención de enfermedades y en la promoción de hábitos saludables para una población con una creciente expectativa de vida. Nuestros profesionales están comprometidos en ofrecer una atención de salud de alta calidad, asegurando que cada paciente reciba el mejor cuidado posible, adaptado a sus necesidades individuales."
-    }    
+    }
   ];
 
   return (

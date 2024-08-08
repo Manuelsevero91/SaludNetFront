@@ -80,13 +80,13 @@ const ShowShiffs = () => {
       timeZone: 'America/Argentina/Buenos_Aires'
     };
     const date = new Date(dateString);
-   const dateInBA = new Date(date.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-//Como lo quiero ver
-  const dayName = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(dateInBA);
-  const day = dateInBA.getDate();
-  const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(dateInBA);
-  const year = dateInBA.getFullYear();
-  return `${dayName} ${day} de ${monthName} de ${year}`;
+    const dateInBA = new Date(date.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+    //Como lo quiero ver
+    const dayName = new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(dateInBA);
+    const day = dateInBA.getDate();
+    const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long' }).format(dateInBA);
+    const year = dateInBA.getFullYear();
+    return `${dayName} ${day} de ${monthName} de ${year}`;
   };
   const handleDoctorChange = (event) => {
     setSelectedDoctor(event.target.value);
@@ -158,11 +158,11 @@ const ShowShiffs = () => {
                 </tbody>
               </table>
             </div>
-           : (
-            <div className="tableContainer">
-           
-          </div>
-          )}
+            : (
+              <div className="tableContainer">
+
+              </div>
+            )}
         </div>
       )}
     </>

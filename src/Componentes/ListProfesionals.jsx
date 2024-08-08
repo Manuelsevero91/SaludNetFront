@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import NavBar from '../Componentes/NavBar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash, faXmark , faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import Spinner from "../Componentes/Spinner";
 import { getToken } from "../Auth/tokenUtils";
@@ -28,7 +28,7 @@ const ListProfesionals = () => {
   const [coverages, setCoverages] = useState([]);
   const [selectedCoverage, setSelectedCoverage] = useState("");
   const [actualDoctorId, setActualDoctorId] = useState(null);
-  
+
   useEffect(() => {
     const fetchDoctors = async () => {
       const token = getToken();
@@ -49,7 +49,7 @@ const ListProfesionals = () => {
         });
         const response = await listDoctors.json();
         setDoctors(response.data);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         Swal.fire({
           text: "No se pudo obtener la lista de profesionales. Verifique estar logueado.",
@@ -123,7 +123,7 @@ const ListProfesionals = () => {
     fetchDoctors();
     fetchSpecialities();
     fetchCoverage();
-  }, []);  
+  }, []);
 
   const openModal = (doctor) => {
     setEditData(doctor);
@@ -263,20 +263,20 @@ const ListProfesionals = () => {
   }
 }; 
 
-const openCoverageModal = (doctorId) => {
-  setActualDoctorId(doctorId);
-  setSelectedCoverage(
-    doctors.find((doc) => doc.id === doctorId)?.coverages.map((coverage) => coverage.id) || []
-  );
-  setShowCoverageModal(true);
-};
+  const openCoverageModal = (doctorId) => {
+    setActualDoctorId(doctorId);
+    setSelectedCoverage(
+      doctors.find((doc) => doc.id === doctorId)?.coverages.map((coverage) => coverage.id) || []
+    );
+    setShowCoverageModal(true);
+  };
 
-const closeCoverageModal = () => {
-  setShowCoverageModal(false);
-  setSelectedCoverage([]);
-  setActualDoctorId(null);
-  window.location.reload();
-};
+  const closeCoverageModal = () => {
+    setShowCoverageModal(false);
+    setSelectedCoverage([]);
+    setActualDoctorId(null);
+    window.location.reload();
+  };
 
 const handleAddCoverage = async () => {
   const token = getToken();
@@ -348,13 +348,13 @@ const handleRemoveCoverage = async (actualDoctorId, coverageIdToRemove) => {
   }
 };
 
-const handleCoverageChange = (e) => {
-  setSelectedCoverage(e.target.value);
-};
+  const handleCoverageChange = (e) => {
+    setSelectedCoverage(e.target.value);
+  };
 
-if (loading) {
-return <Spinner loading={loading} />;
-}
+  if (loading) {
+    return <Spinner loading={loading} />;
+  }
 
 const filteredDoctors = doctors.filter((doctor) => {
   if (!doctor || !doctor.fullName) return false;
@@ -516,30 +516,30 @@ const filteredDoctors = doctors.filter((doctor) => {
         </form>
       </Modal>
 
-      <Modal className="formContainerModal" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
+        <Modal className="formContainerModal" isOpen={showCoverageModal} onRequestClose={closeCoverageModal}>
 
-  <h2>Agregar obras sociales al profesional</h2>
-  <form className="createForm" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
-  <select id="coverageSelect" value={selectedCoverage} onChange={handleCoverageChange}>
-  <option value="">Seleccionar cobertura</option>
-    {coverages.map((coverage) => (
-       <option key={coverage.id} value={coverage.id}>
-       {coverage.coverages}
-     </option>
-   ))}
- </select>
- <div className="btn-container">
-    <button className="btn" type="submit">
-      Guardar
-    </button>
-    <button className="btn" type="button" onClick={closeCoverageModal}>
-      Cancelar
-    </button>
-  </div>
-  </form>
-</Modal>
-   </div>
-</>
+          <h2>Agregar obras sociales al profesional</h2>
+          <form className="createForm" onSubmit={(e) => { e.preventDefault(); handleAddCoverage(); }}>
+            <select id="coverageSelect" value={selectedCoverage} onChange={handleCoverageChange}>
+              <option value="">Seleccionar cobertura</option>
+              {coverages.map((coverage) => (
+                <option key={coverage.id} value={coverage.id}>
+                  {coverage.coverages}
+                </option>
+              ))}
+            </select>
+            <div className="btn-container">
+              <button className="btn" type="submit">
+                Guardar
+              </button>
+              <button className="btn" type="button" onClick={closeCoverageModal}>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </Modal>
+      </div>
+    </>
   );
 };
 
