@@ -28,26 +28,21 @@ import Admin from "./Pages/Admin";
 import NotFound from "./Pages/NotFound";
 import { UserProvider } from "./Componentes/UserContext";
 import FormProfesionals from "./Componentes/FormProfesionals";
-import ProtectedRoute from "./Auth/ProtectedRoute"
+import ProtectedRoute from "./Auth/ProtectedRoute";
 import Turnos from "./Pages/Turnos";
 import SobreNosotros from "./Pages/SobreNosotros";
 import Novedades from "./Pages/Novedades";
 import CreateSchedule from "./Componentes/CreateSchedule";
 import ListProfesionals from "./Componentes/ListProfesionals";
 import EditShifts from "./Componentes/EditShifts";
-
 import VerTurnos from "./Componentes/VerTurnos";
-import Speciality from "./Componentes/Speciality";
 import DeleteSchedule from "./Componentes/DeleteSchedule";
-import DeleteOneSchedule from "./Componentes/DeleteOneSchedule";
 import CoverageAndApecialities from "./Componentes/CoverageAndSpecialities";
 
 function App() {
-
   return (
     <>
       <UserProvider>
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Profesionales" element={<Profesionales />} />
@@ -59,26 +54,21 @@ function App() {
             <Route path="/EditarProfesional" element={<ListProfesionals />} />
             <Route path="/Agenda" element={<CreateSchedule />} />
             <Route path="/EliminarTurnos" element={<EditShifts />} />
-         
             <Route path="/VerTurnos" element={<VerTurnos />} />
             <Route path="/EliminarAgenda" element={<DeleteSchedule />} />
-            <Route path="/Especialidades" element={<Speciality />} />
-            {/* <Route path="/EliminarUnaAgenda" element={<DeleteOneSchedule />} /> */}
-            <Route path="/CoberturaYEspecialidades" element={<CoverageAndApecialities />} />
+            <Route
+              path="/CoberturaYEspecialidades"
+              element={<CoverageAndApecialities />}
+            />
           </Route>
           <Route path="/Novedades" element={<Novedades />} />
           <Route path="/Turnos" element={<Turnos />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFound />} />
-
-
-
-
         </Routes>
       </UserProvider>
-
     </>
   );
-};
+}
 
 export default App;
